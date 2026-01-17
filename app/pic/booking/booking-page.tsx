@@ -58,7 +58,25 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
 
   const getAvailableSessions = () => {
     const room = rooms.find((r) => r.id === formData.roomId);
-    return room?.availableSessions || [];
+    if (!room) return [];
+
+    let availableSessions = room.availableSessions || [];
+
+    // Kalo SESSION_1 atau SESSION_2 tersedia, hapus FULLDAY
+    if (
+      availableSessions.includes("SESSION_1") ||
+      availableSessions.includes("SESSION_2")
+    ) {
+      // Jika keduanya ada, FULLDAY harus dihapus
+      if (
+        availableSessions.includes("SESSION_1") &&
+        availableSessions.includes("SESSION_2")
+      ) {
+        availableSessions = availableSessions.filter((s) => s !== "FULLDAY");
+      }
+    }
+
+    return availableSessions;
   };
 
   return (
@@ -93,7 +111,11 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             onChange={(e) =>
               setFormData({ ...formData, bookingDate: e.target.value })
             }
-            className="w-full border rounded px-4 py-2"
+            className={`w-full border rounded px-4 py-2 ${
+              initialDate !== ""
+                ? "bg-gray-100 text-gray-500 cursor-not-allowed opacity-60"
+                : ""
+            }`}
             disabled={initialDate !== ""}
           />
           {initialDate && (
@@ -111,7 +133,11 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             onChange={(e) =>
               setFormData({ ...formData, roomId: e.target.value })
             }
-            className="w-full border rounded px-4 py-2"
+            className={`w-full border rounded px-4 py-2 ${
+              initialRoomId !== ""
+                ? "bg-gray-100 text-gray-500 cursor-not-allowed opacity-60"
+                : ""
+            }`}
             disabled={initialRoomId !== ""}
           >
             <option value="">Select a room</option>
@@ -139,8 +165,12 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
                 session: e.target.value as BookingSession,
               })
             }
-            className="w-full border rounded px-4 py-2"
-            disabled={!formData.roomId}
+            className={`w-full border rounded px-4 py-2 ${
+              initialSession !== ""
+                ? "bg-gray-100 text-gray-500 cursor-not-allowed opacity-60"
+                : ""
+            }`}
+            disabled={initialSession !== ""}
           >
             <option value="">Select a session</option>
             {getAvailableSessions().map((session) => (
@@ -153,6 +183,11 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
               </option>
             ))}
           </select>
+          {initialSession && (
+            <p className="text-xs text-gray-500 mt-1">
+              Session pre-selected from availability table
+            </p>
+          )}
         </div>
 
         <div>

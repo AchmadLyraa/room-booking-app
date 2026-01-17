@@ -15,6 +15,11 @@ export async function getAvailableRooms(bookingDate: string) {
   const date = new Date(bookingDate);
   date.setHours(0, 0, 0, 0);
 
+  // Get current time
+  const now = new Date();
+  const isToday = date.toDateString() === now.toDateString();
+  const currentHour = now.getHours();
+
   // Get all rooms with their bookings for the selected date
   const rooms = await prisma.room.findMany({
     include: {
@@ -33,12 +38,29 @@ export async function getAvailableRooms(bookingDate: string) {
     },
   });
 
-  return rooms.map((room) => ({
-    ...room,
-    availableSessions: Object.values(BookingSession).filter(
-      (session) => !room.bookings.some((b) => b.session === session),
-    ),
-  }));
+  return rooms.map((room) => {
+    const bookedSessions = room.bookings.map((b) => b.session);
+
+    // Filter sessions yang available
+    let availableSessions = Object.values(BookingSession).filter(
+      (session) => !bookedSessions.some((b) => b === session),
+    );
+
+    // ✅ Jika hari ini, hapus session yang sudah passed
+    if (isToday) {
+      availableSessions = availableSessions.filter((session) => {
+        if (session === "SESSION_1" && currentHour >= 8) return false;
+        if (session === "SESSION_2" && currentHour >= 13) return false;
+        if (session === "FULLDAY" && currentHour >= 8) return false;
+        return true;
+      });
+    }
+
+    return {
+      ...room,
+      availableSessions,
+    };
+  });
 }
 
 // CREATE BOOKING
@@ -59,6 +81,40 @@ export async function createBooking(data: {
 
   const [year, month, day] = data.bookingDate.split("-").map(Number);
   const bookingDateUTC = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
+
+  // VALIDASI: Cegah booking di tanggal lampau
+  const now = new Date();
+  const todayUTC = new Date(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate(),
+      0,
+      0,
+      0,
+      0,
+    ),
+  );
+
+  if (bookingDateUTC < todayUTC) {
+    throw new Error("Cannot book for past dates.");
+  }
+
+  // ✅ VALIDASI: Cegah session yang sudah passed di hari ini
+  const isToday = bookingDateUTC.toDateString() === todayUTC.toDateString();
+  const currentHour = now.getHours();
+
+  if (isToday) {
+    if (data.session === "SESSION_1" && currentHour >= 8) {
+      throw new Error("SESSION_1 (08:00-12:00) has already started or passed.");
+    }
+    if (data.session === "SESSION_2" && currentHour >= 13) {
+      throw new Error("SESSION_2 (13:00-16:00) has already started or passed.");
+    }
+    if (data.session === "FULLDAY" && currentHour >= 8) {
+      throw new Error("FULLDAY (08:00-16:00) has already started or passed.");
+    }
+  }
 
   // Get food and snack names for denormalization
   const selectedFoods = await prisma.food.findMany({

@@ -14,7 +14,11 @@ import type { BookingSession } from "@prisma/client";
 
 export function RoomAvailabilityTable() {
   const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState<Date>();
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    const today = new Date();
+    // today.setHours(0, 0, 0, 0);
+    return today;
+  });
   const [availability, setAvailability] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
