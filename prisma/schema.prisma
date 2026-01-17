@@ -1,0 +1,172 @@
+generator client {
+  provider = "prisma-client"
+  output="./generated"
+  engineType= "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+////////////////////////////////////////
+// ENUM
+////////////////////////////////////////
+
+enum Role {
+  ADMIN
+  PIC
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BookingSession {
+  SESSION_1   // 08.00 - 12.00
+  SESSION_2   // 13.00 - 16.00
+  FULLDAY     // 08.00 - 16.00
+}
+
+enum MeetingType {
+  INTERNAL
+  INTERNAL_LINTAS_BIDANG
+  EKSTERNAL
+}
+
+////////////////////////////////////////
+// USER (NextAuth compatible)
+////////////////////////////////////////
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String   // For basic auth (hashed with bcrypt)
+  role      Role     @default(PIC)
+
+  bookings  Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+}
+
+////////////////////////////////////////
+// ROOM
+////////////////////////////////////////
+
+model Room {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String
+  capacity    Int
+
+  bookings    Booking[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+////////////////////////////////////////
+// FOOD & SNACK (PAKET)
+////////////////////////////////////////
+
+model Food {
+  id        String   @id @default(cuid())
+  name      String   @unique
+
+  bookingFoods BookingFood[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Snack {
+  id        String   @id @default(cuid())
+  name      String   @unique
+
+  bookingSnacks BookingSnack[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+////////////////////////////////////////
+// BOOKING
+////////////////////////////////////////
+
+model Booking {
+  id              String          @id @default(cuid())
+  letterNumber    String          @unique
+  bookingDate     DateTime
+  session         BookingSession
+  status          BookingStatus   @default(PENDING)
+  rejectionReason String?
+
+  agenda          String
+  description     String
+  meetingType     MeetingType
+  note            String?
+  documentUrl     String?
+
+  foodNames       String?         @default("") // JSON string of food names
+  snackNames      String?         @default("") // JSON string of snack names
+
+  userId          String
+  roomId          String
+
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room            Room            @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  bookingFoods    BookingFood[]
+  bookingSnacks   BookingSnack[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@unique([roomId, bookingDate, session])
+  @@index([userId])
+  @@index([status])
+  @@index([bookingDate])
+}
+
+////////////////////////////////////////
+// PIVOT TABLE
+////////////////////////////////////////
+
+model BookingFood {
+  bookingId String
+  foodId    String
+
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  food      Food    @relation(fields: [foodId], references: [id], onDelete: Cascade)
+
+  @@id([bookingId, foodId])
+  @@index([foodId])
+}
+
+model BookingSnack {
+  bookingId String
+  snackId   String
+
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  snack     Snack   @relation(fields: [snackId], references: [id], onDelete: Cascade)
+
+  @@id([bookingId, snackId])
+  @@index([snackId])
+}
+
+////////////////////////////////////////
+// SYSTEM CONFIG
+////////////////////////////////////////
+
+model SystemConfig {
+  id           Int      @id @default(1)
+  autoApprove  Boolean  @default(false)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
