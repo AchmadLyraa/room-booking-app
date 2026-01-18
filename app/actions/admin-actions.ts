@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/auth-utils";
 import { Role, BookingStatus } from "@/prisma/generated/client";
+import { successResult, errorResult } from "@/lib/types";
 
 // ROOM MANAGEMENT
 export async function createRoom(

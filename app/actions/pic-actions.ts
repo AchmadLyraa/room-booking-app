@@ -7,6 +7,7 @@ import {
   BookingSession,
   type MeetingType,
 } from "@/prisma/generated/client";
+import { successResult, errorResult } from "@/lib/type";
 
 // GET AVAILABLE ROOMS FOR A SPECIFIC DATE
 export async function getAvailableRooms(bookingDate: string) {
@@ -23,8 +24,11 @@ export async function getAvailableRooms(bookingDate: string) {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate(),
-      0, 0, 0, 0
-    )
+      0,
+      0,
+      0,
+      0,
+    ),
   );
 
   const isToday = date.getTime() === todayUTC.getTime();
@@ -101,13 +105,15 @@ export async function createBooking(data: {
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate(),
-      0, 0, 0, 0
-    )
+      0,
+      0,
+      0,
+      0,
+    ),
   );
 
   // BANDIN UTC KE UTC
-  const isToday =
-    bookingDateUTC.getTime() === todayUTC.getTime();
+  const isToday = bookingDateUTC.getTime() === todayUTC.getTime();
 
   // JAM UTC
   const currentHour = now.getUTCHours();
@@ -276,7 +282,7 @@ export async function createBooking(data: {
     });
     return {
       success: true,
-      data: approvedBooking;
+      data: approvedBooking,
     };
   }
 

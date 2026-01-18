@@ -3,84 +3,88 @@
 import type React from "react";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
+    setError(null);
 
-    try {
-      if (!email || !password) {
-        setError("Email and password are required");
-        return;
-      }
-
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (!result?.ok) {
-        // Handle auth errors
-        if (result?.error === "CredentialsSignin") {
-          setError("Invalid email or password");
-        } else if (result?.error === "AccessDenied") {
-          setError("Access denied. Please contact administrator");
-        } else {
-          setError(result?.error || "Login failed. Please try again");
-        }
-        return;
-      }
-
-      // Login berhasil, redirect
-      router.push("/");
-    } catch (err) {
-      const errorMessage = getErrorMessage(err);
-      setError(errorMessage || "An error occurred during login");
-    } finally {
-      setLoading(false);
+    if (!email || !password) {
+      setError("Email dan password wajib diisi");
+      return;
     }
+
+    setLoading(true);
+
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      if (data.error === "USER_NOT_FOUND") {
+        setError("User tidak ditemukan");
+      } else if (data.error === "WRONG_PASSWORD") {
+        setError("Password salah");
+      } else {
+        setError("Login gagal");
+      }
+      setLoading(false);
+      return;
+    }
+
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    router.push("/");
   };
 
   return (
-    <div className="w-full max-w-md bg-white rounded shadow p-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Room Booking</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-5"
+      >
+        <h1 className="text-3xl font-bold text-center">Login</h1>
 
-      {error && (
-        <div className="mb-4 p-4 bg-red-100 text-red-700 rounded">{error}</div>
-      )}
+        {error && (
+          <div className="rounded-md bg-red-100 text-red-700 px-4 py-3 text-sm">
+            {error}
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-semibold mb-2">Email</label>
+        <div className="space-y-1">
+          <label className="text-sm font-semibold">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full border rounded px-4 py-2"
+            className="w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="admin@booking.com"
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold mb-2">Password</label>
+        <div className="space-y-1">
+          <label className="text-sm font-semibold">Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full border rounded px-4 py-2"
+            className="w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="••••••••"
           />
         </div>
@@ -88,17 +92,16 @@ export function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+          className="w-full rounded-md bg-blue-600 py-2 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
+        <div className="mt-6 p-4 bg-blue-50 rounded text-sm">
+          <p className="font-semibold mb-2">Demo Credentials:</p>
+          <p>Admin: admin@booking.com / admin123</p>
+          <p>PIC: pic1@booking.com / pic123</p>
+        </div>
       </form>
-
-      <div className="mt-6 p-4 bg-blue-50 rounded text-sm">
-        <p className="font-semibold mb-2">Demo Credentials:</p>
-        <p>Admin: admin@booking.com / admin123</p>
-        <p>PIC: pic1@booking.com / pic123</p>
-      </div>
     </div>
   );
 }
