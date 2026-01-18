@@ -19,14 +19,34 @@ export function LoginForm() {
     setError("");
 
     try {
+      if (!email || !password) {
+        setError("Email and password are required");
+        return;
+      }
+
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: true,
-        redirectTo: "/",
+        redirect: false,
       });
+
+      if (!result?.ok) {
+        // Handle auth errors
+        if (result?.error === "CredentialsSignin") {
+          setError("Invalid email or password");
+        } else if (result?.error === "AccessDenied") {
+          setError("Access denied. Please contact administrator");
+        } else {
+          setError(result?.error || "Login failed. Please try again");
+        }
+        return;
+      }
+
+      // Login berhasil, redirect
+      router.push("/");
     } catch (err) {
-      setError("An error occurred during login");
+      const errorMessage = getErrorMessage(err);
+      setError(errorMessage || "An error occurred during login");
     } finally {
       setLoading(false);
     }

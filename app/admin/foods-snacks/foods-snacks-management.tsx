@@ -9,6 +9,7 @@ import {
   createSnack,
   deleteSnack,
 } from "@/app/actions/admin-actions";
+import { useToastNotifications } from "@/hooks/use-toast-notifications";
 
 type FoodsSnacksManagementProps = {
   foods: any[];
@@ -24,16 +25,30 @@ export default function FoodsSnacksManagementClient({
   const [loading, setLoading] = useState(false);
   const [newFoodName, setNewFoodName] = useState("");
   const [newSnackName, setNewSnackName] = useState("");
+  const { showError, showSuccess } = useToastNotifications();
 
   const handleCreateFood = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newFoodName.trim()) return;
+
+    if (!newFoodName.trim()) {
+      showError("Food name kosong, goblok");
+      return;
+    }
 
     setLoading(true);
     try {
-      const food = await createFood(newFoodName);
-      setFoodList((prev) => [food, ...prev]);
+      const result = await createFood(newFoodName);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
+      setFoodList((prev) => [result.data, ...prev]);
       setNewFoodName("");
+      showSuccess("Food berhasil ditambahkan");
+    } catch (error) {
+      showError(error, "Gagal create food");
     } finally {
       setLoading(false);
     }
@@ -44,8 +59,17 @@ export default function FoodsSnacksManagementClient({
 
     setLoading(true);
     try {
-      await deleteFood(foodId);
+      const result = await deleteFood(foodId);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
       setFoodList((prev) => prev.filter((f) => f.id !== foodId));
+      showSuccess("Food berhasil dihapus");
+    } catch (error) {
+      showError(error, "Gagal delete food");
     } finally {
       setLoading(false);
     }
@@ -53,13 +77,26 @@ export default function FoodsSnacksManagementClient({
 
   const handleCreateSnack = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newSnackName.trim()) return;
+
+    if (!newSnackName.trim()) {
+      showError("Snack name kosong");
+      return;
+    }
 
     setLoading(true);
     try {
-      const snack = await createSnack(newSnackName);
-      setSnackList((prev) => [snack, ...prev]);
+      const result = await createSnack(newSnackName);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
+      setSnackList((prev) => [result.data, ...prev]);
       setNewSnackName("");
+      showSuccess("Snack berhasil ditambahkan");
+    } catch (error) {
+      showError(error, "Gagal create snack");
     } finally {
       setLoading(false);
     }
@@ -70,8 +107,17 @@ export default function FoodsSnacksManagementClient({
 
     setLoading(true);
     try {
-      await deleteSnack(snackId);
+      const result = await deleteSnack(snackId);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
       setSnackList((prev) => prev.filter((s) => s.id !== snackId));
+      showSuccess("Snack berhasil dihapus");
+    } catch (error) {
+      showError(error, "Gagal delete snack");
     } finally {
       setLoading(false);
     }

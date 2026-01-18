@@ -6,11 +6,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { getAvailableRooms, createBooking } from "@/app/actions/pic-actions";
 import type { BookingSession, MeetingType } from "@prisma/client";
 import { Suspense } from "react";
+import { useToastNotifications } from "@/hooks/use-toast-notifications";
 
 function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
   const router = useRouter();
+  const { showError, showSuccess } = useToastNotifications(); // Declare useToastNotifications
   const [loading, setLoading] = useState(false);
   const [rooms, setRooms] = useState<any[]>([]);
+  const [loadingRooms, setLoadingRooms] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -37,20 +40,66 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
     if (!formData.bookingDate) return;
 
     async function loadRooms() {
-      const data = await getAvailableRooms(formData.bookingDate);
-      setRooms(data);
+      setLoadingRooms(true);
+      try {
+        const data = await getAvailableRooms(formData.bookingDate);
+        setRooms(data);
+      } catch (error) {
+        showError(error, "Failed to load rooms");
+        setRooms([]);
+      } finally {
+        setLoadingRooms(false);
+      }
     }
 
     loadRooms();
-  }, [formData.bookingDate]);
+  }, [formData.bookingDate, showError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // Validation
+      if (!formData.letterNumber.trim()) {
+        showError("Letter number is required");
+        setLoading(false);
+        return;
+      }
+      if (!formData.roomId) {
+        showError("Please select a room");
+        setLoading(false);
+        return;
+      }
+      if (!formData.session) {
+        showError("Please select a session");
+        setLoading(false);
+        return;
+      }
+      if (!formData.agenda.trim()) {
+        showError("Agenda is required");
+        setLoading(false);
+        return;
+      }
+      if (!formData.description.trim()) {
+        showError("Description is required");
+        setLoading(false);
+        return;
+      }
+      if (!formData.meetingType) {
+        showError("Meeting type is required");
+        setLoading(false);
+        return;
+      }
+
       await createBooking(formData);
+      showSuccess(
+        "Booking created successfully! Awaiting admin approval.",
+        "Success",
+      );
       router.push("/pic");
+    } catch (error) {
+      showError(error, "Failed to create booking");
     } finally {
       setLoading(false);
     }

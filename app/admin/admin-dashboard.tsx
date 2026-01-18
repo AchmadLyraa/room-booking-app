@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { logoutUser } from "@/app/actions/logout-action";
 import Pagination from "@/components/Pagination";
 import Filter from "@/components/Filter";
+import { useToastNotifications } from "@/hooks/use-toast-notifications";
 
 function parseJsonArray(jsonString: string | null): string[] {
   if (!jsonString) return [];
@@ -28,6 +29,7 @@ type AdminDashboardProps = {
 export default function AdminDashboardClient({
   bookings,
 }: AdminDashboardProps) {
+  const { showError, showSuccess } = useToastNotifications();
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
@@ -41,94 +43,87 @@ export default function AdminDashboardClient({
 
   useEffect(() => {
     const loadAutoApproveStatus = async () => {
-      try {
-        const config = await getSystemConfig();
-        setAutoApproveEnabled(config?.autoApprove || false);
-      } catch (error) {
-        console.error("Error loading auto-approve status:", error);
+      const result = await getSystemConfig();
+
+      if (!result.success) {
+        showError(result.error);
+        return;
       }
+
+      setAutoApproveEnabled(result.data.autoApprove);
     };
+
     loadAutoApproveStatus();
   }, []);
 
   const handleApprove = async (bookingId: string) => {
     setLoading(true);
     try {
-      const booking = bookingList.find((b) => b.id === bookingId);
-      if (!booking) return;
+      const result = await approveBooking(bookingId);
 
-      await approveBooking(bookingId);
-
-      // Tentukan sessions yang conflict
-      let conflictSessions: string[] = [];
-      if (booking.session === "FULLDAY") {
-        conflictSessions = ["SESSION_1", "SESSION_2"];
-      } else if (
-        booking.session === "SESSION_1" ||
-        booking.session === "SESSION_2"
-      ) {
-        conflictSessions = ["FULLDAY"];
+      if (!result.success) {
+        showError(result.error);
+        return;
       }
 
-      // Update state: approve booking utama + auto-reject conflict bookings
+      showSuccess("Booking approved");
+
+      // UPDATE STATE BERDASARKAN DATA DARI SERVER
       setBookingList((prev) =>
-        prev.map((b) => {
-          // Approve booking yang di-klik
-          if (b.id === bookingId) {
-            return { ...b, status: "APPROVED" };
-          }
-
-          // Auto-reject booking conflict (same room, same date, conflict session)
-          if (
-            conflictSessions.includes(b.session) &&
-            b.roomId === booking.roomId &&
-            new Date(b.bookingDate).toDateString() ===
-              new Date(booking.bookingDate).toDateString() &&
-            b.status === "PENDING"
-          ) {
-            return {
-              ...b,
-              status: "REJECTED",
-              rejectionReason: "Maaf, sudah ada yang request duluan",
-            };
-          }
-
-          return b;
-        }),
+        prev.map((b) => (b.id === result.data.id ? result.data : b)),
       );
+    } catch (error) {
+      showError(error, "Failed to approve booking");
     } finally {
       setLoading(false);
     }
   };
+
   const handleToggleAutoApprove = async () => {
     setTogglingAutoApprove(true);
     try {
-      await updateAutoApprove(!autoApproveEnabled);
-      setAutoApproveEnabled(!autoApproveEnabled);
+      const result = await updateAutoApprove(!autoApproveEnabled);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
+      setAutoApproveEnabled(result.data.autoApprove);
+      showSuccess("Auto-approve updated");
     } catch (error) {
-      console.error("Error toggling auto-approve:", error);
-      alert("Ada error saat mengubah auto-approve setting");
+      showError(error, "Failed to update auto-approve");
     } finally {
       setTogglingAutoApprove(false);
     }
   };
 
   const handleRejectSubmit = async () => {
-    if (!selectedBooking || !rejectReason.trim()) return;
+    if (!selectedBooking) {
+      showError("Booking not found");
+      return;
+    }
 
     setLoading(true);
     try {
-      await rejectBooking(selectedBooking.id, rejectReason);
+      const result = await rejectBooking(selectedBooking.id, rejectReason);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
+      showSuccess("Booking rejected");
+
       setBookingList((prev) =>
-        prev.map((b) =>
-          b.id === selectedBooking.id
-            ? { ...b, status: "REJECTED", rejectionReason: rejectReason }
-            : b,
-        ),
+        prev.map((b) => (b.id === result.data.id ? result.data : b)),
       );
+
       setShowRejectModal(false);
       setRejectReason("");
       setSelectedBooking(null);
+    } catch (error) {
+      showError(error, "Failed to reject booking");
     } finally {
       setLoading(false);
     }

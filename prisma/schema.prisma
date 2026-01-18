@@ -127,10 +127,10 @@ model Booking {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 
-  @@unique([roomId, bookingDate, session])
   @@index([userId])
   @@index([status])
   @@index([bookingDate])
+  @@index([roomId, bookingDate, session])
 }
 
 ////////////////////////////////////////

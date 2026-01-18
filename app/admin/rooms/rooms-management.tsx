@@ -9,6 +9,7 @@ import {
   updateRoom,
   deleteRoom,
 } from "@/app/actions/admin-actions";
+import { useToastNotifications } from "@/hooks/use-toast-notifications";
 
 type RoomsManagementProps = {
   rooms: any[];
@@ -26,35 +27,52 @@ export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
     capacity: 10,
   });
 
+  const { showError, showSuccess } = useToastNotifications();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       if (editingRoom) {
-        await updateRoom(
+        const result = await updateRoom(
           editingRoom.id,
           formData.name,
           formData.description,
           formData.capacity,
         );
+
+        if (!result.success) {
+          showError(result.error);
+          return;
+        }
+
         setRoomList((prev) =>
-          prev.map((r) =>
-            r.id === editingRoom.id ? { ...r, ...formData } : r,
-          ),
+          prev.map((r) => (r.id === result.data.id ? result.data : r)),
         );
+
+        showSuccess("Room berhasil diupdate");
       } else {
-        const newRoom = await createRoom(
+        const result = await createRoom(
           formData.name,
           formData.description,
           formData.capacity,
         );
-        setRoomList((prev) => [newRoom, ...prev]);
+
+        if (!result.success) {
+          showError(result.error);
+          return;
+        }
+
+        setRoomList((prev) => [result.data, ...prev]);
+        showSuccess("Room berhasil dibuat");
       }
 
       setFormData({ name: "", description: "", capacity: 10 });
       setEditingRoom(null);
       setShowForm(false);
+    } catch (error) {
+      showError(error, "Gagal menyimpan room");
     } finally {
       setLoading(false);
     }
@@ -75,8 +93,17 @@ export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
 
     setLoading(true);
     try {
-      await deleteRoom(roomId);
+      const result = await deleteRoom(roomId);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
       setRoomList((prev) => prev.filter((r) => r.id !== roomId));
+      showSuccess("Room berhasil dihapus");
+    } catch (error) {
+      showError(error, "Gagal delete room");
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { logoutUser } from "@/app/actions/logout-action";
+import { useToastNotifications } from "@/hooks/use-toast-notifications";
 
 function parseJsonArray(jsonString: string | null): string[] {
   if (!jsonString) return [];
@@ -13,10 +14,15 @@ function parseJsonArray(jsonString: string | null): string[] {
 }
 
 export default function PICDashboardClient({ bookings }: { bookings: any[] }) {
+  const { showError } = useToastNotifications();
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
 
   const handleLogout = async () => {
-    await logoutUser();
+    try {
+      await logoutUser();
+    } catch (error) {
+      showError(error, "Failed to logout");
+    }
   };
 
   return (

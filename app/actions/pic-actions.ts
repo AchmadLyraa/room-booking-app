@@ -17,8 +17,18 @@ export async function getAvailableRooms(bookingDate: string) {
 
   // Get current time
   const now = new Date();
-  const isToday = date.toDateString() === now.toDateString();
-  const currentHour = now.getHours();
+
+  const todayUTC = new Date(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate(),
+      0, 0, 0, 0
+    )
+  );
+
+  const isToday = date.getTime() === todayUTC.getTime();
+  const currentHour = now.getUTCHours();
 
   // Get all rooms with their bookings for the selected date
   const rooms = await prisma.room.findMany({
@@ -84,35 +94,46 @@ export async function createBooking(data: {
 
   // VALIDASI: Cegah booking di tanggal lampau
   const now = new Date();
+
+  // TODAY UTC (00:00 UTC)
   const todayUTC = new Date(
     Date.UTC(
       now.getUTCFullYear(),
       now.getUTCMonth(),
       now.getUTCDate(),
-      0,
-      0,
-      0,
-      0,
-    ),
+      0, 0, 0, 0
+    )
   );
 
-  if (bookingDateUTC < todayUTC) {
-    throw new Error("Cannot book for past dates.");
-  }
+  // BANDIN UTC KE UTC
+  const isToday =
+    bookingDateUTC.getTime() === todayUTC.getTime();
 
-  // ✅ VALIDASI: Cegah session yang sudah passed di hari ini
-  const isToday = bookingDateUTC.toDateString() === todayUTC.toDateString();
-  const currentHour = now.getHours();
+  // JAM UTC
+  const currentHour = now.getUTCHours();
+
+  if (bookingDateUTC < todayUTC) {
+    return {
+      success: false,
+      error: "Cannot book for past dates.",
+    };
+  }
 
   if (isToday) {
     if (data.session === "SESSION_1" && currentHour >= 8) {
-      throw new Error("SESSION_1 (08:00-12:00) has already started or passed.");
+      return errorResult(
+        "SESSION_1 (08:00–12:00) has already started or passed.",
+      );
     }
     if (data.session === "SESSION_2" && currentHour >= 13) {
-      throw new Error("SESSION_2 (13:00-16:00) has already started or passed.");
+      return errorResult(
+        "SESSION_2 (13:00–16:00) has already started or passed.",
+      );
     }
     if (data.session === "FULLDAY" && currentHour >= 8) {
-      throw new Error("FULLDAY (08:00-16:00) has already started or passed.");
+      return errorResult(
+        "FULLDAY (08:00–16:00) has already started or passed.",
+      );
     }
   }
 
@@ -127,6 +148,19 @@ export async function createBooking(data: {
   const foodNames = JSON.stringify(selectedFoods.map((f) => f.name));
   const snackNames = JSON.stringify(selectedSnacks.map((s) => s.name));
 
+  // Cegah letter number yang sudah ada
+  const existingLetterNumber = await prisma.booking.findUnique({
+    where: { letterNumber: data.letterNumber },
+  });
+
+  if (existingLetterNumber) {
+    return {
+      success: false,
+      error:
+        "Letter number already exists. Please use a different letter number.",
+    };
+  }
+
   const existingBooking = await prisma.booking.findFirst({
     where: {
       userId: user.id as string,
@@ -138,9 +172,10 @@ export async function createBooking(data: {
   });
 
   if (existingBooking) {
-    throw new Error(
-      "You already have a booking for this room, date, and session.",
-    );
+    return {
+      success: false,
+      error: "You already have a booking for this room, date, and session.",
+    };
   }
 
   const conflictingBooking = await prisma.booking.findFirst({
@@ -153,9 +188,11 @@ export async function createBooking(data: {
   });
 
   if (conflictingBooking) {
-    throw new Error(
-      "This room is no longer available for the selected session. Please refresh and try another time.",
-    );
+    return {
+      success: false,
+      error:
+        "This room is no longer available for the selected session. Please refresh and try another time.",
+    };
   }
 
   if (data.session === "FULLDAY") {
@@ -169,9 +206,11 @@ export async function createBooking(data: {
     });
 
     if (partialConflict) {
-      throw new Error(
-        "This room is partially booked during fullday hours. Please select a different date or session.",
-      );
+      return {
+        success: false,
+        error:
+          "This room is partially booked during fullday hours. Please select a different date or session.",
+      };
     }
   }
 
@@ -186,9 +225,11 @@ export async function createBooking(data: {
     });
 
     if (fullDayConflict) {
-      throw new Error(
-        "This room is fully booked during this time. Please select a different date or session.",
-      );
+      return {
+        success: false,
+        error:
+          "This room is fully booked during this time. Please select a different date or session.",
+      };
     }
   }
 
@@ -233,10 +274,16 @@ export async function createBooking(data: {
         bookingSnacks: { include: { snack: true } },
       },
     });
-    return approvedBooking;
+    return {
+      success: true,
+      data: approvedBooking;
+    };
   }
 
-  return booking;
+  return {
+    success: true,
+    data: booking,
+  };
 }
 
 // GET USER'S BOOKINGS

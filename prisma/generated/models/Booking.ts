@@ -311,7 +311,6 @@ export type BookingOrderByWithRelationInput = {
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   letterNumber?: string
-  roomId_bookingDate_session?: Prisma.BookingRoomIdBookingDateSessionCompoundUniqueInput
   AND?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   OR?: Prisma.BookingWhereInput[]
   NOT?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
@@ -334,7 +333,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   bookingFoods?: Prisma.BookingFoodListRelationFilter
   bookingSnacks?: Prisma.BookingSnackListRelationFilter
-}, "id" | "letterNumber" | "roomId_bookingDate_session">
+}, "id" | "letterNumber">
 
 export type BookingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -536,12 +535,6 @@ export type BookingListRelationFilter = {
 
 export type BookingOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type BookingRoomIdBookingDateSessionCompoundUniqueInput = {
-  roomId: string
-  bookingDate: Date | string
-  session: $Enums.BookingSession
 }
 
 export type BookingCountOrderByAggregateInput = {
