@@ -7,7 +7,7 @@ import {
   BookingSession,
   type MeetingType,
 } from "@/prisma/generated/client";
-import { successResult, errorResult } from "@/lib/type";
+import { successResult, errorResult } from "@/lib/types";
 
 // GET AVAILABLE ROOMS FOR A SPECIFIC DATE
 export async function getAvailableRooms(bookingDate: string) {

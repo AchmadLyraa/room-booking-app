@@ -34,9 +34,7 @@ export default function AdminDashboardClient({
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
   const [loading, setLoading] = useState(false);
-  const [bookingList, setBookingList] = useState<any[]>(
-    Array.isArray(bookings) ? bookings : [],
-  );
+  const [bookingList, setBookingList] = useState<any[]>(bookings?.data ?? []);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [filter, setFilter] = useState("");

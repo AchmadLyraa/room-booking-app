@@ -20,8 +20,8 @@ export default function FoodsSnacksManagementClient({
   foods,
   snacks,
 }: FoodsSnacksManagementProps) {
-  const [foodList, setFoodList] = useState(foods);
-  const [snackList, setSnackList] = useState(snacks);
+  const [foodList, setFoodList] = useState<any[]>(foods?.data ?? []);
+  const [snackList, setSnackList] = useState<any[]>(snacks?.data ?? []);
   const [loading, setLoading] = useState(false);
   const [newFoodName, setNewFoodName] = useState("");
   const [newSnackName, setNewSnackName] = useState("");

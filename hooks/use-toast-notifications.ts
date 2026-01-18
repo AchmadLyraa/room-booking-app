@@ -1,17 +1,11 @@
 "use client";
 
-import { useToast } from "@/components/ui/use-toast";
-import { getErrorMessage } from "@/lib/error-utils";
+import { useToast } from "@/hooks/use-toast";
 
-/**
- * Hook untuk toast notifications
- * Usage: const { showError, showSuccess } = useToastNotifications();
- */
 export function useToastNotifications() {
   const { toast } = useToast();
 
-  const showError = (error: unknown, title = "Error") => {
-    const message = getErrorMessage(error);
+  const showError = (message: string, title = "Error") => {
     toast({
       title,
       description: message,

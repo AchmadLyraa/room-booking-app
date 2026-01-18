@@ -43,9 +43,13 @@ export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
         );
 
         if (!result.success) {
-          showError(result.error);
-          return;
-        }
+  if (result.error === "ROOM_NAME_EXISTS") {
+    showError("Nama ruangan sudah ada, jangan tolol ngulang");
+  } else {
+    showError("Gagal membuat ruangan");
+  }
+  return;
+}
 
         setRoomList((prev) =>
           prev.map((r) => (r.id === result.data.id ? result.data : r)),
@@ -60,9 +64,13 @@ export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
         );
 
         if (!result.success) {
-          showError(result.error);
-          return;
-        }
+  if (result.error === "ROOM_NAME_EXISTS") {
+    showError("Nama ruangan sudah ada, jangan tolol ngulang");
+  } else {
+    showError("Gagal membuat ruangan");
+  }
+  return;
+}
 
         setRoomList((prev) => [result.data, ...prev]);
         showSuccess("Room berhasil dibuat");
@@ -72,7 +80,7 @@ export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
       setEditingRoom(null);
       setShowForm(false);
     } catch (error) {
-      showError(error, "Gagal menyimpan room");
+      showError("Gagal menyimpan room");
     } finally {
       setLoading(false);
     }
@@ -96,14 +104,14 @@ export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
       const result = await deleteRoom(roomId);
 
       if (!result.success) {
-        showError(result.error);
+        showError("Gagal delete room");
         return;
       }
 
       setRoomList((prev) => prev.filter((r) => r.id !== roomId));
       showSuccess("Room berhasil dihapus");
     } catch (error) {
-      showError(error, "Gagal delete room");
+      showError("Gagal delete room");
     } finally {
       setLoading(false);
     }

@@ -2,24 +2,33 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/auth-utils";
-import { Role, BookingStatus } from "@/prisma/generated/client";
+import { Role, BookingStatus, Prisma } from "@/prisma/generated/client";
 import { successResult, errorResult } from "@/lib/types";
 
 // ROOM MANAGEMENT
-export async function createRoom(
-  name: string,
-  description: string,
-  capacity: number,
-) {
-  await requireRole([Role.ADMIN]);
+export async function createRoom(name: string, description: string, capacity: number) {
+  try {
+    const room = await prisma.room.create({
+      data: { name, description, capacity },
+    });
 
-  const room = await prisma.room.create({
-    data: { name, description, capacity },
-  });
+    return { success: true, data: room };
+  } catch (err) {
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2002") {
+        return {
+          success: false,
+          error: "ROOM_NAME_EXISTS",
+        };
+      }
+    }
 
-  return successResult(room);
+    return {
+      success: false,
+      error: "UNKNOWN_ERROR",
+    };
+  }
 }
-
 export async function updateRoom(
   id: string,
   name: string,
