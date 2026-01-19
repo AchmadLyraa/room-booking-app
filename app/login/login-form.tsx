@@ -100,6 +100,7 @@ export function LoginForm() {
           <p className="font-semibold mb-2">Demo Credentials:</p>
           <p>Admin: admin@booking.com / admin123</p>
           <p>PIC: pic1@booking.com / pic123</p>
+          <p>PIC: pic2@booking.com / pic123</p>
         </div>
       </form>
     </div>

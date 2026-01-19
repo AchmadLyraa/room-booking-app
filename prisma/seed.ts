@@ -35,6 +35,15 @@ async function main() {
     },
   });
 
+  const pic2 = await prisma.user.create({
+    data: {
+      name: "PIC 2",
+      email: "pic2@booking.com",
+      password: await bcrypt.hash("pic123", 10),
+      role: Role.PIC,
+    },
+  });
+
   // Create rooms
   const room1 = await prisma.room.create({
     data: {
