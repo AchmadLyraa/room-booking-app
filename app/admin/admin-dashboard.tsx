@@ -23,7 +23,10 @@ function parseJsonArray(jsonString: string | null): string[] {
 }
 
 type AdminDashboardProps = {
-  bookings: any[];
+  bookings: {
+    success: boolean;
+    data: any[];
+  };
 };
 
 export default function AdminDashboardClient({
