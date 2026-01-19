@@ -17,7 +17,7 @@ type RoomsManagementProps = {
 
 export default function RoomsManagementClient({ rooms }: RoomsManagementProps) {
   const router = useRouter();
-  const [roomList, setRoomList] = useState(rooms);
+  const [roomList, setRoomList] = useState<any[]>(rooms?.data ?? []);
   const [showForm, setShowForm] = useState(false);
   const [editingRoom, setEditingRoom] = useState<any>(null);
   const [loading, setLoading] = useState(false);

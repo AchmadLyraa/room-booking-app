@@ -316,15 +316,27 @@ export async function getFoodsAndSnacks() {
 export async function getRoomAvailability(bookingDateString: string) {
   await requireRole([Role.PIC]);
 
-  // Parse the date string (format: YYYY-MM-DD from browser) and create UTC date
   const [year, month, day] = bookingDateString.split("-").map(Number);
+
   const dateUTC = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
   const nextDayUTC = new Date(dateUTC.getTime() + 24 * 60 * 60 * 1000);
 
-  // Get current time in browser timezone
   const now = new Date();
+  const todayUTC = new Date(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate(),
+      0,
+      0,
+      0,
+      0,
+    ),
+  );
 
-  // Get all rooms with their bookings for the selected date
+  const isToday = dateUTC.getTime() === todayUTC.getTime();
+  const currentHourUTC = now.getUTCHours();
+
   const rooms = await prisma.room.findMany({
     include: {
       bookings: {
@@ -335,32 +347,24 @@ export async function getRoomAvailability(bookingDateString: string) {
           },
           status: "APPROVED",
         },
-        select: {
-          session: true,
-        },
+        select: { session: true },
       },
     },
-    orderBy: {
-      name: "asc",
-    },
+    orderBy: { name: "asc" },
   });
-  const isToday = dateUTC.toDateString() === now.toDateString();
 
-  // Define session times (in 24-hour format)
   const sessionTimes = {
     SESSION_1: { start: 8, end: 12 },
     SESSION_2: { start: 13, end: 16 },
     FULLDAY: { start: 8, end: 16 },
   };
 
-  // Map rooms with their session availability
   return rooms.map((room) => {
-    const bookedSessions = room.bookings.map((b) => b.session);
+    const booked = room.bookings.map((b) => b.session);
 
-    const isSession1Reserved = bookedSessions.includes("SESSION_1");
-    const isSession2Reserved = bookedSessions.includes("SESSION_2");
-    const isFulldayReserved = bookedSessions.includes("FULLDAY");
-    const isFulldayDisabledByPartial = isSession1Reserved || isSession2Reserved;
+    const hasS1 = booked.includes("SESSION_1");
+    const hasS2 = booked.includes("SESSION_2");
+    const hasFD = booked.includes("FULLDAY");
 
     return {
       id: room.id,
@@ -368,29 +372,31 @@ export async function getRoomAvailability(bookingDateString: string) {
       capacity: room.capacity,
       sessionAvailability: {
         SESSION_1: getSessionStatus(
-          isSession1Reserved,
+          hasS1,
           isToday,
-          now.getHours(),
+          currentHourUTC,
           sessionTimes.SESSION_1,
         ),
         SESSION_2: getSessionStatus(
-          isSession2Reserved,
+          hasS2,
           isToday,
-          now.getHours(),
+          currentHourUTC,
           sessionTimes.SESSION_2,
         ),
-        FULLDAY: isFulldayDisabledByPartial
-          ? "DISABLED"
-          : getSessionStatus(
-              isFulldayReserved,
-              isToday,
-              now.getHours(),
-              sessionTimes.FULLDAY,
-            ),
+        FULLDAY:
+          hasS1 || hasS2
+            ? "DISABLED"
+            : getSessionStatus(
+                hasFD,
+                isToday,
+                currentHourUTC,
+                sessionTimes.FULLDAY,
+              ),
       },
     };
   });
 }
+
 
 function getSessionStatus(
   isBooked: boolean,

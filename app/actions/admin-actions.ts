@@ -68,9 +68,15 @@ export async function deleteRoom(id: string) {
 
 export async function getAllRooms() {
   await requireRole([Role.ADMIN]);
-  return prisma.room.findMany({
+
+  const rooms = await prisma.room.findMany({
     orderBy: { createdAt: "desc" },
   });
+
+  return {
+    success: true,
+    data: rooms,
+  };
 }
 
 // BOOKING APPROVAL

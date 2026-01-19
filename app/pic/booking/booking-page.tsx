@@ -53,7 +53,7 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
     }
 
     loadRooms();
-  }, [formData.bookingDate, showError]);
+  }, [formData.bookingDate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,7 +92,14 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
         return;
       }
 
-      await createBooking(formData);
+      const result = await createBooking(formData);
+
+      if (!result.success) {
+        showError(result.error ?? "Booking failed");
+        setLoading(false);
+        return;
+      }
+
       showSuccess(
         "Booking created successfully! Awaiting admin approval.",
         "Success",
@@ -108,24 +115,7 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
   const getAvailableSessions = () => {
     const room = rooms.find((r) => r.id === formData.roomId);
     if (!room) return [];
-
-    let availableSessions = room.availableSessions || [];
-
-    // Kalo SESSION_1 atau SESSION_2 tersedia, hapus FULLDAY
-    if (
-      availableSessions.includes("SESSION_1") ||
-      availableSessions.includes("SESSION_2")
-    ) {
-      // Jika keduanya ada, FULLDAY harus dihapus
-      if (
-        availableSessions.includes("SESSION_1") &&
-        availableSessions.includes("SESSION_2")
-      ) {
-        availableSessions = availableSessions.filter((s) => s !== "FULLDAY");
-      }
-    }
-
-    return availableSessions;
+    return room.availableSessions ?? [];
   };
 
   return (
