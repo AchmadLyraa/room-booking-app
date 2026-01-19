@@ -2,11 +2,20 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/auth-utils";
-import { Role, BookingStatus, Prisma } from "@/prisma/generated/client";
+import {
+  Role,
+  BookingStatus,
+  BookingSession,
+  Prisma,
+} from "@/prisma/generated/client";
 import { successResult, errorResult } from "@/lib/types";
 
 // ROOM MANAGEMENT
-export async function createRoom(name: string, description: string, capacity: number) {
+export async function createRoom(
+  name: string,
+  description: string,
+  capacity: number,
+) {
   try {
     const room = await prisma.room.create({
       data: { name, description, capacity },
