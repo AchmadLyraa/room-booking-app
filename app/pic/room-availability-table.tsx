@@ -1,34 +1,77 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
+import { getRoomAvailability } from "@/app/actions/pic-actions";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { getRoomAvailability } from "@/app/actions/pic-actions";
-import type { BookingSession } from "@prisma/client";
+
+function getStatusButton(status: string, roomId: number, session: string, selectedDate: Date, session1Status?: string, session2Status?: string) {
+  const dateString = selectedDate.toLocaleDateString("en-CA");
+
+  // Logic for full session (FULLDAY)
+  if (session === "FULLDAY") {
+    // If either session 1 or session 2 is booked, full becomes restricted (database sets to "DISABLED")
+    if (status === "DISABLED") {
+      return (
+        <button className="h-8 px-3 bg-[#facc15] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed" disabled>
+          DIBATASI
+        </button>
+      );
+    }
+    // Otherwise check the actual status
+    if (status === "TERSEDIA") {
+      return (
+        <Link href={`/pic/booking?date=${dateString}&roomId=${roomId}&session=${session}`}>
+          <button className="h-8 px-3 bg-[#22c55e] text-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
+            TERSEDIA
+          </button>
+        </Link>
+      );
+    }
+    // If full day is booked, show as booked
+    return (
+      <button className="h-8 px-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black text-xs cursor-not-allowed" disabled>
+        TERPAKAI
+      </button>
+    );
+  }
+
+  // Logic for session 1 and session 2
+  if (status === "TERSEDIA") {
+    return (
+      <Link href={`/pic/booking?date=${dateString}&roomId=${roomId}&session=${session}`}>
+        <button className="h-8 px-3 bg-[#22c55e] text-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
+          TERSEDIA
+        </button>
+      </Link>
+    );
+  }
+
+  // If booked or disabled (time passed), show as booked
+  return (
+    <button className="h-8 px-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black text-xs cursor-not-allowed" disabled>
+      TERPAKAI
+    </button>
+  );
+}
 
 export function RoomAvailabilityTable() {
-  const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState<Date>(() => {
-    const today = new Date();
-    // today.setHours(0, 0, 0, 0);
-    return today;
-  });
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [availability, setAvailability] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!selectedDate) return;
-
     async function loadAvailability() {
       setLoading(true);
       try {
-        const dateString = selectedDate.toLocaleDateString("en-CA"); // en-CA gives YYYY-MM-DD format
+        const dateString = currentDate.toLocaleDateString("en-CA");
         const data = await getRoomAvailability(dateString);
         setAvailability(data);
       } finally {
@@ -37,167 +80,93 @@ export function RoomAvailabilityTable() {
     }
 
     loadAvailability();
-  }, [selectedDate]);
+  }, [currentDate]);
 
-  const handleCellClick = (
-    roomId: string,
-    session: BookingSession,
-    status: string,
-  ) => {
-    if (status !== "TERSEDIA") return;
+  const dayName = format(currentDate, "EEEE", { locale: id }).toUpperCase();
+  const dateFormatted = format(currentDate, "dd/MM/yyyy");
+  const timeFormatted = format(currentDate, "HH:mm");
 
-    const dateString = selectedDate!.toLocaleDateString("en-CA");
-    router.push(
-      `/pic/booking?date=${dateString}&roomId=${roomId}&session=${session}`,
-    );
-  };
-
-  const getSessionLabel = (session: BookingSession) => {
-    if (session === "SESSION_1") return "SESI1\n08:00-12:00";
-    if (session === "SESSION_2") return "SESI2\n13:00-16:00";
-    return "FULL\n08:00-16:00";
-  };
-
-  const getStatusStyle = (status: string) => {
-    if (status === "TERSEDIA") {
-      return "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer font-semibold";
-    }
-    if (status === "DISABLED") {
-      return "bg-gray-100 text-gray-500 cursor-not-allowed font-semibold";
-    }
-    return "bg-red-100 text-red-800 cursor-not-allowed font-semibold";
-  };
+  if (loading) {
+    return <div className="text-center py-8">Loading...</div>;
+  }
 
   return (
-    <div className="p-6 bg-white rounded-lg border">
-      <div className="mb-6 flex items-center gap-4">
-        <h2 className="text-2xl font-bold">DAFTAR RESERVASI RUANGAN</h2>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline">
-              📅{" "}
-              {selectedDate
-                ? selectedDate.toLocaleDateString("id-ID")
-                : "Pilih Tanggal"}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={selectedDate}
-              onSelect={setSelectedDate}
-              disabled={(date) =>
-                date < new Date(new Date().setHours(0, 0, 0, 0))
-              }
-            />
-          </PopoverContent>
-        </Popover>
+    <div className="space-y-6">
+      {/* Header with date */}
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold uppercase">DAFTAR RESERVASI RUANGAN</h1>
+        <div className="flex border-3 border-black brutal-shadow overflow-hidden">
+          <div className="px-4 py-2 bg-white text-black font-bold uppercase border-r-3 border-black">
+            {dayName}
+          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button className="px-4 py-2 bg-[#22c55e] text-white font-bold border-r-3 border-black hover:bg-[#16a34a] transition-colors">
+                {dateFormatted}
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0 border-3 border-black brutal-shadow bg-white" align="end">
+              <Calendar
+                mode="single"
+                selected={currentDate}
+                onSelect={(date) => date && setCurrentDate(date)}
+                disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                className="border-0"
+              />
+            </PopoverContent>
+          </Popover>
+          <div className="px-4 py-2 bg-white text-black font-bold">{timeFormatted}</div>
+        </div>
       </div>
 
-      {!selectedDate ? (
-        <p className="text-gray-500 text-center py-8">
-          Silakan pilih tanggal untuk melihat ketersediaan ruangan
-        </p>
-      ) : loading ? (
-        <p className="text-gray-500 text-center py-8">Loading...</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-400 px-4 py-2 text-left font-bold">
-                  NO
-                </th>
-                <th className="border border-gray-400 px-4 py-2 text-left font-bold">
-                  RUANGAN
-                </th>
-                <th className="border border-gray-400 px-4 py-2 text-center font-bold">
-                  KAPASITAS
-                </th>
-                <th
-                  colSpan={3}
-                  className="border border-gray-400 px-4 py-2 text-center font-bold"
-                >
-                  SESI RAPAT
-                </th>
-              </tr>
-              <tr className="bg-gray-100">
-                <th className="border border-gray-400 px-4 py-2"></th>
-                <th className="border border-gray-400 px-4 py-2"></th>
-                <th className="border border-gray-400 px-4 py-2"></th>
-                <th className="border border-gray-400 px-4 py-2 text-center font-bold">
-                  <div>SESI1</div>
-                  <div className="text-sm">08:00-12:00</div>
-                </th>
-                <th className="border border-gray-400 px-4 py-2 text-center font-bold">
-                  <div>SESI2</div>
-                  <div className="text-sm">13:00-16:00</div>
-                </th>
-                <th className="border border-gray-400 px-4 py-2 text-center font-bold">
-                  <div>FULL</div>
-                  <div className="text-sm">08:00-16:00</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {availability.map((room, index) => (
-                <tr key={room.id}>
-                  <td className="border border-gray-400 px-4 py-2 text-center font-semibold">
-                    {String(index + 1).padStart(2, "0")}
+      {/* Room Availability Table */}
+      <div className="bg-white border-3 border-black brutal-shadow overflow-hidden">
+        <table className="w-full">
+          <thead>
+            <tr className="bg-[#f5f5f5] border-b-3 border-black">
+              <th className="px-4 py-3 text-center font-bold uppercase text-sm border-r-2 border-black">NO</th>
+              <th className="px-4 py-3 text-left font-bold uppercase text-sm border-r-2 border-black">RUANGAN</th>
+              <th className="px-4 py-3 text-center font-bold uppercase text-sm border-r-2 border-black">KAPASITAS</th>
+              <th className="px-4 py-3 text-center font-bold uppercase text-sm border-r-2 border-black">
+                <div>SESI 1</div>
+                <div className="text-xs font-normal text-black/60">08:00-12:00</div>
+              </th>
+              <th className="px-4 py-3 text-center font-bold uppercase text-sm border-r-2 border-black">
+                <div>SESI 2</div>
+                <div className="text-xs font-normal text-black/60">13:00-16:00</div>
+              </th>
+              <th className="px-4 py-3 text-center font-bold uppercase text-sm">
+                <div>FULL</div>
+                <div className="text-xs font-normal text-black/60">08:00-16:00</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {availability.map((room, index) => {
+              const session1Status = room.sessionAvailability.SESSION_1;
+              const session2Status = room.sessionAvailability.SESSION_2;
+              const fullDayStatus = room.sessionAvailability.FULLDAY;
+
+              return (
+                <tr key={room.id} className="border-b-2 border-black last:border-b-0">
+                  <td className="px-4 py-4 text-center font-bold border-r-2 border-black">{index + 1}</td>
+                  <td className="px-4 py-4 font-bold border-r-2 border-black">{room.name}</td>
+                  <td className="px-4 py-4 text-center font-bold border-r-2 border-black">{room.capacity}</td>
+                  <td className="px-4 py-4 text-center border-r-2 border-black">
+                    {getStatusButton(session1Status, room.id, "SESSION_1", currentDate, session1Status, session2Status)}
                   </td>
-                  <td className="border border-gray-400 px-4 py-2 font-semibold">
-                    {room.name}
+                  <td className="px-4 py-4 text-center border-r-2 border-black">
+                    {getStatusButton(session2Status, room.id, "SESSION_2", currentDate, session1Status, session2Status)}
                   </td>
-                  <td className="border border-gray-400 px-4 py-2 text-center">
-                    {room.capacity}
+                  <td className="px-4 py-4 text-center">
+                    {getStatusButton(fullDayStatus, room.id, "FULLDAY", currentDate, session1Status, session2Status)}
                   </td>
-
-                  {(["SESSION_1", "SESSION_2", "FULLDAY"] as const).map(
-                    (session) => {
-                      const session1Status = room.sessionAvailability.SESSION_1;
-                      const session2Status = room.sessionAvailability.SESSION_2;
-                      const fullDayStatus = room.sessionAvailability.FULLDAY;
-
-                      let displayStatus = room.sessionAvailability[session];
-
-                      // Jika FULLDAY sudah RESERVED, SESSION_1 dan SESSION_2 jadi RESERVED
-                      if (fullDayStatus === "RESERVED") {
-                        if (
-                          session === "SESSION_1" ||
-                          session === "SESSION_2"
-                        ) {
-                          displayStatus = "RESERVED";
-                        }
-                      }
-
-                      // Jika SESSION_1 atau SESSION_2 sudah RESERVED, FULLDAY jadi DISABLED
-                      if (
-                        (session1Status === "RESERVED" ||
-                          session2Status === "RESERVED") &&
-                        session === "FULLDAY"
-                      ) {
-                        displayStatus = "DISABLED";
-                      }
-
-                      return (
-                        <td
-                          key={`${room.id}-${session}`}
-                          className={`border border-gray-400 px-4 py-2 text-center ${getStatusStyle(displayStatus)} whitespace-pre-wrap`}
-                          onClick={() =>
-                            handleCellClick(room.id, session, displayStatus)
-                          }
-                        >
-                          {displayStatus}
-                        </td>
-                      );
-                    },
-                  )}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

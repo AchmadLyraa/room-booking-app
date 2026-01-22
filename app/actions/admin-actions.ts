@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/auth-utils";
-import { Role, BookingStatus, Prisma } from "@/prisma/generated/client";
+import { Role, BookingStatus, BookingSession, Prisma } from "@/prisma/generated/client";
 import { successResult, errorResult } from "@/lib/types";
 
 // ROOM MANAGEMENT
