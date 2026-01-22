@@ -4,12 +4,14 @@ import type React from "react";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 
 export function LoginForm() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -54,55 +56,81 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-5"
-      >
-        <h1 className="text-3xl font-bold text-center">Login</h1>
-
-        {error && (
-          <div className="rounded-md bg-red-100 text-red-700 px-4 py-3 text-sm">
-            {error}
+    <div className="login-container">
+      <div className="login-wrapper">
+        <div className="login-branding">
+          <div className="login-logo-container">
+            <div className="login-logo">
+              <svg viewBox="0 0 24 24" className="login-logo-svg" fill="currentColor">
+                <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" />
+              </svg>
+            </div>
+            <div>
+              <span className="login-title">PLNSPACE</span>
+              <p className="login-subtitle">
+                BY PT PLN NUSANTARA POWER UP KALTIM TELUK
+              </p>
+            </div>
           </div>
-        )}
-
-        <div className="space-y-1">
-          <label className="text-sm font-semibold">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="admin@booking.com"
-          />
         </div>
 
-        <div className="space-y-1">
-          <label className="text-sm font-semibold">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="••••••••"
-          />
-        </div>
+        <div className="login-form-container">
+          <h1 className="login-heading">MASUK</h1>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-md bg-blue-600 py-2 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-        <div className="mt-6 p-4 bg-blue-50 rounded text-sm">
-          <p className="font-semibold mb-2">Demo Credentials:</p>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="login-field">
+              <label htmlFor="email" className="login-label">EMAIL</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="nama@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="login-input"
+                required
+              />
+            </div>
+
+            <div className="login-field">
+              <label htmlFor="password" className="login-label">PASSWORD</label>
+              <div className="login-password-container">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="********"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="login-input login-password-input"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="login-toggle-btn"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="login-submit-btn"
+            >
+              {loading ? "MEMPROSES..." : "MASUK"}
+            </button>
+
+          </form>
+          <div className="divider">Coba Akun Demo</div>
+           <div className="mt-6 p-4 bg-green-50 rounded text-sm">
           <p>Admin: admin@booking.com / admin123</p>
           <p>PIC: pic1@booking.com / pic123</p>
           <p>PIC: pic2@booking.com / pic123</p>
         </div>
-      </form>
+
+        </div>
+      </div>
     </div>
-  );
+  )
 }
