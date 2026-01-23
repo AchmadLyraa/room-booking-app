@@ -1,9 +1,7 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getUserBookings } from "@/app/actions/pic-actions";
-import { Sidebar } from "../sidebar";
-import { Header } from "../header";
-import { format } from "date-fns";
+import BookingsClient from "./bookings-client";
 
 export default async function BookingsPage() {
   const session = await auth();
@@ -13,89 +11,5 @@ export default async function BookingsPage() {
 
   const bookings = await getUserBookings();
 
-  const statusConfig = {
-    APPROVED: { label: "DISETUJUI", bg: "bg-[#22c55e]", text: "text-white" },
-    PENDING: { label: "MENUNGGU", bg: "bg-[#facc15]", text: "text-black" },
-    REJECTED: { label: "DITOLAK", bg: "bg-[#FF5E5B]", text: "text-white" },
-  };
-
-  return (
-    <div className="flex">
-      <Sidebar role="user" currentView="bookings" />
-      <div className="flex-1">
-        <Header />
-        <div className="p-8">
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-3xl font-bold uppercase mb-2">SEMUA BOOKING AKTIF</h1>
-              <p className="text-black/60">Kelola dan pantau semua booking ruangan Anda</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {bookings.map((booking: any) => {
-                const statusKey = booking.status as keyof typeof statusConfig;
-                const status = statusConfig[statusKey] || statusConfig.PENDING;
-
-                const sessionLabel = (() => {
-                  switch (booking.session) {
-                    case "SESSION_1":
-                      return "Sesi 1 (08:00 - 12:00)";
-                    case "SESSION_2":
-                      return "Sesi 2 (13:00 - 16:00)";
-                    case "FULLDAY":
-                      return "Full Day (08:00 - 16:00)";
-                    default:
-                      return booking.session;
-                  }
-                })();
-
-                return (
-                  <div key={booking.id} className="bg-white border-3 border-black brutal-shadow p-6 flex gap-4 hover:shadow-[6px_6px_0_0_#000] transition-all">
-                    <div className="w-32 h-24 bg-gradient-to-br from-amber-800 to-amber-600 flex-shrink-0 relative overflow-hidden border-2 border-black">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    </div>
-                    <div className="flex-1 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm font-bold text-black/60 uppercase">
-                          {format(booking.bookingDate, "dd/MM/yyyy")}
-                        </p>
-                        <span className={`text-xs font-bold uppercase px-3 py-1 border-2 border-black ${status.bg} ${status.text}`}>
-                          {status.label}
-                        </span>
-                      </div>
-                      <h3 className="font-bold uppercase text-lg">{booking.room.name}</h3>
-                      <div className="flex items-center gap-4 text-sm">
-                        <div>
-                          <span className="text-xs text-black/60 uppercase">AREA</span>
-                          <p className="font-bold">{booking.room.area || "N/A"}</p>
-                        </div>
-                        <div>
-                          <span className="text-xs text-black/60 uppercase">KAPASITAS</span>
-                          <p className="font-bold">{booking.room.capacity}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <button className="h-8 px-3 bg-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
-                          DETAIL
-                        </button>
-                        <span className="text-xs font-bold uppercase">{sessionLabel}</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {bookings.length === 0 && (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">📅</div>
-                <h3 className="text-xl font-bold mb-2">Belum Ada Booking</h3>
-                <p className="text-black/60">Anda belum memiliki booking aktif saat ini</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <BookingsClient bookings={bookings} />;
 }

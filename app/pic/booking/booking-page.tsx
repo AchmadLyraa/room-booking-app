@@ -119,8 +119,8 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
   };
 
   return (
-    <div className="p-8 max-w-2xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Create Room Booking</h1>
+    <div className="p-4 md:p-8 max-w-2xl mx-auto">
+      <h1 className="text-2xl md:text-4xl font-bold mb-6 md:mb-8">Create Room Booking</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -358,18 +358,18 @@ function CreateBookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
           </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+            className="flex-1 px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 min-h-[44px]"
           >
             {loading ? "Creating..." : "Create Booking"}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="flex-1 px-6 py-3 border rounded hover:bg-gray-100"
+            className="flex-1 px-6 py-3 border rounded hover:bg-gray-100 min-h-[44px]"
           >
             Cancel
           </button>

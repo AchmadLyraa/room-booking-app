@@ -93,15 +93,16 @@ export function RoomAvailabilityTable() {
   return (
     <div className="space-y-6">
       {/* Header with date */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold uppercase">DAFTAR RESERVASI RUANGAN</h1>
-        <div className="flex border-3 border-black brutal-shadow overflow-hidden">
-          <div className="px-4 py-2 bg-white text-black font-bold uppercase border-r-3 border-black">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h1 className="text-xl md:text-2xl font-bold uppercase">DAFTAR RESERVASI RUANGAN</h1>
+        <div className="flex border-3 border-black brutal-shadow overflow-hidden w-full md:w-auto self-end md:self-auto">
+          <div className="flex-1 px-3 md:px-4 py-2 bg-white text-black font-bold text-sm md:text-base text-center border-r-3 border-black">{timeFormatted}</div>
+          <div className="flex-1 px-3 md:px-4 py-2 bg-white text-black font-bold uppercase border-r-3 border-black text-sm md:text-base text-center">
             {dayName}
           </div>
           <Popover>
             <PopoverTrigger asChild>
-              <button className="px-4 py-2 bg-[#22c55e] text-white font-bold border-r-3 border-black hover:bg-[#16a34a] transition-colors">
+              <button className="flex-1 px-3 md:px-4 py-2 bg-[#22c55e] text-white font-bold hover:bg-[#16a34a] transition-colors text-sm md:text-base min-h-[44px] text-center">
                 {dateFormatted}
               </button>
             </PopoverTrigger>
@@ -115,13 +116,12 @@ export function RoomAvailabilityTable() {
               />
             </PopoverContent>
           </Popover>
-          <div className="px-4 py-2 bg-white text-black font-bold">{timeFormatted}</div>
         </div>
       </div>
 
-      {/* Room Availability Table */}
-      <div className="bg-white border-3 border-black brutal-shadow overflow-hidden">
-        <table className="w-full">
+      {/* Room Availability Table - Desktop */}
+      <div className="hidden md:block bg-white border-3 border-black brutal-shadow overflow-x-auto">
+        <table className="w-full min-w-[800px]">
           <thead>
             <tr className="bg-[#f5f5f5] border-b-3 border-black">
               <th className="px-4 py-3 text-center font-bold uppercase text-sm border-r-2 border-black">NO</th>
@@ -166,6 +166,70 @@ export function RoomAvailabilityTable() {
             })}
           </tbody>
         </table>
+      </div>
+
+      {/* Room Availability Cards - Mobile */}
+      <div className="md:hidden space-y-4">
+        {availability.map((room, index) => {
+          const session1Status = room.sessionAvailability.SESSION_1;
+          const session2Status = room.sessionAvailability.SESSION_2;
+          const fullDayStatus = room.sessionAvailability.FULLDAY;
+
+          return (
+            <div key={room.id} className="bg-white border-3 border-black brutal-shadow p-4">
+              {/* Room Header */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-[#22c55e] text-white font-bold flex items-center justify-center text-sm border-2 border-black">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-bold uppercase text-lg">{room.name}</h3>
+                    <p className="text-sm text-black/60">Kapasitas: {room.capacity} orang</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Session Buttons */}
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 gap-3">
+                  {/* Session 1 */}
+                  <div className="flex items-center justify-between p-3 bg-[#f5f5f5] border-2 border-black">
+                    <div>
+                      <div className="font-bold uppercase text-sm">SESI 1</div>
+                      <div className="text-xs text-black/60">08:00-12:00</div>
+                    </div>
+                    <div>
+                      {getStatusButton(session1Status, room.id, "SESSION_1", currentDate, session1Status, session2Status)}
+                    </div>
+                  </div>
+
+                  {/* Session 2 */}
+                  <div className="flex items-center justify-between p-3 bg-[#f5f5f5] border-2 border-black">
+                    <div>
+                      <div className="font-bold uppercase text-sm">SESI 2</div>
+                      <div className="text-xs text-black/60">13:00-16:00</div>
+                    </div>
+                    <div>
+                      {getStatusButton(session2Status, room.id, "SESSION_2", currentDate, session1Status, session2Status)}
+                    </div>
+                  </div>
+
+                  {/* Full Day */}
+                  <div className="flex items-center justify-between p-3 bg-[#f5f5f5] border-2 border-black">
+                    <div>
+                      <div className="font-bold uppercase text-sm">FULL DAY</div>
+                      <div className="text-xs text-black/60">08:00-16:00</div>
+                    </div>
+                    <div>
+                      {getStatusButton(fullDayStatus, room.id, "FULLDAY", currentDate, session1Status, session2Status)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

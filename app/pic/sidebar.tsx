@@ -18,7 +18,7 @@ const adminMenuItems = [
 
 const userMenuItems = [
   { href: "/pic", label: "BERANDA", icon: Home },
-  { href: "/pic/bookings", label: "BOOKING AKTIF", icon: CalendarCheck },
+  { href: "/pic/bookings", label: "BOOKING SAYA", icon: CalendarCheck },
 ]
 
 export function Sidebar({ role, currentView }: SidebarProps) {

@@ -6,6 +6,9 @@ import { logoutUser } from "@/app/actions/logout-action";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { RoomAvailabilityTable } from "./room-availability-table";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 function parseJsonArray(jsonString: string | null): string[] {
   if (!jsonString) return [];
@@ -24,6 +27,8 @@ export default function PICDashboardClient({
   view?: string;
 }) {
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleLogout = async () => {
     await logoutUser();
@@ -38,8 +43,7 @@ export default function PICDashboardClient({
   const BookingList = ({ bookings }: { bookings: any[] }) => (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold uppercase mb-2">SEMUA BOOKING AKTIF</h1>
-        <p className="text-black/60">Kelola dan pantau semua booking ruangan Anda</p>
+         <h1 className="text-xl md:text-2xl font-bold uppercase">SEMUA BOOKING SAYA</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -113,10 +117,25 @@ export default function PICDashboardClient({
   return (
     <>
       <div className="flex">
-        <Sidebar role="user" currentView={view} />
-        <div className="flex-1">
-          <Header />
-          <div className="p-8">
+        {/* Desktop Sidebar */}
+        <div className="hidden md:block">
+          <Sidebar role="user" currentView={view} />
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="flex-1 md:flex-1">
+          <Header onMenuClick={isMobile ? () => setSidebarOpen(true) : undefined} />
+
+          {/* Mobile Sidebar Sheet - Only show on mobile */}
+          {isMobile && (
+            <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+              <SheetContent side="left" className="p-0 w-64">
+                <Sidebar role="user" currentView={view} />
+              </SheetContent>
+            </Sheet>
+          )}
+
+          <div className="p-4 md:p-8">
             {view === "bookings" ? (
               <BookingList bookings={bookings} />
             ) : (
