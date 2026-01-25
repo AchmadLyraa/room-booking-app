@@ -15,11 +15,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 function BookingsClient({ bookings }: { bookings: any[] }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [dateFilter, setDateFilter] = useState<Date | undefined>(undefined);
+  const [selectedBooking, setSelectedBooking] = useState<any>(null);
+  const [isDetailDialogOpen, setIsDetailDialogOpen] = useState(false);
   const isMobile = useIsMobile();
 
   const statusConfig = {
@@ -180,9 +189,108 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                         </div>
                       </div>
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                        <button className="h-8 px-3 bg-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all self-start">
-                          DETAIL
-                        </button>
+                        <Dialog open={isDetailDialogOpen} onOpenChange={setIsDetailDialogOpen}>
+                          <DialogTrigger asChild>
+                            <button
+                              className="h-8 px-3 bg-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all self-start"
+                              onClick={() => setSelectedBooking(booking)}
+                            >
+                              DETAIL
+                            </button>
+                          </DialogTrigger>
+                          <DialogContent className="border-3 border-black brutal-shadow bg-white max-w-2xl">
+                            <DialogHeader>
+                              <DialogTitle className="text-xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
+                            </DialogHeader>
+                            {selectedBooking && (
+                              <div className="space-y-4 py-4">
+                                <div className="grid grid-cols-2 gap-4">
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">TANGGAL</p>
+                                    <p className="font-bold">{format(selectedBooking.bookingDate, "dd/MM/yyyy")}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">STATUS</p>
+                                    <span className={`text-xs font-bold uppercase px-3 py-1 border-2 border-black ${statusConfig[selectedBooking.status as keyof typeof statusConfig]?.bg || statusConfig.PENDING.bg} ${statusConfig[selectedBooking.status as keyof typeof statusConfig]?.text || statusConfig.PENDING.text}`}>
+                                      {statusConfig[selectedBooking.status as keyof typeof statusConfig]?.label || statusConfig.PENDING.label}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">RUANGAN</p>
+                                    <p className="font-bold uppercase">{selectedBooking.room.name}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">AREA</p>
+                                    <p className="font-bold">{selectedBooking.room.area || "N/A"}</p>
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">KAPASITAS</p>
+                                    <p className="font-bold">{selectedBooking.room.capacity}</p>
+                                  </div>
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">SESI</p>
+                                    <p className="font-bold">
+                                      {(() => {
+                                        switch (selectedBooking.session) {
+                                          case "SESSION_1":
+                                            return "Sesi 1 (08:00 - 12:00)";
+                                          case "SESSION_2":
+                                            return "Sesi 2 (13:00 - 16:00)";
+                                          case "FULLDAY":
+                                            return "Full Day (08:00 - 16:00)";
+                                          default:
+                                            return selectedBooking.session;
+                                        }
+                                      })()}
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <p className="text-sm font-bold text-black/60 uppercase">AGENDA</p>
+                                  <p className="font-bold">{selectedBooking.agenda}</p>
+                                </div>
+
+                                <div>
+                                  <p className="text-sm font-bold text-black/60 uppercase">DESKRIPSI</p>
+                                  <p className="font-bold">{selectedBooking.description}</p>
+                                </div>
+
+                                <div>
+                                  <p className="text-sm font-bold text-black/60 uppercase">JENIS RAPAT</p>
+                                  <p className="font-bold">{selectedBooking.meetingType}</p>
+                                </div>
+
+                                {selectedBooking.note && (
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">CATATAN</p>
+                                    <p className="font-bold">{selectedBooking.note}</p>
+                                  </div>
+                                )}
+
+                                {selectedBooking.foodNames && (
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">MAKANAN</p>
+                                    <p className="font-bold">{selectedBooking.foodNames}</p>
+                                  </div>
+                                )}
+
+                                {selectedBooking.snackNames && (
+                                  <div>
+                                    <p className="text-sm font-bold text-black/60 uppercase">SNACK</p>
+                                    <p className="font-bold">{selectedBooking.snackNames}</p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </DialogContent>
+                        </Dialog>
                         <span className="text-xs font-bold uppercase self-end md:self-auto">{sessionLabel}</span>
                       </div>
                     </div>

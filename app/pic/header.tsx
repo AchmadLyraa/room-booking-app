@@ -39,7 +39,7 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-black" />
             <input
               type="search"
-              placeholder="CARI.."
+              placeholder="CARI RUANGAN.."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-10 pl-10 pr-4 border-2 border-black bg-white font-mono text-sm uppercase outline-none transition-all focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px]"
