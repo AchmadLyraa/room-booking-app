@@ -159,9 +159,6 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
 
                 return (
                   <div key={booking.id} className="bg-white border-3 border-black brutal-shadow p-4 md:p-6 flex flex-col md:flex-row gap-4 hover:shadow-[6px_6px_0_0_#000] transition-all">
-                    <div className="w-full md:w-32 h-24 bg-gradient-to-br from-amber-800 to-amber-600 flex-shrink-0 relative overflow-hidden border-2 border-black">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    </div>
                     <div className="flex-1 space-y-3">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                         <p className="text-sm font-bold text-black/60 uppercase">
