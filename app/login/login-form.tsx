@@ -56,24 +56,8 @@ export function LoginForm() {
   };
 
   return (
-    <div className="login-container">
+   
       <div className="login-wrapper">
-        <div className="login-branding">
-          <div className="login-logo-container">
-            <div className="login-logo">
-              <svg viewBox="0 0 24 24" className="login-logo-svg" fill="currentColor">
-                <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" />
-              </svg>
-            </div>
-            <div>
-              <span className="login-title">PLNSPACE</span>
-              <p className="login-subtitle">
-                BY PT PLN NUSANTARA POWER UP KALTIM TELUK
-              </p>
-            </div>
-          </div>
-        </div>
-
         <div className="login-form-container">
           <h1 className="login-heading">MASUK</h1>
 
@@ -131,6 +115,6 @@ export function LoginForm() {
 
         </div>
       </div>
-    </div>
+
   )
 }

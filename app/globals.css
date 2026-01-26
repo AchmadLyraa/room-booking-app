@@ -199,7 +199,7 @@ body {
 /* Login Form Utility Classes */
 .login-container {
   height: 100vh;
-  background-color: #22c55e;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,7 +210,7 @@ body {
 
 .login-wrapper {
   width: 100%;
-  max-width: 64rem;
+  max-width: 100rem;
   display: flex;
   flex-direction: column;
 }
@@ -266,9 +266,7 @@ body {
   max-width: 420px;
   height: auto;
   background-color: white;
-  border: 3px solid #000000;
   padding: 2rem;
-  box-shadow: var(--brutal-shadow-lg);
   position: relative;
   margin: 0 auto;
 }
@@ -446,18 +444,8 @@ body {
 }
 
 @media (max-width: 767px) {
-  .login-wrapper {
-    flex-direction: column;
-  }
 
-  .login-branding {
-    padding: 1.5rem;
-    text-align: center;
-  }
 
-  .login-logo-container {
-    justify-content: center;
-  }
 
   .login-title, .login-subtitle {
     text-align: center;

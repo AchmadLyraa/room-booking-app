@@ -371,18 +371,24 @@ export async function getRoomAvailability(bookingDateString: string) {
       name: room.name,
       capacity: room.capacity,
       sessionAvailability: {
-        SESSION_1: getSessionStatus(
-          hasS1,
-          isToday,
-          currentHourUTC,
-          sessionTimes.SESSION_1,
-        ),
-        SESSION_2: getSessionStatus(
-          hasS2,
-          isToday,
-          currentHourUTC,
-          sessionTimes.SESSION_2,
-        ),
+        SESSION_1:
+          hasFD || hasS1
+            ? "RESERVED"
+            : getSessionStatus(
+                hasS1,
+                isToday,
+                currentHourUTC,
+                sessionTimes.SESSION_1,
+              ),
+        SESSION_2:
+          hasFD || hasS2
+            ? "RESERVED"
+            : getSessionStatus(
+                hasS2,
+                isToday,
+                currentHourUTC,
+                sessionTimes.SESSION_2,
+              ),
         FULLDAY:
           hasS1 || hasS2
             ? "DISABLED"
