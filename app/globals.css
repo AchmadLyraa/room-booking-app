@@ -198,20 +198,21 @@ body {
 
 /* Login Form Utility Classes */
 .login-container {
-  height: 100vh;  /* ubah dari min-height */
-  background-color: #22c55e;  /* atau var(--pln-green) */
+  height: 100vh;
+  background-color: #22c55e;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  width: 100%;    /* tambah ini */
-  box-sizing: border-box;  /* padding tidak tambah width */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-wrapper {
   width: 100%;
   max-width: 64rem;
   display: flex;
+  flex-direction: column;
 }
 
 .login-branding {
@@ -261,13 +262,15 @@ body {
 }
 
 .login-form-container {
-  width: 420px;
-  height: 600px;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
   background-color: white;
   border: 3px solid #000000;
   padding: 2rem;
   box-shadow: var(--brutal-shadow-lg);
   position: relative;
+  margin: 0 auto;
 }
 
 .login-heading {
@@ -414,6 +417,67 @@ body {
 
 .login-signup-link:hover {
   text-decoration: none;
+}
+
+/* Responsive Design for Login Page */
+@media (min-width: 768px) {
+  .login-wrapper {
+    flex-direction: row;
+  }
+
+  .login-branding {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .login-form-container {
+    width: 420px;
+    height: 600px;
+    margin: 0;
+  }
+
+  .login-logo-container {
+    justify-content: flex-start;
+  }
+
+  .login-title, .login-subtitle {
+    text-align: left;
+  }
+}
+
+@media (max-width: 767px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login-branding {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .login-logo-container {
+    justify-content: center;
+  }
+
+  .login-title, .login-subtitle {
+    text-align: center;
+  }
+
+  .login-form-container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+  }
+
+  .login-input, .login-submit-btn {
+    height: 2.75rem;
+  }
+
+  .login-heading {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 
