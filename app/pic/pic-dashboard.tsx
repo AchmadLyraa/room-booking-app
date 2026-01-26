@@ -117,13 +117,15 @@ export default function PICDashboardClient({
   return (
     <>
       <div className="flex">
-        {/* Desktop Sidebar */}
-        <div className="hidden md:block">
-          <Sidebar role="user" currentView={view} />
+        {/* Desktop Sidebar - Sticky position */}
+        <div className="hidden md:block md:w-64">
+          <div className="sticky top-0 h-screen">
+            <Sidebar role="user" currentView={view} />
+          </div>
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex-1 md:flex-1">
+        <div className="flex-1">
           <Header onMenuClick={isMobile ? () => setSidebarOpen(true) : undefined} />
 
           {/* Mobile Sidebar Sheet - Only show on mobile */}

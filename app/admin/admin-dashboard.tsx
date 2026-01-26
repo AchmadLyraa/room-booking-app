@@ -10,8 +10,7 @@ import {
   getSystemConfig,
 } from "@/app/actions/admin-actions";
 import { useToastNotifications } from "@/hooks/use-toast-notifications";
-import { Sidebar } from "./sidebar";
-import { Header } from "./header";
+import { Sidebar, Header } from "@/components/admin-layout";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, BookOpen, Clock, CheckCircle, XCircle } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -164,26 +163,27 @@ export default function AdminDashboardClient({
   };
 
   return (
-    <div className="flex">
-      {/* Desktop Sidebar */}
+    <div className="flex h-screen">
+      {/* Sidebar */}
       <div className="hidden md:block">
         <Sidebar currentView="dashboard" />
       </div>
-
-      {/* Mobile Layout */}
-      <div className="flex-1 md:flex-1">
-        <Header onMenuClick={isMobile ? () => setSidebarOpen(true) : undefined} />
-
-        {/* Mobile Sidebar Sheet - Only show on mobile */}
-        {isMobile && (
-          <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-            <SheetContent side="left" className="p-0 w-64">
-              <Sidebar currentView="dashboard" />
-            </SheetContent>
-          </Sheet>
-        )}
-
-        <div className="p-4 md:p-8">
+      {/* Mobile Sidebar Sheet */}
+      {isMobile && (
+        <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+          <SheetContent side="left" className="p-0 w-64">
+            <Sidebar currentView="dashboard" />
+          </SheetContent>
+        </Sheet>
+      )}
+      {/* Main area */}
+      <div className="flex flex-col flex-1 min-w-0 h-full">
+        <Header
+          currentView="dashboard"
+          onMenuClick={isMobile ? () => setSidebarOpen(true) : undefined}
+        />
+        {/* Scrollable content */}
+        <div className="flex-1 min-h-0 overflow-y-auto p-4 md:p-8">
           {/* Header with date */}
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-2xl font-bold uppercase">ADMIN DASHBOARD</h1>
@@ -378,14 +378,6 @@ export default function AdminDashboardClient({
           </div>
         </div>
 
-        {/* Mobile Sidebar Sheet */}
-        {isMobile && (
-          <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-            <SheetContent side="left" className="p-0 w-64">
-              <Sidebar currentView="dashboard" />
-            </SheetContent>
-          </Sheet>
-        )}
       </div>
 
       {/* Detail Modal */}
