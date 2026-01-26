@@ -208,15 +208,9 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                               DETAIL
                             </button>
                           </DialogTrigger>
-                          <DialogContent className="border-3 border-black brutal-shadow bg-white max-w-2xl" showCloseButton={false}>
+                          <DialogContent className="border-3 border-black brutal-shadow bg-white max-w-2xl">
                             <div className="flex justify-between items-center mb-4">
-                              <DialogTitle className="text-2xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
-                              <button
-                                onClick={() => setIsDetailDialogOpen(false)}
-                                className="w-8 h-8 flex items-center justify-center bg-white border-2 border-black font-bold uppercase hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
-                              >
-                                ✕
-                              </button>
+                              <DialogTitle className="text-xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
                             </div>
                             {selectedBooking && (
                               <div className="space-y-4 py-4">

@@ -12,9 +12,15 @@ import {
 import { useToastNotifications } from "@/hooks/use-toast-notifications";
 import { Sidebar, Header } from "@/components/admin-layout";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, BookOpen, Clock, CheckCircle, XCircle } from "lucide-react";
+import { Menu, BookOpen, Clock, CheckCircle, XCircle, Eye } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 function parseJsonArray(jsonString: string | null): string[] {
   if (!jsonString) return [];
@@ -329,7 +335,7 @@ export default function AdminDashboardClient({
                             onClick={() => setSelectedBooking(booking)}
                             className="px-3 py-1 bg-white border-2 border-black text-xs font-bold uppercase hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
                           >
-                            LIHAT
+                            <Eye className="w-4 h-4" />
                           </button>
 
                           {booking.status === "PENDING" && (
@@ -382,20 +388,13 @@ export default function AdminDashboardClient({
       </div>
 
       {/* Detail Modal */}
-      {selectedBooking && !showRejectModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6 border-3 border-black brutal-shadow">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold uppercase">DETAIL BOOKING</h2>
-              <button
-                onClick={() => setSelectedBooking(null)}
-                className="w-8 h-8 flex items-center justify-center bg-white border-2 border-black font-bold uppercase hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="space-y-4">
+      <Dialog open={!!selectedBooking && !showRejectModal} onOpenChange={() => setSelectedBooking(null)}>
+        <DialogContent className="max-w-2xl">
+          <div className="flex justify-between items-center mb-4">
+            <DialogTitle className="text-xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
+          </div>
+          {selectedBooking && (
+            <div className="space-y-4 py-4 max-h-[80vh] overflow-y-auto">
               <div>
                 <p className="text-sm font-bold uppercase text-black/60">NOMOR SURAT</p>
                 <p className="font-semibold">{selectedBooking.letterNumber}</p>
@@ -485,47 +484,58 @@ export default function AdminDashboardClient({
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      )}
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Reject Confirmation Modal */}
-      {showRejectModal && selectedBooking && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 border-3 border-black brutal-shadow">
-            <h2 className="text-2xl font-bold uppercase mb-4">TOLAK BOOKING</h2>
-            <p className="font-bold uppercase text-black/60 mb-2">NOMOR SURAT</p>
-            <p className="mb-4">{selectedBooking.letterNumber}</p>
-
-            <textarea
-              value={rejectReason}
-              onChange={(e) => setRejectReason(e.target.value)}
-              placeholder="Masukkan alasan penolakan..."
-              className="w-full border-2 border-black p-3 h-24 mb-4 brutal-shadow focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
-            />
-
-            <div className="flex gap-4">
-              <button
-                onClick={handleRejectSubmit}
-                disabled={loading || !rejectReason.trim()}
-                className="flex-1 px-4 py-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
-              >
-                {loading ? "MEMPROSES..." : "TOLAK"}
-              </button>
-              <button
-                onClick={() => {
-                  setShowRejectModal(false);
-                  setRejectReason("");
-                }}
-                disabled={loading}
-                className="flex-1 px-4 py-3 bg-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
-              >
-                BATAL
-              </button>
-            </div>
+      <Dialog open={showRejectModal && !!selectedBooking} onOpenChange={() => {
+        setShowRejectModal(false);
+        setRejectReason("");
+      }}>
+        <DialogContent className="max-w-md">
+          <div className="flex justify-between items-center mb-4">
+            <DialogTitle className="text-xl font-bold uppercase">TOLAK BOOKING</DialogTitle>
           </div>
-        </div>
-      )}
+          {selectedBooking && (
+            <>
+              <div className="space-y-4 py-4">
+                <div>
+                  <p className="font-bold uppercase text-black/60 mb-2">NOMOR SURAT</p>
+                  <p className="mb-4">{selectedBooking.letterNumber}</p>
+                </div>
+
+                <textarea
+                  value={rejectReason}
+                  onChange={(e) => setRejectReason(e.target.value)}
+                  placeholder="Masukkan alasan penolakan..."
+                  className="w-full border-2 border-black p-3 h-24 mb-4 brutal-shadow focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  onClick={handleRejectSubmit}
+                  disabled={loading || !rejectReason.trim()}
+                  className="flex-1 px-4 py-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                >
+                  {loading ? "MEMPROSES..." : "TOLAK"}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowRejectModal(false);
+                    setRejectReason("");
+                  }}
+                  disabled={loading}
+                  className="flex-1 px-4 py-3 bg-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                >
+                  BATAL
+                </button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
