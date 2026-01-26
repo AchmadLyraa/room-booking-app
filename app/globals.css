@@ -265,8 +265,7 @@ body {
   width: 100%;
   max-width: 420px;
   height: auto;
-  background-color: white;
-  padding: 2rem;
+  padding: 0rem;
   position: relative;
   margin: 0 auto;
 }
