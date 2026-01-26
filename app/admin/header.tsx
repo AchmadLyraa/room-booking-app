@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Settings, User, LogOut, Menu } from "lucide-react"
+import { Settings, User, LogOut, Menu } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,8 +32,6 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
             <Menu className="w-5 h-5" />
           </button>
         )}
-
-        {/* Search Bar - Hidden on mobile */}
       </div>
 
       <div className="flex items-center gap-3 ml-auto">
