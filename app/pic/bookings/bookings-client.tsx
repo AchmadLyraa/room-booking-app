@@ -18,7 +18,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -30,6 +29,15 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [isDetailDialogOpen, setIsDetailDialogOpen] = useState(false);
   const isMobile = useIsMobile();
+
+  function parseJsonArray(jsonString: string | null): string[] {
+    if (!jsonString) return [];
+    try {
+      return JSON.parse(jsonString);
+    } catch {
+      return [];
+    }
+  }
 
   const statusConfig = {
     APPROVED: { label: "DISETUJUI", bg: "bg-[#22c55e]", text: "text-white" },
@@ -200,10 +208,16 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                               DETAIL
                             </button>
                           </DialogTrigger>
-                          <DialogContent className="border-3 border-black brutal-shadow bg-white max-w-2xl">
-                            <DialogHeader>
-                              <DialogTitle className="text-xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
-                            </DialogHeader>
+                          <DialogContent className="border-3 border-black brutal-shadow bg-white max-w-2xl" showCloseButton={false}>
+                            <div className="flex justify-between items-center mb-4">
+                              <DialogTitle className="text-2xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
+                              <button
+                                onClick={() => setIsDetailDialogOpen(false)}
+                                className="w-8 h-8 flex items-center justify-center bg-white border-2 border-black font-bold uppercase hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
+                              >
+                                ✕
+                              </button>
+                            </div>
                             {selectedBooking && (
                               <div className="space-y-4 py-4">
                                 <div className="grid grid-cols-2 gap-4">
@@ -276,19 +290,25 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                                   </div>
                                 )}
 
-                                {selectedBooking.foodNames && (
-                                  <div>
-                                    <p className="text-sm font-bold text-black/60 uppercase">MAKANAN</p>
-                                    <p className="font-bold">{selectedBooking.foodNames}</p>
-                                  </div>
-                                )}
+                                {(() => {
+                                  const foodList = parseJsonArray(selectedBooking.foodNames);
+                                  return foodList.length > 0 ? (
+                                    <div>
+                                      <p className="text-sm font-bold text-black/60 uppercase">MAKANAN</p>
+                                      <p className="font-bold">{foodList.join(", ")}</p>
+                                    </div>
+                                  ) : null;
+                                })()}
 
-                                {selectedBooking.snackNames && (
-                                  <div>
-                                    <p className="text-sm font-bold text-black/60 uppercase">SNACK</p>
-                                    <p className="font-bold">{selectedBooking.snackNames}</p>
-                                  </div>
-                                )}
+                                {(() => {
+                                  const snackList = parseJsonArray(selectedBooking.snackNames);
+                                  return snackList.length > 0 ? (
+                                    <div>
+                                      <p className="text-sm font-bold text-black/60 uppercase">SNACK</p>
+                                      <p className="font-bold">{snackList.join(", ")}</p>
+                                    </div>
+                                  ) : null;
+                                })()}
                               </div>
                             )}
                           </DialogContent>

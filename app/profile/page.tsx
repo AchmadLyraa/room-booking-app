@@ -36,7 +36,6 @@ export default async function ProfilePage() {
           href={user.role === "PIC" ? "/pic" : "/"}
           className="bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         >
-          <ArrowLeft className="inline-block mr-2 w-4 h-4" />
           KEMBALI
         </Link>
         <h1 className="text-2xl font-bold text-black uppercase flex-1 text-center">PROFIL PENGGUNA</h1>

@@ -148,13 +148,13 @@ export default function PICDashboardClient({
       </div>
 
       {selectedBooking && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6 border-3 border-black brutal-shadow">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Booking Details</h2>
+              <h2 className="text-2xl font-bold uppercase">DETAIL BOOKING</h2>
               <button
                 onClick={() => setSelectedBooking(null)}
-                className="text-gray-500 hover:text-gray-700"
+                className="w-8 h-8 flex items-center justify-center bg-white border-2 border-black font-bold uppercase hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
               >
                 ✕
               </button>
