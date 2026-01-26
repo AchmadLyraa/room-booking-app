@@ -164,9 +164,11 @@ export default function AdminDashboardClient({
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="hidden md:block">
-        <Sidebar currentView="dashboard" />
+      {/* Sidebar - Sticky position */}
+      <div className="hidden md:block md:w-64">
+        <div className="sticky top-0 h-screen">
+          <Sidebar currentView="dashboard" />
+        </div>
       </div>
       {/* Mobile Sidebar Sheet */}
       {isMobile && (
@@ -179,7 +181,6 @@ export default function AdminDashboardClient({
       {/* Main area */}
       <div className="flex flex-col flex-1 min-w-0 h-full">
         <Header
-          currentView="dashboard"
           onMenuClick={isMobile ? () => setSidebarOpen(true) : undefined}
         />
         {/* Scrollable content */}

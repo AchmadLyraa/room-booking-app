@@ -23,7 +23,7 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <header className="h-16 border-b-3 border-black bg-white flex items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-20 h-16 border-b-3 border-black bg-white flex items-center justify-between px-4 md:px-6">
       <div className="flex items-center gap-3 flex-1 md:flex-none">
         {onMenuClick && (
           <button
