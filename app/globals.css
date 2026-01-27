@@ -37,7 +37,7 @@
   --sidebar-accent-foreground: #000000;
   --sidebar-border: #000000;
   --sidebar-ring: #000000;
-  
+
   --pln-green: #22c55e;
   --pln-yellow: #FFF000;
   --brutal-shadow: 4px 4px 0px #000000;
@@ -146,7 +146,6 @@ body {
 body {
   min-height: 100vh !important;
 }
-
 
 /* Neo Brutalism Utility Classes */
 .brutal-shadow {
@@ -339,8 +338,8 @@ body {
 .login-submit-btn {
   width: 100%;
   height: 3rem;
-  background-color: #ffffff;
-  color: white;
+  background-color: #22c55e;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   text-transform: uppercase;
   border: 3px solid #000000;
@@ -443,9 +442,6 @@ body {
 }
 
 @media (max-width: 767px) {
-
-
-
   .login-title, .login-subtitle {
     text-align: center;
   }
@@ -556,26 +552,109 @@ body {
 
 /* Responsive adjustments for card layout */
 @media (max-width: 767px) {
+  /* Mobile-only: Hide the card container and show login form directly */
   .login-card-container {
+    display: none !important;
+  }
+
+  /* Mobile-only: Show login form directly with proper styling */
+  .mobile-login-form {
     width: 90%;
-    height: 450px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border: 3px solid #000000;
+    box-shadow: var(--brutal-shadow);
+    border-radius: 0;
   }
 
-  .login-form-wrapper {
-    padding: 1rem;
+  /* Mobile-specific login form card styling */
+  .login-form-card {
+    display: none !important;
   }
 
-  /* Mobile-specific adjustments */
-  .profile-content {
-    padding: 1rem;
+  .profile-card {
+    display: none !important;
   }
 
-  .profile-content h1 {
-    font-size: 1.5rem;
+  /* Mobile-specific form container adjustments */
+  .login-form-container {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  .profile-content p {
+  /* Mobile-specific form elements */
+  .login-form {
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .login-heading {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .login-input, .login-submit-btn {
+    height: 2.5rem;
     font-size: 0.9rem;
+  }
+
+  /* Mobile masuk button styling */
+  .mobile-masuk-btn {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background-color: white;
+    color: black;
+    border: 3px solid black;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.15s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  /* COMPLETELY REMOVE ALL HOVER EFFECTS ON MOBILE */
+  .login-card-container:hover .profile-card,
+  .login-card-container:hover .login-form-card,
+  .login-submit-btn:hover,
+  .login-toggle-btn:hover,
+  .login-input:focus {
+    transform: none !important;
+    box-shadow: var(--brutal-shadow) !important;
+  }
+
+  /* Mobile animation states - not needed anymore since we're hiding the cards */
+  .login-card-container:not([data-show-login="true"]) .profile-card {
+    transform: translateX(0);
+    z-index: 2;
+  }
+
+  .login-card-container:not([data-show-login="true"]) .login-form-card {
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  .login-card-container[data-show-login="true"] .profile-card {
+    transform: translateX(-100%);
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .login-card-container[data-show-login="true"] .login-form-card {
+    transform: translateX(0);
+    z-index: 2;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
 
@@ -595,6 +674,15 @@ body {
     justify-content: left;
   }
 
+  /* Hide mobile button on desktop */
+  .mobile-masuk-btn {
+    display: none !important;
+  }
+
+  /* Hide mobile login form on desktop */
+  .mobile-login-form {
+    display: none !important;
+  }
 }
 
 /* Ensure proper stacking and z-index */
@@ -618,6 +706,12 @@ body {
   color: white;
 }
 
+/* Mobile-only: Login page specific green background */
+@media (max-width: 767px) {
+  .login-page-container {
+    background-color: #22c55e !important;
+  }
+}
 
 .divider {
   display: flex;

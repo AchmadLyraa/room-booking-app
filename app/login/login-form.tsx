@@ -81,7 +81,6 @@ export function LoginForm() {
       <div className="login-form-wrapper">
         <div className="login-form-container">
           <h1 className="login-heading">MASUK</h1>
-
           <form onSubmit={handleSubmit} className="login-form">
             <div className="login-field">
               <label htmlFor="email" className="login-label">EMAIL</label>
@@ -128,11 +127,11 @@ export function LoginForm() {
 
           </form>
           <div className="divider">Coba Akun Demo</div>
-           <div className="mt-6 p-4 bg-green-50 rounded text-sm">
-          <p>Admin: admin@booking.com / admin123</p>
-          <p>PIC: pic1@booking.com / pic123</p>
-          <p>PIC: pic2@booking.com / pic123</p>
-        </div>
+            <div className="mt-0 p-2 bg-green-50 text-sm">
+              <p>Admin: admin@booking.com / admin123</p>
+              <p>PIC: pic1@booking.com / pic123</p>
+              <p>PIC: pic2@booking.com / pic123</p>
+            </div>
 
         </div>
       </div>

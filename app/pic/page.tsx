@@ -6,7 +6,7 @@ import PICDashboardClient from "./pic-dashboard";
 export default async function PICPage({
   searchParams,
 }: {
-  searchParams: { view?: string };
+  searchParams: Promise<{ view?: string }>;
 }) {
   const session = await auth();
 
@@ -14,7 +14,8 @@ export default async function PICPage({
   if (session.user.role !== "PIC") redirect("/");
 
   const bookings = await getUserBookings();
-  const view = searchParams.view || "availability";
+  const params = await searchParams;
+  const view = params.view || "availability";
 
   return <PICDashboardClient bookings={bookings} view={view} />;
 }
