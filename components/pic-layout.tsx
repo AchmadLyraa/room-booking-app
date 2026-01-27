@@ -38,7 +38,7 @@ export function PICLayout({ children, currentView, onMenuClick, sidebarOpen, set
       <aside className="hidden md:flex fixed top-0 left-0 bottom-0 w-64 flex-col bg-white border-r-3 border-black">
         <div className="p-4 border-b-3 border-black">
           <Link href="/pic" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-[#facc15] border-2 border-black flex items-center justify-center brutal-shadow">
+            <div className="w-10 h-10 bg-[#FFF000] border-2 border-black flex items-center justify-center brutal-shadow">
               <svg viewBox="0 0 24 24" className="w-6 h-6 text-black" fill="currentColor">
                 <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" />
               </svg>
@@ -80,7 +80,7 @@ export function PICLayout({ children, currentView, onMenuClick, sidebarOpen, set
             <div className="flex flex-col min-h-screen bg-white border-r-3 border-black">
               <div className="p-4 border-b-3 border-black">
                 <Link href="/pic" className="flex items-center gap-2">
-                  <div className="w-10 h-10 bg-[#facc15] border-2 border-black flex items-center justify-center brutal-shadow">
+                  <div className="w-10 h-10 bg-[#FFF000] border-2 border-black flex items-center justify-center brutal-shadow">
                     <svg viewBox="0 0 24 24" className="w-6 h-6 text-black" fill="currentColor">
                       <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" />
                     </svg>

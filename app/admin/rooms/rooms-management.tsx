@@ -176,7 +176,7 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
                 <button
                   onClick={() => setEditMode(!editMode)}
                   className={`px-6 py-3 font-bold uppercase border-3 border-black transition-all brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
-                    editMode ? "bg-[#facc15] text-black" : "bg-white text-black"
+                    editMode ? "bg-[#FFF000] text-black" : "bg-white text-black"
                   }`}
                 >
                   {editMode ? "SELESAI" : "EDIT"}
@@ -273,7 +273,7 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
                         <button
                           onClick={() => handleEdit(room)}
                           disabled={loading}
-                          className="flex-1 px-4 py-2 bg-[#facc15] text-black font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                          className="flex-1 px-4 py-2 bg-[#FFF000] text-black font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
                         >
                           EDIT
                         </button>

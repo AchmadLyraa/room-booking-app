@@ -20,7 +20,7 @@ function getStatusButton(status: string, roomId: number, session: string, select
     // If either session 1 or session 2 is booked, full becomes restricted (database sets to "DISABLED")
     if (status === "DISABLED") {
       return (
-        <button className="h-8 px-3 bg-[#facc15] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed" disabled>
+        <button className="h-8 px-3 bg-[#FFF000] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed" disabled>
           DIBATASI
         </button>
       );

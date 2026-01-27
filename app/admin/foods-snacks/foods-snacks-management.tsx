@@ -162,7 +162,7 @@ export default function FoodsSnacksManagementClient({
                 <button
                   onClick={() => setEditMode(!editMode)}
                   className={`px-6 py-3 font-bold uppercase border-3 border-black transition-all brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
-                    editMode ? "bg-[#facc15] text-black" : "bg-white text-black"
+                    editMode ? "bg-[#FFF000] text-black" : "bg-white text-black"
                   }`}
                 >
                   {editMode ? "SELESAI" : "EDIT"}
@@ -269,7 +269,7 @@ export default function FoodsSnacksManagementClient({
                     <div key={snack.id} className="bg-white border-3 border-black brutal-shadow p-6 flex items-center justify-between hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all cursor-pointer group">
                       <div>
                         <h3 className="text-xl font-bold leading-tight uppercase">{snack.name}</h3>
-                        <span className="text-xs font-bold uppercase px-2 py-1 border-2 border-black inline-block mt-2 bg-[#facc15] text-black">
+                        <span className="text-xs font-bold uppercase px-2 py-1 border-2 border-black inline-block mt-2 bg-[#FFF000] text-black">
                           SNACK
                         </span>
                       </div>

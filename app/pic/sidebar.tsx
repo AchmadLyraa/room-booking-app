@@ -38,17 +38,7 @@ export function Sidebar({ role, currentView }: SidebarProps) {
     <aside className="w-64 min-h-screen bg-white border-r-3 border-black flex flex-col">
       <div className="p-4 border-b-3 border-black">
         <Link href={role === "admin" ? "/admin" : "/pic"} className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-[#facc15] border-2 border-black flex items-center justify-center brutal-shadow">
-            <svg viewBox="0 0 24 24" className="w-6 h-6 text-black" fill="currentColor">
-              <path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z" />
-            </svg>
-          </div>
-          <div>
-            <span className="font-bold text-lg text-black uppercase">PLNSPACE</span>
-            <p className="text-[9px] text-black leading-tight uppercase font-bold">
-              BY PT PLN NUSANTARA POWER UP KALTIM TELUK
-            </p>
-          </div>
+          <img src="/PLNSPACE_logo2.png" alt="PLNSPACE Logo" className="object-contain" />
         </Link>
       </div>
 

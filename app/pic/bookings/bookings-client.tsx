@@ -41,7 +41,7 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
 
   const statusConfig = {
     APPROVED: { label: "DISETUJUI", bg: "bg-[#22c55e]", text: "text-white" },
-    PENDING: { label: "MENUNGGU", bg: "bg-[#facc15]", text: "text-black" },
+    PENDING: { label: "MENUNGGU", bg: "bg-[#FFF000]", text: "text-black" },
     REJECTED: { label: "DITOLAK", bg: "bg-[#FF5E5B]", text: "text-white" },
   };
 
@@ -112,7 +112,7 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                     <DropdownMenuItem
                       onClick={() => setStatusFilter(statusFilter === "PENDING" ? "" : "PENDING")}
                       className={`font-bold uppercase cursor-pointer ${
-                        statusFilter === "PENDING" ? "bg-[#facc15] text-black" : ""
+                        statusFilter === "PENDING" ? "bg-[#FFF000] text-black" : ""
                       }`}
                     >
                       MENUNGGU
@@ -190,10 +190,6 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                       <h3 className="font-bold uppercase text-lg">{booking.room.name}</h3>
                       <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-sm">
                         <div>
-                          <span className="text-xs text-black/60 uppercase">AREA</span>
-                          <p className="font-bold">{booking.room.area || "N/A"}</p>
-                        </div>
-                        <div>
                           <span className="text-xs text-black/60 uppercase">KAPASITAS</span>
                           <p className="font-bold">{booking.room.capacity}</p>
                         </div>
@@ -231,10 +227,6 @@ function BookingsClient({ bookings }: { bookings: any[] }) {
                                   <div>
                                     <p className="text-sm font-bold text-black/60 uppercase">RUANGAN</p>
                                     <p className="font-bold uppercase">{selectedBooking.room.name}</p>
-                                  </div>
-                                  <div>
-                                    <p className="text-sm font-bold text-black/60 uppercase">AREA</p>
-                                    <p className="font-bold">{selectedBooking.room.area || "N/A"}</p>
                                   </div>
                                 </div>
 

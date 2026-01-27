@@ -80,13 +80,14 @@ export default function AdminDashboardClient({
       showSuccess("Booking approved");
 
       // UPDATE STATE BERDASARKAN DATA DARI SERVER
-      if (result.data && result.data.id) {
+      if (result.data && typeof result.data === 'object' && 'id' in result.data) {
+        const bookingData = result.data as { id: string };
         setBookingList((prev) =>
-          prev.map((b) => (b.id === result.data.id ? result.data : b)),
+          prev.map((b) => (b.id === bookingData.id ? bookingData : b)),
         );
       }
     } catch (error) {
-      showError(error, "Failed to approve booking");
+      showError(error instanceof Error ? error.message : String(error), "Failed to approve booking");
     } finally {
       setLoading(false);
     }
@@ -105,7 +106,7 @@ export default function AdminDashboardClient({
       setAutoApproveEnabled(result.data?.autoApprove || false);
       showSuccess("Auto-approve updated");
     } catch (error) {
-      showError(error, "Failed to update auto-approve");
+      showError(error instanceof Error ? error.message : String(error), "Failed to update auto-approve");
     } finally {
       setTogglingAutoApprove(false);
     }
@@ -128,9 +129,10 @@ export default function AdminDashboardClient({
 
       showSuccess("Booking rejected");
 
-      if (result.data && result.data.id) {
+      if (result.data && typeof result.data === 'object' && 'id' in result.data) {
+        const bookingData = result.data as { id: string };
         setBookingList((prev) =>
-          prev.map((b) => (b.id === result.data.id ? result.data : b)),
+          prev.map((b) => (b.id === bookingData.id ? bookingData : b)),
         );
       }
 
@@ -138,7 +140,7 @@ export default function AdminDashboardClient({
       setRejectReason("");
       setSelectedBooking(null);
     } catch (error) {
-      showError(error, "Failed to reject booking");
+      showError(error instanceof Error ? error.message : String(error), "Failed to reject booking");
     } finally {
       setLoading(false);
     }
@@ -164,7 +166,7 @@ export default function AdminDashboardClient({
 
   const statusConfig = {
     APPROVED: { label: "DISETUJUI", bg: "bg-[#22c55e]", text: "text-white" },
-    PENDING: { label: "MENUNGGU", bg: "bg-[#facc15]", text: "text-black" },
+    PENDING: { label: "MENUNGGU", bg: "bg-[#FFF000]", text: "text-black" },
     REJECTED: { label: "DITOLAK", bg: "bg-[#FF5E5B]", text: "text-white" },
   };
 
@@ -231,7 +233,7 @@ export default function AdminDashboardClient({
                     </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
-                    <Clock className="w-8 h-8 text-[#facc15]" />
+                    <Clock className="w-8 h-8 text-[#FFF000]" />
                   </span>
                 </div>
                 {/* DISETUJUI */}

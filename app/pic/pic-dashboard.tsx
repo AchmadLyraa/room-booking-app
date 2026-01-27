@@ -36,7 +36,7 @@ export default function PICDashboardClient({
 
   const statusConfig = {
     APPROVED: { label: "DISETUJUI", bg: "bg-[#22c55e]", text: "text-white" },
-    PENDING: { label: "MENUNGGU", bg: "bg-[#facc15]", text: "text-black" },
+    PENDING: { label: "MENUNGGU", bg: "bg-[#FFF000]", text: "text-black" },
     REJECTED: { label: "DITOLAK", bg: "bg-[#FF5E5B]", text: "text-white" },
   };
 
@@ -80,10 +80,6 @@ export default function PICDashboardClient({
                 </div>
                 <h3 className="font-bold uppercase text-lg">{booking.room.name}</h3>
                 <div className="flex items-center gap-4 text-sm">
-                  <div>
-                    <span className="text-xs text-black/60 uppercase">AREA</span>
-                    <p className="font-bold">{booking.room.area || "N/A"}</p>
-                  </div>
                   <div>
                     <span className="text-xs text-black/60 uppercase">KAPASITAS</span>
                     <p className="font-bold">{booking.room.capacity}</p>

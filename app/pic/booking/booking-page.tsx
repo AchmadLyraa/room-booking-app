@@ -4,7 +4,7 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getAvailableRooms, createBooking } from "@/app/actions/pic-actions";
-import type { BookingSession, MeetingType } from "@prisma/client";
+import type { BookingSession, MeetingType } from "@/prisma/generated/enums";
 import { Suspense } from "react";
 import { useToastNotifications } from "@/hooks/use-toast-notifications";
 import { Grid2X2, Users } from "lucide-react";
@@ -47,7 +47,8 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
         const data = await getAvailableRooms(formData.bookingDate);
         setRooms(data);
       } catch (error) {
-        showError(error, "Failed to load rooms");
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        showError(errorMessage, "Failed to load rooms");
         setRooms([]);
       } finally {
         setLoadingRooms(false);
@@ -108,7 +109,8 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
       );
       router.push("/pic");
     } catch (error) {
-      showError(error, "Failed to create booking");
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      showError(errorMessage, "Failed to create booking");
     } finally {
       setLoading(false);
     }
@@ -140,11 +142,6 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             <div className="pb-4 border-b-3 border-black">
               <h2 className="font-bold text-lg uppercase mb-4">{getSelectedRoom().name}</h2>
               <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-black/60 uppercase">AREA</span>
-                  <span className="font-bold text-xl">{getSelectedRoom().area || "N/A"}M2</span>
-                  <Grid2X2 className="w-5 h-5" />
-                </div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-black/60 uppercase">KAPASITAS</span>
                   <span className="font-bold text-xl">{getSelectedRoom().capacity}</span>

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
@@ -14,6 +14,28 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasInput, setHasInput] = useState(false);
+
+  // Track if user has started typing
+  useEffect(() => {
+    if (email || password) {
+      setHasInput(true);
+    } else {
+      setHasInput(false);
+    }
+  }, [email, password]);
+
+  // Add hasInput to the container data attribute for CSS targeting
+  useEffect(() => {
+    const container = document.querySelector('.login-card-container');
+    if (container) {
+      if (hasInput) {
+        container.setAttribute('data-has-input', 'true');
+      } else {
+        container.setAttribute('data-has-input', 'false');
+      }
+    }
+  }, [hasInput]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,8 +78,7 @@ export function LoginForm() {
   };
 
   return (
-   
-      <div className="login-wrapper">
+      <div className="login-form-wrapper">
         <div className="login-form-container">
           <h1 className="login-heading">MASUK</h1>
 
@@ -115,6 +136,5 @@ export function LoginForm() {
 
         </div>
       </div>
-
   )
 }
