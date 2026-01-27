@@ -223,9 +223,9 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
         <div className="flex-1 min-h-0 overflow-y-auto p-4 md:p-8">
           <div className="space-y-6">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <h1 className="text-2xl font-bold uppercase">DAFTAR RUANGAN</h1>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
                 <button
                   onClick={() => {
                     if (!editMode) {

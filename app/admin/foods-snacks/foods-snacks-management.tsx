@@ -213,9 +213,9 @@ export default function FoodsSnacksManagementClient({
         <div className="flex-1 min-h-0 overflow-y-auto p-4 md:p-8">
           <div className="space-y-6">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <h1 className="text-2xl font-bold uppercase">MAKANAN & SNACK</h1>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
                 <button
                   onClick={() => {
                     if (!editMode) {
@@ -330,9 +330,9 @@ export default function FoodsSnacksManagementClient({
                             selectedItems.includes(item.id) ? "bg-[#FF5E5B]" : "bg-white"
                           }`}
                         >
-                          {selectedItems.includes(item.id) && (
-                            <div className="w-3 h-3 bg-white border-2 border-black" />
-                          )}
+    {selectedItems.includes(item.id) && (
+      <span className="text-white font-bold text-sm">-</span>
+    )}
                         </div>
                       </div>
                     )}
