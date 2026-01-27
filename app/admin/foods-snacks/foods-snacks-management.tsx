@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Package } from "lucide-react";
+import { Plus, Package2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -33,8 +33,7 @@ export default function FoodsSnacksManagementClient({
   snacks: initialSnacks
 }: FoodsSnacksManagementProps) {
   const { showError, showSuccess } = useToastNotifications();
-  const [foodList, setFoodList] = useState<any[]>(initialFoods?.success && initialFoods.data ? initialFoods.data : []);
-  const [snackList, setSnackList] = useState<any[]>(initialSnacks?.success && initialSnacks.data ? initialSnacks.data : []);
+  const [itemList, setItemList] = useState<any[]>([]);
   const [editMode, setEditMode] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,6 +43,8 @@ export default function FoodsSnacksManagementClient({
     type: "makanan",
   });
   const [editingItem, setEditingItem] = useState<any>(null);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [shakeAnimation, setShakeAnimation] = useState(false);
   const isMobile = useIsMobile();
 
   // Refresh data when edit mode changes
@@ -52,12 +53,14 @@ export default function FoodsSnacksManagementClient({
       const foodsResult = await getAllFoods();
       const snacksResult = await getAllSnacks();
 
+      const combinedItems = [];
       if (foodsResult.success && foodsResult.data) {
-        setFoodList(foodsResult.data);
+        combinedItems.push(...foodsResult.data.map(item => ({...item, type: "makanan"})));
       }
       if (snacksResult.success && snacksResult.data) {
-        setSnackList(snacksResult.data);
+        combinedItems.push(...snacksResult.data.map(item => ({...item, type: "snack"})));
       }
+      setItemList(combinedItems);
     };
 
     if (!editMode) {
@@ -83,11 +86,8 @@ export default function FoodsSnacksManagementClient({
         return;
       }
 
-      if (formData.type === "makanan") {
-        setFoodList((prev) => [result.data, ...prev]);
-      } else {
-        setSnackList((prev) => [result.data, ...prev]);
-      }
+      // Add the new item to the combined list with its type
+      setItemList((prev) => [{...result.data, type: formData.type}, ...prev]);
       showSuccess(`${formData.type === "makanan" ? "Makanan" : "Snack"} berhasil dibuat`);
 
       // Reset form and close dialog
@@ -117,17 +117,74 @@ export default function FoodsSnacksManagementClient({
         return;
       }
 
-      if (type === "makanan") {
-        setFoodList((prev) => prev.filter((f) => f.id !== itemId));
-      } else {
-        setSnackList((prev) => prev.filter((s) => s.id !== itemId));
-      }
+      // Remove from combined list
+      setItemList((prev) => prev.filter((item) => item.id !== itemId));
       showSuccess(`${type === "makanan" ? "Makanan" : "Snack"} berhasil dihapus`);
     } catch (error) {
       showError("Gagal menghapus item");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedItems.length === 0) {
+      showError("Pilih setidaknya satu item untuk dihapus");
+      return;
+    }
+
+    if (!confirm(`Apakah Anda yakin ingin menghapus ${selectedItems.length} item yang dipilih?`)) return;
+
+    setLoading(true);
+    let successCount = 0;
+    let failedItems = [];
+
+    try {
+      // Delete all selected items
+      for (const itemId of selectedItems) {
+        const item = itemList.find(i => i.id === itemId);
+        if (!item) continue;
+
+        let result;
+        if (item.type === "makanan") {
+          result = await deleteFood(itemId);
+        } else {
+          result = await deleteSnack(itemId);
+        }
+
+        if (!result.success) {
+          failedItems.push(itemId);
+          showError(`Gagal menghapus item: ${result.error}`);
+        } else {
+          successCount++;
+        }
+      }
+
+      // Update the item list by filtering out successfully deleted items
+      setItemList((prev) => prev.filter((item) => !selectedItems.includes(item.id) || failedItems.includes(item.id)));
+      setSelectedItems([]);
+
+      if (successCount > 0) {
+        showSuccess(`${successCount} item berhasil dihapus`);
+      }
+      if (failedItems.length > 0) {
+        showError(`${failedItems.length} item gagal dihapus`);
+      }
+    } catch (error) {
+      showError("Gagal menghapus item");
+      setItemList((prev) => prev.filter((item) => !selectedItems.includes(item.id)));
+      setSelectedItems([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleItemSelection = (itemId: string) => {
+    setSelectedItems((prev) =>
+      prev.includes(itemId)
+        ? prev.filter((id) => id !== itemId)
+        : [...prev, itemId]
+    );
   };
 
   return (
@@ -160,7 +217,13 @@ export default function FoodsSnacksManagementClient({
               <h1 className="text-2xl font-bold uppercase">MAKANAN & SNACK</h1>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setEditMode(!editMode)}
+                  onClick={() => {
+                    if (!editMode) {
+                      setShakeAnimation(true);
+                      setTimeout(() => setShakeAnimation(false), 500);
+                    }
+                    setEditMode(!editMode);
+                  }}
                   className={`px-6 py-3 font-bold uppercase border-3 border-black transition-all brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
                     editMode ? "bg-[#FFF000] text-black" : "bg-white text-black"
                   }`}
@@ -228,76 +291,74 @@ export default function FoodsSnacksManagementClient({
                     </form>
                   </DialogContent>
                 </Dialog>
+                {editMode && selectedItems.length > 0 && (
+                  <button
+                    onClick={handleBulkDelete}
+                    disabled={loading}
+                    className="px-6 py-3 bg-[#FF5E5B] text-white font-bold uppercase border-3 border-black brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50 flex items-center gap-2"
+                  >
+                    HAPUS ({selectedItems.length})
+                  </button>
+                )}
               </div>
             </div>
 
-            {/* Food Grid */}
+            {/* Unified Items Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {/* Foods Section */}
-              <div className="col-span-1">
-
-                <div className="grid grid-cols-1 gap-4">
-                  {foodList.map((food) => (
-                    <div key={food.id} className="bg-white border-3 border-black brutal-shadow p-6 flex items-center justify-between hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all cursor-pointer group">
-                      <div>
-                        <h3 className="text-xl font-bold leading-tight uppercase">{food.name}</h3>
-                        <span className="text-xs font-bold uppercase px-2 py-1 border-2 border-black inline-block mt-2 bg-[#22c55e] text-white">
-                          MAKANAN
+              {itemList.map((item) => (
+                <div
+                  key={item.id}
+                  className={`bg-white border-3 border-black brutal-shadow overflow-hidden group relative hover:shadow-[6px_6px_0_0_#000] transition-all cursor-pointer item-card ${
+                    selectedItems.includes(item.id) ? "bg-[#FF5E5B]" : ""
+                  } ${shakeAnimation ? "animate-shake" : ""}`}
+                  onClick={(e) => {
+                    if (editMode) {
+                      // In edit mode, clicking card toggles selection
+                      toggleItemSelection(item.id);
+                    }
+                  }}
+                >
+                  <div className="p-6">
+                    {editMode && (
+                      <div className="absolute top-2 right-2 z-10">
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleItemSelection(item.id);
+                          }}
+                          className={`w-5 h-5 border-3 border-black cursor-pointer flex items-center justify-center ${
+                            selectedItems.includes(item.id) ? "bg-[#FF5E5B]" : "bg-white"
+                          }`}
+                        >
+                          {selectedItems.includes(item.id) && (
+                            <div className="w-3 h-3 bg-white border-2 border-black" />
+                          )}
+                        </div>
+                      </div>
+                    )}
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold leading-tight uppercase mb-2">{item.name}</h3>
+                        <span className={`text-xs font-bold uppercase px-2 py-1 border-2 border-black inline-block ${
+                          item.type === "makanan" ? "bg-[#22c55e] text-white" : "bg-[#FFF000] text-black"
+                        }`}>
+                          {item.type === "makanan" ? "MAKANAN" : "SNACK"}
                         </span>
                       </div>
-                      <Package className="w-12 h-12 text-black" />
-                      {editMode && (
-                        <div className="flex gap-2 ml-4">
-                          <button
-                            onClick={() => handleDelete(food.id, "makanan")}
-                            disabled={loading}
-                            className="px-4 py-2 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
-                          >
-                            HAPUS
-                          </button>
-                        </div>
-                      )}
+                      <Package2 className="w-12 h-12 ml-4 flex-shrink-0" />
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
+              ))}
 
-              {/* Snacks Section */}
-              <div className="col-span-1">
-                <div className="grid grid-cols-1 gap-4">
-                  {snackList.map((snack) => (
-                    <div key={snack.id} className="bg-white border-3 border-black brutal-shadow p-6 flex items-center justify-between hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all cursor-pointer group">
-                      <div>
-                        <h3 className="text-xl font-bold leading-tight uppercase">{snack.name}</h3>
-                        <span className="text-xs font-bold uppercase px-2 py-1 border-2 border-black inline-block mt-2 bg-[#FFF000] text-black">
-                          SNACK
-                        </span>
-                      </div>
-                      <Package className="w-12 h-12 text-black" />
-                      {editMode && (
-                        <div className="flex gap-2 ml-4">
-                          <button
-                            onClick={() => handleDelete(snack.id, "snack")}
-                            disabled={loading}
-                            className="px-4 py-2 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
-                          >
-                            HAPUS
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+              {itemList.length === 0 && (
+                <div className="text-center py-12 col-span-full">
+                  <div className="text-6xl mb-4">🍽️</div>
+                  <h3 className="text-xl font-bold mb-2">Belum Ada Menu</h3>
+                  <p className="text-black/60">Tambahkan menu baru untuk memulai</p>
                 </div>
-              </div>
+              )}
             </div>
-
-            {(foodList.length === 0 || snackList.length === 0) && (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">🍽️</div>
-                <h3 className="text-xl font-bold mb-2">Belum Ada Menu</h3>
-                <p className="text-black/60">Tambahkan menu baru untuk memulai</p>
-              </div>
-            )}
           </div>
         </div>
       </div>

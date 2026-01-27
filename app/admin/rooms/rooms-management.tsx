@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Pencil, Package } from "lucide-react";
+import { Plus, Pencil, DoorClosed  } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +38,8 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
     capacity: 10,
   });
   const [editingRoom, setEditingRoom] = useState<any>(null);
+  const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
+  const [shakeAnimation, setShakeAnimation] = useState(false);
   const isMobile = useIsMobile();
 
   // Refresh data when edit mode changes
@@ -144,6 +146,57 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
     }
   };
 
+  const handleBulkDelete = async () => {
+    if (selectedRooms.length === 0) {
+      showError("Pilih setidaknya satu ruangan untuk dihapus");
+      return;
+    }
+
+    if (!confirm(`Apakah Anda yakin ingin menghapus ${selectedRooms.length} ruangan yang dipilih?`)) return;
+
+    setLoading(true);
+    let successCount = 0;
+    let failedRooms = [];
+
+    try {
+      // Delete all selected rooms
+      for (const roomId of selectedRooms) {
+        const result = await deleteRoom(roomId);
+        if (!result.success) {
+          failedRooms.push(roomId);
+          showError(`Gagal menghapus ruangan: ${result.error}`);
+        } else {
+          successCount++;
+        }
+      }
+
+      // Update the room list by filtering out successfully deleted rooms
+      setRoomList((prev) => prev.filter((r) => !selectedRooms.includes(r.id) || failedRooms.includes(r.id)));
+      setSelectedRooms([]);
+
+      if (successCount > 0) {
+        showSuccess(`${successCount} ruangan berhasil dihapus`);
+      }
+      if (failedRooms.length > 0) {
+        showError(`${failedRooms.length} ruangan gagal dihapus`);
+      }
+    } catch (error) {
+      showError("Gagal menghapus ruangan");
+      setRoomList((prev) => prev.filter((r) => !selectedRooms.includes(r.id)));
+      setSelectedRooms([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleRoomSelection = (roomId: string) => {
+    setSelectedRooms((prev) =>
+      prev.includes(roomId)
+        ? prev.filter((id) => id !== roomId)
+        : [...prev, roomId]
+    );
+  };
+
   return (
     <div className="flex h-screen">
       {/* Sidebar - Sticky position */}
@@ -174,7 +227,13 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
               <h1 className="text-2xl font-bold uppercase">DAFTAR RUANGAN</h1>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setEditMode(!editMode)}
+                  onClick={() => {
+                    if (!editMode) {
+                      setShakeAnimation(true);
+                      setTimeout(() => setShakeAnimation(false), 500);
+                    }
+                    setEditMode(!editMode);
+                  }}
                   className={`px-6 py-3 font-bold uppercase border-3 border-black transition-all brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
                     editMode ? "bg-[#FFF000] text-black" : "bg-white text-black"
                   }`}
@@ -251,41 +310,68 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
                     </form>
                   </DialogContent>
                 </Dialog>
+                {editMode && selectedRooms.length > 0 && (
+                  <button
+                    onClick={handleBulkDelete}
+                    disabled={loading}
+                    className="px-6 py-3 bg-[#FF5E5B] text-white font-bold uppercase border-3 border-black brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50 flex items-center gap-2"
+                  >
+                    HAPUS ({selectedRooms.length})
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Room Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {roomList.map((room) => (
-                <div key={room.id} className="bg-white border-3 border-black brutal-shadow overflow-hidden group relative hover:shadow-[6px_6px_0_0_#000] transition-all">
+                  <div
+                    key={room.id}
+                    className={`bg-white border-3 border-black brutal-shadow overflow-hidden group relative hover:shadow-[6px_6px_0_0_#000] transition-all cursor-pointer room-card ${
+                      selectedRooms.includes(room.id) ? "bg-[#FF5E5B]" : ""
+                    } ${shakeAnimation ? "animate-shake" : ""}`}
+                    onClick={(e) => {
+                      if (editMode) {
+                        // In edit mode, clicking card toggles selection
+                        toggleRoomSelection(room.id);
+                      } else {
+                        // In normal mode, clicking card opens edit dialog
+                        handleEdit(room);
+                      }
+                    }}
+                  >
                   <div className="p-4">
+                    {editMode && (
+                      <div className="absolute top-2 right-2 z-10">
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleRoomSelection(room.id);
+                          }}
+                          className={`w-5 h-5 border-3 border-black cursor-pointer flex items-center justify-center ${
+                            selectedRooms.includes(room.id) ? "bg-[#FF5E5B]" : "bg-white"
+                          }`}
+                        >
+                          {selectedRooms.includes(room.id) && (
+                            <div className="w-3 h-3 bg-white border-2 border-black" />
+                          )}
+                        </div>
+                      </div>
+                    )}
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <h3 className="font-bold text-lg uppercase mb-2">{room.name}</h3>
                         <div className="text-sm">
-                          <p className="font-bold uppercase text-black/80">KAPASITAS: <span className="text-black font-bold">{room.capacity}</span> ORANG</p>
+                          <p className="font-bold uppercase"><span className="font-bold">{room.capacity}</span> ORANG</p>
+                          {room.description && (
+                            <p className="font-bold mt-2">
+                              <span className="font-bold">{room.description}</span>
+                            </p>
+                          )}
                         </div>
                       </div>
-                      <Package className="w-12 h-12 text-black/60 ml-4 flex-shrink-0" />
+                      <DoorClosed className="w-12 h-12 ml-4 flex-shrink-0" />
                     </div>
-                    {editMode && (
-                      <div className="flex gap-2 mt-4">
-                        <button
-                          onClick={() => handleEdit(room)}
-                          disabled={loading}
-                          className="flex-1 px-4 py-2 bg-[#FFF000] text-black font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
-                        >
-                          EDIT
-                        </button>
-                        <button
-                          onClick={() => handleDelete(room.id)}
-                          disabled={loading}
-                          className="flex-1 px-4 py-2 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
-                        >
-                          HAPUS
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
               ))}
