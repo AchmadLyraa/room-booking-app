@@ -9,7 +9,7 @@ import {
 } from "@/prisma/generated/client";
 import { successResult, errorResult } from "@/lib/types";
 
-// GET AVAILABLE ROOMS FOR A SPECIFIC DATE
+// FILTER A VALID BOOKING
 export async function getAvailableRooms(bookingDate: string) {
   await requireRole([Role.PIC]);
 
@@ -313,29 +313,49 @@ export async function getFoodsAndSnacks() {
 }
 
 // GET ROOM AVAILABILITY FOR A SPECIFIC DATE
+// Fungsi untuk convert UTC ke WIB (GMT+7)
+function getWIBTime(date: Date) {
+  // Tambah 7 jam untuk WIB
+  const wibTime = new Date(date.getTime() + 8 * 60 * 60 * 1000);
+  return {
+    hours: wibTime.getUTCHours(),
+    date: wibTime,
+  };
+}
+
+function getSessionStatus(
+  isBooked: boolean,
+  isToday: boolean,
+  currentHourWIB: number,
+  sessionTime: { start: number; end: number },
+) {
+  if (isBooked) return "RESERVED";
+
+  // Kalau hari ini, cek apakah sesi sudah lewat
+  if (isToday && currentHourWIB >= sessionTime.end) {
+    return "DISABLED"; // Sesi sudah lewat
+  }
+
+  return "TERSEDIA";
+}
+
 export async function getRoomAvailability(bookingDateString: string) {
   await requireRole([Role.PIC]);
 
   const [year, month, day] = bookingDateString.split("-").map(Number);
-
   const dateUTC = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
   const nextDayUTC = new Date(dateUTC.getTime() + 24 * 60 * 60 * 1000);
 
+  // Ambil waktu sekarang dalam WIB
   const now = new Date();
-  const todayUTC = new Date(
-    Date.UTC(
-      now.getUTCFullYear(),
-      now.getUTCMonth(),
-      now.getUTCDate(),
-      0,
-      0,
-      0,
-      0,
-    ),
-  );
+  const wibNow = getWIBTime(now);
 
-  const isToday = dateUTC.getTime() === todayUTC.getTime();
-  const currentHourUTC = now.getUTCHours();
+  // Bandingkan tanggal dalam WIB
+  const todayWIB = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+  const todayWIBString = todayWIB.toISOString().slice(0, 10);
+  const isToday = bookingDateString === todayWIBString;
+
+  const currentHourWIB = wibNow.hours;
 
   const rooms = await prisma.room.findMany({
     include: {
@@ -361,7 +381,6 @@ export async function getRoomAvailability(bookingDateString: string) {
 
   return rooms.map((room) => {
     const booked = room.bookings.map((b) => b.session);
-
     const hasS1 = booked.includes("SESSION_1");
     const hasS2 = booked.includes("SESSION_2");
     const hasFD = booked.includes("FULLDAY");
@@ -371,51 +390,28 @@ export async function getRoomAvailability(bookingDateString: string) {
       name: room.name,
       capacity: room.capacity,
       sessionAvailability: {
-        SESSION_1:
-          hasFD || hasS1
-            ? "RESERVED"
-            : getSessionStatus(
-                hasS1,
-                isToday,
-                currentHourUTC,
-                sessionTimes.SESSION_1,
-              ),
-        SESSION_2:
-          hasFD || hasS2
-            ? "RESERVED"
-            : getSessionStatus(
-                hasS2,
-                isToday,
-                currentHourUTC,
-                sessionTimes.SESSION_2,
-              ),
+        SESSION_1: getSessionStatus(
+          hasS1,
+          isToday,
+          currentHourWIB,
+          sessionTimes.SESSION_1,
+        ),
+        SESSION_2: getSessionStatus(
+          hasS2,
+          isToday,
+          currentHourWIB,
+          sessionTimes.SESSION_2,
+        ),
         FULLDAY:
           hasS1 || hasS2
             ? "DISABLED"
             : getSessionStatus(
                 hasFD,
                 isToday,
-                currentHourUTC,
+                currentHourWIB,
                 sessionTimes.FULLDAY,
               ),
       },
     };
   });
-}
-
-
-function getSessionStatus(
-  isBooked: boolean,
-  isToday: boolean,
-  currentHour: number,
-  sessionTime: { start: number; end: number },
-): string {
-  if (isBooked) return "RESERVED";
-
-  // If it's today, check if session time has already passed or is ongoing
-  if (isToday && currentHour >= sessionTime.start) {
-    return "DISABLED";
-  }
-
-  return "TERSEDIA";
 }

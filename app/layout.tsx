@@ -2,15 +2,16 @@ import type React from "react";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from 'next/font/google'
 import { Analytics } from "@vercel/analytics/next";
+import { Geist, Geist_Mono } from "next/font/google";
+// import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 const _jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Room Booking System",
-  description: "Manage room bookings with ease",
-  generator: "v0.app",
+  title: "UPKT Space",
+  description: "Booking atau Pinjam Ruangan PLN UP Kaltim Teluk",
   icons: {
     icon: [
       {
@@ -44,7 +45,7 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         {children}
         <Toaster />
-        <Analytics />
+        {/*<Analytics />*/}
       </body>
     </html>
   );

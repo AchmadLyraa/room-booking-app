@@ -382,6 +382,72 @@ export default function AdminDashboardClient({
                 >
                   {page}
                 </button>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="border p-2 text-left">Letter</th>
+                <th className="border p-2 text-left">Room</th>
+                <th className="border p-2 text-left">Date</th>
+                <th className="border p-2 text-left">Session</th>
+                <th className="border p-2 text-left">PIC</th>
+                <th className="border p-2 text-left">Status</th>
+                <th className="border p-2 text-left">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {currentItems.map((booking) => (
+                <tr key={booking.id} className="hover:bg-gray-50">
+                  <td className="border p-2">{booking.letterNumber}</td>
+                  <td className="border p-2">{booking.room?.name}</td>
+                  <td className="border p-2">{booking.bookingDateFormatted}</td>
+                  <td className="border p-2">{booking.session}</td>
+                  <td className="border p-2">{booking.user?.name}</td>
+                  <td className="border p-2">
+                    <span
+                      className={`px-2 py-1 rounded text-sm font-semibold ${
+                        booking.status === "PENDING"
+                          ? "bg-yellow-200"
+                          : booking.status === "APPROVED"
+                            ? "bg-green-200"
+                            : "bg-red-200"
+                      }`}
+                    >
+                      {booking.status}
+                    </span>
+                  </td>
+                  <td className="border p-2 space-x-2">
+                    <button
+                      onClick={() => setSelectedBooking(booking)}
+                      className="text-blue-500 hover:underline text-sm"
+                    >
+                      View
+                    </button>
+
+                    {booking.status === "PENDING" && (
+                      <>
+                        <button
+                          onClick={() => handleApprove(booking.id)}
+                          disabled={loading}
+                          className="text-green-500 hover:underline text-sm disabled:opacity-50"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedBooking(booking);
+                            setShowRejectModal(true);
+                          }}
+                          disabled={loading}
+                          className="text-red-500 hover:underline text-sm disabled:opacity-50"
+                        >
+                          Reject
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
               ))}
             </div>
           </div>

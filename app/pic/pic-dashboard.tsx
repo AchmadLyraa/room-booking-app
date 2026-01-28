@@ -19,6 +19,15 @@ function parseJsonArray(jsonString: string | null): string[] {
   }
 }
 
+// Helper function untuk format date yang aman dari hydration error
+function formatDateSafe(dateString: string | Date): string {
+  const date = new Date(dateString);
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  return `${day}/${month}/${year}`; // atau format lain yang kamu mau
+}
+
 export default function PICDashboardClient({
   bookings,
   view = "availability"
@@ -45,6 +54,18 @@ export default function PICDashboardClient({
       <div>
          <h1 className="text-xl md:text-2xl font-bold uppercase">SEMUA BOOKING SAYA</h1>
       </div>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <p className="text-sm text-gray-600">Date</p>
+                      <p className="font-semibold">
+                        {formatDateSafe(booking.bookingDate)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Session</p>
+                      <p className="font-semibold">{booking.session}</p>
+                    </div>
+                  </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {bookings.map((booking) => {
@@ -171,7 +192,7 @@ export default function PICDashboardClient({
                 <div>
                   <p className="text-sm text-gray-600">Date</p>
                   <p className="font-semibold">
-                    {new Date(selectedBooking.bookingDate).toLocaleDateString()}
+                    {formatDateSafe(selectedBooking.bookingDate)}
                   </p>
                 </div>
                 <div>
