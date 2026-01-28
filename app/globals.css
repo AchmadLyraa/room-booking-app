@@ -4,79 +4,87 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #FFFFFF;
+  --foreground: #000000;
+  --card: #FFFFFF;
+  --card-foreground: #000000;
+  --popover: #FFFFFF;
+  --popover-foreground: #000000;
+  --primary: #22c55e;
+  --primary-foreground: #FFFFFF;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #000000;
+  --muted: #f5f5f5;
+  --muted-foreground: #666666;
+  --accent: #22c55e;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF5E5B;
+  --destructive-foreground: #FFFFFF;
+  --border: #000000;
+  --input: #000000;
+  --ring: #000000;
+  --chart-1: #22c55e;
+  --chart-2: #FFF000;
+  --chart-3: #FF5E5B;
+  --chart-4: #3b82f6;
+  --chart-5: #a855f7;
+  --radius: 0px;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #22c55e;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #000000;
+  --sidebar-ring: #000000;
+
+  --pln-green: #22c55e;
+  --pln-yellow: #FFF000;
+  --brutal-shadow: 4px 4px 0px #000000;
+  --brutal-shadow-lg: 8px 8px 0px #000000;
+  --brutal-shadow-hover: 6px 6px 0px #000000;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --card: #111111;
+  --card-foreground: #FFFFFF;
+  --popover: #111111;
+  --popover-foreground: #FFFFFF;
+  --primary: #22c55e;
+  --primary-foreground: #FFFFFF;
+  --secondary: #222222;
+  --secondary-foreground: #FFFFFF;
+  --muted: #222222;
+  --muted-foreground: #999999;
+  --accent: #22c55e;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF5E5B;
+  --destructive-foreground: #FFFFFF;
+  --border: #FFFFFF;
+  --input: #FFFFFF;
+  --ring: #FFFFFF;
+  --chart-1: #22c55e;
+  --chart-2: #FFF000;
+  --chart-3: #FF5E5B;
+  --chart-4: #3b82f6;
+  --chart-5: #a855f7;
+  --sidebar: #111111;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #22c55e;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #222222;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #FFFFFF;
+  --sidebar-ring: #FFFFFF;
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: 'JetBrains Mono', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --color-pln-green: var(--pln-green);
+  --color-pln-yellow: var(--pln-yellow);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -101,10 +109,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -120,6 +128,632 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
   }
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Override @layer base body */
+body {
+  min-height: 100vh !important;
+}
+
+/* Neo Brutalism Utility Classes */
+.brutal-shadow {
+  box-shadow: var(--brutal-shadow);
+}
+
+.brutal-shadow-lg {
+  box-shadow: var(--brutal-shadow-lg);
+}
+
+.brutal-border {
+  border: 3px solid #000000;
+}
+
+.brutal-border-2 {
+  border: 2px solid #000000;
+}
+
+.brutal-hover:hover {
+  box-shadow: var(--brutal-shadow-hover);
+  transform: translate(-2px, -2px);
+}
+
+.brutal-active:active {
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+/* Custom border widths */
+.border-3 {
+  border-width: 3px;
+}
+
+.border-t-3 {
+  border-top-width: 3px;
+}
+
+.border-r-3 {
+  border-right-width: 3px;
+}
+
+.border-b-3 {
+  border-bottom-width: 3px;
+}
+
+.border-l-3 {
+  border-left-width: 3px;
+}
+
+/* Login Form Utility Classes */
+.login-container {
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 100rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-branding {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.login-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.login-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #FFF000;
+  border: 3px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--brutal-shadow);
+}
+
+.login-logo-svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #000000;
+}
+
+.login-title {
+  font-weight: bold;
+  font-size: 1.875rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+.login-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: medium;
+  text-transform: uppercase;
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  padding: 0rem;
+  position: relative;
+  margin: 0 auto;
+}
+
+.login-heading {
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-label {
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+}
+
+.login-input {
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem;
+  border: 3px solid #000000;
+  background-color: white;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 1rem;
+  font-weight: medium;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.login-input:focus {
+  box-shadow: 4px 4px 0px #000000;
+  transform: translate(-2px, -2px);
+}
+
+.login-password-container {
+  position: relative;
+}
+
+.login-password-input {
+  padding-right: 3rem;
+}
+
+.login-toggle-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000000;
+  transition: opacity 0.15s ease;
+}
+
+.login-toggle-btn:hover {
+  opacity: 0.7;
+}
+
+.login-submit-btn {
+  width: 100%;
+  height: 3rem;
+  background-color: #22c55e;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 3px solid #000000;
+  box-shadow: var(--brutal-shadow);
+  transition: all 0.15s ease;
+}
+
+.login-submit-btn:hover {
+  box-shadow: var(--brutal-shadow-hover);
+  transform: translate(-2px, -2px);
+}
+
+.login-submit-btn:active {
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+.login-submit-btn:disabled {
+  opacity: 0.5;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.login-divider-line {
+  flex: 1;
+  border-top: 2px solid #000000;
+}
+
+.login-divider-text {
+  padding: 0 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.login-social-btns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.login-social-btn {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.15s ease;
+}
+
+.login-social-btn:hover {
+  box-shadow: var(--brutal-shadow);
+  transform: translate(-2px, -2px);
+}
+
+.login-signup-text {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.login-signup-link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.login-signup-link:hover {
+  text-decoration: none;
+}
+
+/* Responsive Design for Login Page */
+@media (min-width: 768px) {
+  .login-wrapper {
+    flex-direction: row;
+  }
+
+  .login-branding {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .login-form-container {
+    width: 420px;
+    height: 600px;
+    margin: 0;
+  }
+
+  .login-logo-container {
+    justify-content: flex-start;
+  }
+
+  .login-title, .login-subtitle {
+    text-align: left;
+  }
+}
+
+@media (max-width: 767px) {
+  .login-title, .login-subtitle {
+    text-align: center;
+  }
+
+  .login-form-container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+  }
+
+  .login-input, .login-submit-btn {
+    height: 2.75rem;
+  }
+
+  .login-heading {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Login Card Animation Styles */
+.login-card-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  perspective: 1000px;
+  overflow: visible;
+}
+
+.profile-card, .login-form-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 3px solid #000000;
+  box-shadow: var(--brutal-shadow);
+  top: 0;
+  left: 0;
+}
+
+/* Initial state - both cards stacked at position 0, welcome on top, form behind */
+.profile-card {
+  background-color: #22c55e !important;
+  color: white !important;
+  transform: translateX(0);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-form-card {
+  background-color: white !important;
+  color: black !important;
+  transform: translateX(0);
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* Hover effect - both cards move in opposite directions */
+.login-card-container:hover .profile-card {
+  transform: translateX(-50%);
+}
+
+.login-card-container:hover .login-form-card {
+  transform: translateX(50%);
+}
+
+/* If user has started typing, keep form open (cover stays left, form stays right) */
+.login-card-container[data-has-input="true"] .profile-card {
+  transform: translateX(-50%);
+}
+
+.login-card-container[data-has-input="true"] .login-form-card {
+  transform: translateX(50%);
+}
+
+/* When not hovering and no input, return to stacked position */
+.login-card-container:not(:hover):not([data-has-input="true"]) .profile-card {
+  transform: translateX(0);
+}
+
+.login-card-container:not(:hover):not([data-has-input="true"]) .login-form-card {
+  transform: translateX(0);
+}
+
+/* Login form wrapper styling */
+.login-form-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Adjust login form container for the card layout */
+.login-form-container {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+/* Responsive adjustments for card layout */
+@media (max-width: 767px) {
+  /* Mobile-only: Hide the card container and show login form directly */
+  .login-card-container {
+    display: none !important;
+  }
+
+  /* Mobile-only: Show login form directly with proper styling */
+  .mobile-login-form {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border: 3px solid #000000;
+    box-shadow: var(--brutal-shadow);
+    border-radius: 0;
+  }
+
+  /* Mobile-specific login form card styling */
+  .login-form-card {
+    display: none !important;
+  }
+
+  .profile-card {
+    display: none !important;
+  }
+
+  /* Mobile-specific form container adjustments */
+  .login-form-container {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Mobile-specific form elements */
+  .login-form {
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .login-heading {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .login-input, .login-submit-btn {
+    height: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Mobile masuk button styling */
+  .mobile-masuk-btn {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background-color: white;
+    color: black;
+    border: 3px solid black;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.15s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  /* COMPLETELY REMOVE ALL HOVER EFFECTS ON MOBILE */
+  .login-card-container:hover .profile-card,
+  .login-card-container:hover .login-form-card,
+  .login-submit-btn:hover,
+  .login-toggle-btn:hover,
+  .login-input:focus {
+    transform: none !important;
+    box-shadow: var(--brutal-shadow) !important;
+  }
+
+  /* Mobile animation states - not needed anymore since we're hiding the cards */
+  .login-card-container:not([data-show-login="true"]) .profile-card {
+    transform: translateX(0);
+    z-index: 2;
+  }
+
+  .login-card-container:not([data-show-login="true"]) .login-form-card {
+    transform: translateX(0);
+    z-index: 1;
+  }
+
+  .login-card-container[data-show-login="true"] .profile-card {
+    transform: translateX(-100%);
+    z-index: 1;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .login-card-container[data-show-login="true"] .login-form-card {
+    transform: translateX(0);
+    z-index: 2;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+@media (min-width: 768px) {
+  /* Desktop-specific adjustments */
+  .login-card-container {
+    width: 400px;
+    height: 500px;
+  }
+
+  .profile-content {
+    padding: 1rem;
+  }
+  .profile-logo {
+    width: 70%;
+    height: 70%;
+    justify-content: left;
+  }
+
+  /* Hide mobile button on desktop */
+  .mobile-masuk-btn {
+    display: none !important;
+  }
+
+  /* Hide mobile login form on desktop */
+  .mobile-login-form {
+    display: none !important;
+  }
+}
+
+/* Ensure proper stacking and z-index */
+.login-card-container {
+  transform-style: preserve-3d;
+}
+
+/* Add smooth transition for better UX */
+.profile-card, .login-form-card {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Fix for form inputs to ensure they're properly visible */
+.login-form-card input  {
+  background-color: white;
+  color: black;
+}
+
+.login-form-card button {
+  background-color: #22c55e;
+  color: white;
+}
+
+/* Mobile-only: Login page specific green background */
+@media (max-width: 767px) {
+  .login-page-container {
+    background-color: #22c55e !important;
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px solid var(--foreground);
+  margin: 0 10px;
+}
+
+.login-toggle-btn {
+  background-color: white !important;
+  color: black !important;
+  border: none;
+  padding: 0;
+}
+
+.object-contain {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+
+/* Shake animation for edit mode */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+  transform-origin: center;
+}
+
+/* Ensure cards can be animated properly */
+.room-card {
+  transition: all 0.2s ease;
 }
