@@ -329,11 +329,13 @@ function getSessionStatus(
   currentHourWIB: number,
   sessionTime: { start: number; end: number },
 ) {
-  if (isBooked) return "RESERVED";
+  if (isBooked) {
+    return "TERPAKAI"; // ← GANTI INI DARI "RESERVED"
+  }
 
   // Kalau hari ini, cek apakah sesi sudah lewat
   if (isToday && currentHourWIB >= sessionTime.end) {
-    return "DISABLED"; // Sesi sudah lewat
+    return "DISABLED";
   }
 
   return "TERSEDIA";
@@ -390,18 +392,22 @@ export async function getRoomAvailability(bookingDateString: string) {
       name: room.name,
       capacity: room.capacity,
       sessionAvailability: {
-        SESSION_1: getSessionStatus(
-          hasS1,
-          isToday,
-          currentHourWIB,
-          sessionTimes.SESSION_1,
-        ),
-        SESSION_2: getSessionStatus(
-          hasS2,
-          isToday,
-          currentHourWIB,
-          sessionTimes.SESSION_2,
-        ),
+        SESSION_1: hasFD
+          ? "TERPAKAI"
+          : getSessionStatus(
+              hasS1,
+              isToday,
+              currentHourWIB,
+              sessionTimes.SESSION_1,
+            ),
+        SESSION_2: hasFD
+          ? "TERPAKAI"
+          : getSessionStatus(
+              hasS2,
+              isToday,
+              currentHourWIB,
+              sessionTimes.SESSION_2,
+            ),
         FULLDAY:
           hasS1 || hasS2
             ? "DISABLED"

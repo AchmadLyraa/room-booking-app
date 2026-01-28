@@ -43,7 +43,9 @@ export default function AdminDashboardClient({
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
   const [loading, setLoading] = useState(false);
-  const [bookingList, setBookingList] = useState<any[]>(bookings?.success && bookings.data ? bookings.data : []);
+  const [bookingList, setBookingList] = useState<any[]>(
+    bookings?.success && bookings.data ? bookings.data : [],
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [filter, setFilter] = useState("");
@@ -80,14 +82,21 @@ export default function AdminDashboardClient({
       showSuccess("Booking approved");
 
       // UPDATE STATE BERDASARKAN DATA DARI SERVER
-      if (result.data && typeof result.data === 'object' && 'id' in result.data) {
+      if (
+        result.data &&
+        typeof result.data === "object" &&
+        "id" in result.data
+      ) {
         const bookingData = result.data as { id: string };
         setBookingList((prev) =>
           prev.map((b) => (b.id === bookingData.id ? bookingData : b)),
         );
       }
     } catch (error) {
-      showError(error instanceof Error ? error.message : String(error), "Failed to approve booking");
+      showError(
+        error instanceof Error ? error.message : String(error),
+        "Failed to approve booking",
+      );
     } finally {
       setLoading(false);
     }
@@ -106,7 +115,10 @@ export default function AdminDashboardClient({
       setAutoApproveEnabled(result.data?.autoApprove || false);
       showSuccess("Auto-approve updated");
     } catch (error) {
-      showError(error instanceof Error ? error.message : String(error), "Failed to update auto-approve");
+      showError(
+        error instanceof Error ? error.message : String(error),
+        "Failed to update auto-approve",
+      );
     } finally {
       setTogglingAutoApprove(false);
     }
@@ -129,7 +141,11 @@ export default function AdminDashboardClient({
 
       showSuccess("Booking rejected");
 
-      if (result.data && typeof result.data === 'object' && 'id' in result.data) {
+      if (
+        result.data &&
+        typeof result.data === "object" &&
+        "id" in result.data
+      ) {
         const bookingData = result.data as { id: string };
         setBookingList((prev) =>
           prev.map((b) => (b.id === bookingData.id ? bookingData : b)),
@@ -140,7 +156,10 @@ export default function AdminDashboardClient({
       setRejectReason("");
       setSelectedBooking(null);
     } catch (error) {
-      showError(error instanceof Error ? error.message : String(error), "Failed to reject booking");
+      showError(
+        error instanceof Error ? error.message : String(error),
+        "Failed to reject booking",
+      );
     } finally {
       setLoading(false);
     }
@@ -217,7 +236,9 @@ export default function AdminDashboardClient({
                 {/* TOTAL BOOKING */}
                 <div className="flex-1 flex items-center justify-between bg-white border-3 border-black brutal-shadow p-4 min-w-[180px]">
                   <div>
-                    <h2 className="text-sm font-bold uppercase text-black/60">TOTAL BOOKING</h2>
+                    <h2 className="text-sm font-bold uppercase text-black/60">
+                      TOTAL BOOKING
+                    </h2>
                     <p className="text-3xl font-bold">{bookingList.length}</p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
@@ -227,7 +248,9 @@ export default function AdminDashboardClient({
                 {/* MENUNGGU */}
                 <div className="flex-1 flex items-center justify-between bg-white border-3 border-black brutal-shadow p-4 min-w-[180px]">
                   <div>
-                    <h2 className="text-sm font-bold uppercase text-black/60">MENUNGGU</h2>
+                    <h2 className="text-sm font-bold uppercase text-black/60">
+                      MENUNGGU
+                    </h2>
                     <p className="text-3xl font-bold">
                       {bookingList.filter((b) => b.status === "PENDING").length}
                     </p>
@@ -239,9 +262,14 @@ export default function AdminDashboardClient({
                 {/* DISETUJUI */}
                 <div className="flex-1 flex items-center justify-between bg-white border-3 border-black brutal-shadow p-4 min-w-[180px]">
                   <div>
-                    <h2 className="text-sm font-bold uppercase text-black/60">DISETUJUI</h2>
+                    <h2 className="text-sm font-bold uppercase text-black/60">
+                      DISETUJUI
+                    </h2>
                     <p className="text-3xl font-bold">
-                      {bookingList.filter((b) => b.status === "APPROVED").length}
+                      {
+                        bookingList.filter((b) => b.status === "APPROVED")
+                          .length
+                      }
                     </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
@@ -251,9 +279,14 @@ export default function AdminDashboardClient({
                 {/* DITOLAK */}
                 <div className="flex-1 flex items-center justify-between bg-white border-3 border-black brutal-shadow p-4 min-w-[180px]">
                   <div>
-                    <h2 className="text-sm font-bold uppercase text-black/60">DITOLAK</h2>
+                    <h2 className="text-sm font-bold uppercase text-black/60">
+                      DITOLAK
+                    </h2>
                     <p className="text-3xl font-bold">
-                      {bookingList.filter((b) => b.status === "REJECTED").length}
+                      {
+                        bookingList.filter((b) => b.status === "REJECTED")
+                          .length
+                      }
                     </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
@@ -263,8 +296,6 @@ export default function AdminDashboardClient({
               </div>
             </div>
           </div>
-
-
 
           {/* Booking Table */}
           <div className="mb-8">
@@ -289,7 +320,9 @@ export default function AdminDashboardClient({
                 `}
                 style={{ minWidth: "180px" }}
               >
-                <span className="text-xs opacity-80 mb-1 leading-none">AUTO APPROVE</span>
+                <span className="text-xs opacity-80 mb-1 leading-none">
+                  AUTO APPROVE
+                </span>
                 <span className="text-lg leading-none">
                   {autoApproveEnabled ? "ON" : "OFF"}
                 </span>
@@ -300,35 +333,62 @@ export default function AdminDashboardClient({
               <table className="w-full border-collapse border-3 border-black brutal-shadow">
                 <thead className="bg-[#f5f5f5]">
                   <tr>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">NO SURAT</th>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">RUANGAN</th>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">TANGGAL</th>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">SESI</th>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">PIC</th>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">STATUS</th>
-                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">AKSI</th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      NO SURAT
+                    </th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      RUANGAN
+                    </th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      TANGGAL
+                    </th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      SESI
+                    </th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      PIC
+                    </th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      STATUS
+                    </th>
+                    <th className="border-2 border-black p-3 text-left font-bold uppercase text-sm">
+                      AKSI
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {currentItems.map((booking, index) => {
-                    const statusKey = booking.status as keyof typeof statusConfig;
-                    const status = statusConfig[statusKey] || statusConfig.PENDING;
+                    const statusKey =
+                      booking.status as keyof typeof statusConfig;
+                    const status =
+                      statusConfig[statusKey] || statusConfig.PENDING;
 
                     return (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="border-2 border-black p-3">{booking.letterNumber}</td>
-                        <td className="border-2 border-black p-3">{booking.room?.name}</td>
+                        <td className="border-2 border-black p-3">
+                          {booking.letterNumber}
+                        </td>
+                        <td className="border-2 border-black p-3">
+                          {booking.room?.name}
+                        </td>
                         <td className="border-2 border-black p-3">
                           {format(new Date(booking.bookingDate), "dd/MM/yyyy")}
                         </td>
                         <td className="border-2 border-black p-3">
-                          {booking.session === "SESSION_1" ? "Sesi 1" :
-                           booking.session === "SESSION_2" ? "Sesi 2" : "Full Day"}
+                          {booking.session === "SESSION_1"
+                            ? "Sesi 1"
+                            : booking.session === "SESSION_2"
+                              ? "Sesi 2"
+                              : "Full Day"}
                         </td>
-                        <td className="border-2 border-black p-3">{booking.user?.name}</td>
                         <td className="border-2 border-black p-3">
-                          <span className={`px-3 py-1 border-2 border-black text-xs font-bold uppercase ${status.bg} ${status.text}`}>
+                          {booking.user?.name}
+                        </td>
+                        <td className="border-2 border-black p-3">
+                          <span
+                            className={`px-3 py-1 border-2 border-black text-xs font-bold uppercase ${status.bg} ${status.text}`}
+                          >
                             {status.label}
                           </span>
                         </td>
@@ -369,8 +429,12 @@ export default function AdminDashboardClient({
               </table>
             </div>
 
+            {/* Pagination - SEBELUM tutup div mb-8 */}
             <div className="mt-4 flex justify-center gap-2">
-              {Array.from({ length: Math.ceil(bookingList.length / itemsPerPage) }, (_, i) => i + 1).map((page) => (
+              {Array.from(
+                { length: Math.ceil(bookingList.length / itemsPerPage) },
+                (_, i) => i + 1,
+              ).map((page) => (
                 <button
                   key={page}
                   onClick={() => paginate(page)}
@@ -382,130 +446,91 @@ export default function AdminDashboardClient({
                 >
                   {page}
                 </button>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border p-2 text-left">Letter</th>
-                <th className="border p-2 text-left">Room</th>
-                <th className="border p-2 text-left">Date</th>
-                <th className="border p-2 text-left">Session</th>
-                <th className="border p-2 text-left">PIC</th>
-                <th className="border p-2 text-left">Status</th>
-                <th className="border p-2 text-left">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {currentItems.map((booking) => (
-                <tr key={booking.id} className="hover:bg-gray-50">
-                  <td className="border p-2">{booking.letterNumber}</td>
-                  <td className="border p-2">{booking.room?.name}</td>
-                  <td className="border p-2">{booking.bookingDateFormatted}</td>
-                  <td className="border p-2">{booking.session}</td>
-                  <td className="border p-2">{booking.user?.name}</td>
-                  <td className="border p-2">
-                    <span
-                      className={`px-2 py-1 rounded text-sm font-semibold ${
-                        booking.status === "PENDING"
-                          ? "bg-yellow-200"
-                          : booking.status === "APPROVED"
-                            ? "bg-green-200"
-                            : "bg-red-200"
-                      }`}
-                    >
-                      {booking.status}
-                    </span>
-                  </td>
-                  <td className="border p-2 space-x-2">
-                    <button
-                      onClick={() => setSelectedBooking(booking)}
-                      className="text-blue-500 hover:underline text-sm"
-                    >
-                      View
-                    </button>
-
-                    {booking.status === "PENDING" && (
-                      <>
-                        <button
-                          onClick={() => handleApprove(booking.id)}
-                          disabled={loading}
-                          className="text-green-500 hover:underline text-sm disabled:opacity-50"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          onClick={() => {
-                            setSelectedBooking(booking);
-                            setShowRejectModal(true);
-                          }}
-                          disabled={loading}
-                          className="text-red-500 hover:underline text-sm disabled:opacity-50"
-                        >
-                          Reject
-                        </button>
-                      </>
-                    )}
-                  </td>
-                </tr>
               ))}
             </div>
+            {/* ← TUTUP div mb-8 di sini! */}
           </div>
         </div>
-
       </div>
 
       {/* Detail Modal */}
-      <Dialog open={!!selectedBooking && !showRejectModal} onOpenChange={() => setSelectedBooking(null)}>
+      <Dialog
+        open={!!selectedBooking && !showRejectModal}
+        onOpenChange={() => setSelectedBooking(null)}
+      >
         <DialogContent className="max-w-2xl">
           <div className="flex justify-between items-center mb-4">
-            <DialogTitle className="text-xl font-bold uppercase">DETAIL BOOKING</DialogTitle>
+            <DialogTitle className="text-xl font-bold uppercase">
+              DETAIL BOOKING
+            </DialogTitle>
           </div>
           {selectedBooking && (
             <div className="space-y-4 py-4 max-h-[80vh] overflow-y-auto">
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">NOMOR SURAT</p>
+                <p className="text-sm font-bold uppercase text-black/60">
+                  NOMOR SURAT
+                </p>
                 <p className="font-semibold">{selectedBooking.letterNumber}</p>
               </div>
 
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">RUANGAN</p>
+                <p className="text-sm font-bold uppercase text-black/60">
+                  RUANGAN
+                </p>
                 <p className="font-semibold">{selectedBooking.room?.name}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-bold uppercase text-black/60">TANGGAL</p>
+                  <p className="text-sm font-bold uppercase text-black/60">
+                    TANGGAL
+                  </p>
                   <p className="font-semibold">
-                    {format(new Date(selectedBooking.bookingDate), "dd/MM/yyyy")}
+                    {format(
+                      new Date(selectedBooking.bookingDate),
+                      "dd/MM/yyyy",
+                    )}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-bold uppercase text-black/60">SESI</p>
+                  <p className="text-sm font-bold uppercase text-black/60">
+                    SESI
+                  </p>
                   <p className="font-semibold">
-                    {selectedBooking.session === "SESSION_1" ? "Sesi 1 (08:00 - 12:00)" :
-                     selectedBooking.session === "SESSION_2" ? "Sesi 2 (13:00 - 16:00)" : "Full Day (08:00 - 16:00)"}
+                    {selectedBooking.session === "SESSION_1"
+                      ? "Sesi 1 (08:00 - 12:00)"
+                      : selectedBooking.session === "SESSION_2"
+                        ? "Sesi 2 (13:00 - 16:00)"
+                        : "Full Day (08:00 - 16:00)"}
                   </p>
                 </div>
               </div>
 
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">NAMA PIC</p>
+                <p className="text-sm font-bold uppercase text-black/60">
+                  NAMA PIC
+                </p>
                 <p className="font-semibold">{selectedBooking.user?.name}</p>
               </div>
 
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">AGENDA</p>
+                <p className="text-sm font-bold uppercase text-black/60">
+                  AGENDA
+                </p>
                 <p className="font-semibold">{selectedBooking.agenda}</p>
               </div>
 
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">DESKRIPSI</p>
+                <p className="text-sm font-bold uppercase text-black/60">
+                  DESKRIPSI
+                </p>
                 <p className="text-sm">{selectedBooking.description}</p>
               </div>
 
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">TIPE RAPAT</p>
+                <p className="text-sm font-bold uppercase text-black/60">
+                  TIPE RAPAT
+                </p>
                 <p className="font-semibold">{selectedBooking.meetingType}</p>
               </div>
 
@@ -513,7 +538,9 @@ export default function AdminDashboardClient({
                 const foodList = parseJsonArray(selectedBooking.foodNames);
                 return foodList.length > 0 ? (
                   <div>
-                    <p className="text-sm font-bold uppercase text-black/60">MAKANAN</p>
+                    <p className="text-sm font-bold uppercase text-black/60">
+                      MAKANAN
+                    </p>
                     <p className="text-sm">{foodList.join(", ")}</p>
                   </div>
                 ) : null;
@@ -523,7 +550,9 @@ export default function AdminDashboardClient({
                 const snackList = parseJsonArray(selectedBooking.snackNames);
                 return snackList.length > 0 ? (
                   <div>
-                    <p className="text-sm font-bold uppercase text-black/60">SNACK</p>
+                    <p className="text-sm font-bold uppercase text-black/60">
+                      SNACK
+                    </p>
                     <p className="text-sm">{snackList.join(", ")}</p>
                   </div>
                 ) : null;
@@ -531,21 +560,33 @@ export default function AdminDashboardClient({
 
               {selectedBooking.note && (
                 <div>
-                  <p className="text-sm font-bold uppercase text-black/60">CATATAN</p>
+                  <p className="text-sm font-bold uppercase text-black/60">
+                    CATATAN
+                  </p>
                   <p className="text-sm">{selectedBooking.note}</p>
                 </div>
               )}
 
               <div>
-                <p className="text-sm font-bold uppercase text-black/60">STATUS</p>
-                <span className={`inline-block px-3 py-1 border-2 border-black text-sm font-bold uppercase ${statusConfig[selectedBooking.status as keyof typeof statusConfig]?.bg} ${statusConfig[selectedBooking.status as keyof typeof statusConfig]?.text}`}>
-                  {statusConfig[selectedBooking.status as keyof typeof statusConfig]?.label}
+                <p className="text-sm font-bold uppercase text-black/60">
+                  STATUS
+                </p>
+                <span
+                  className={`inline-block px-3 py-1 border-2 border-black text-sm font-bold uppercase ${statusConfig[selectedBooking.status as keyof typeof statusConfig]?.bg} ${statusConfig[selectedBooking.status as keyof typeof statusConfig]?.text}`}
+                >
+                  {
+                    statusConfig[
+                      selectedBooking.status as keyof typeof statusConfig
+                    ]?.label
+                  }
                 </span>
               </div>
 
               {selectedBooking.rejectionReason && (
                 <div className="bg-[#FF5E5B]/10 border border-[#FF5E5B] rounded p-3">
-                  <p className="text-sm font-bold uppercase text-black/60">ALASAN PENOLAKAN</p>
+                  <p className="text-sm font-bold uppercase text-black/60">
+                    ALASAN PENOLAKAN
+                  </p>
                   <p className="text-sm text-[#FF5E5B]">
                     {selectedBooking.rejectionReason}
                   </p>
@@ -557,19 +598,26 @@ export default function AdminDashboardClient({
       </Dialog>
 
       {/* Reject Confirmation Modal */}
-      <Dialog open={showRejectModal && !!selectedBooking} onOpenChange={() => {
-        setShowRejectModal(false);
-        setRejectReason("");
-      }}>
+      <Dialog
+        open={showRejectModal && !!selectedBooking}
+        onOpenChange={() => {
+          setShowRejectModal(false);
+          setRejectReason("");
+        }}
+      >
         <DialogContent className="max-w-md">
           <div className="flex justify-between items-center mb-4">
-            <DialogTitle className="text-xl font-bold uppercase">TOLAK BOOKING</DialogTitle>
+            <DialogTitle className="text-xl font-bold uppercase">
+              TOLAK BOOKING
+            </DialogTitle>
           </div>
           {selectedBooking && (
             <>
               <div className="space-y-4 py-4">
                 <div>
-                  <p className="font-bold uppercase text-black/60 mb-2">NOMOR SURAT</p>
+                  <p className="font-bold uppercase text-black/60 mb-2">
+                    NOMOR SURAT
+                  </p>
                   <p className="mb-4">{selectedBooking.letterNumber}</p>
                 </div>
 

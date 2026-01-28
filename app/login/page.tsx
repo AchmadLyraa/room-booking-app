@@ -1,5 +1,4 @@
 "use client";
-
 import { LoginForm } from "./login-form";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useState } from "react";
@@ -22,13 +21,31 @@ export default function LoginPage() {
         <div className="login-card-container" data-show-login={showLoginForm}>
           {/* Profile Card (visible initially) */}
           <div className="profile-card">
+            {/* Logo Danantara - Di dalam profile card */}
+            <div className="absolute top-3 left-3 z-10">
+              <img
+                src="./Danantara_Indonesia.png"
+                alt="logo danantara"
+                className="w-18 h-5 object-fill"
+              />
+            </div>
+
             <div className="profile-logo">
-                <img src="./PLNSPACE_logo.png" alt="logo pln" />
+              <img src="./PLNSPACE_logo.png" alt="logo pln" />
             </div>
             <div className="profile-content">
-              <h1 className="text-3xl md:text-4xl font-bold uppercase mb-4 text-center">Selamat Datang DI</h1>
-              <p className="text-lg md:text-xl font-semibold text-center mb-6">SISTEM BOOKING RUANGAN</p>
-              <p className="text-base md:text-lg text-center">PT PLN NUSANTARA POWER UP KALTIM TELUK</p>
+              <h1 className="text-3xl md:text-4xl font-bold uppercase mb-4 text-center">
+                Selamat Datang DI
+              </h1>
+              <p className="text-lg md:text-xl font-semibold text-center mb-6">
+                SISTEM BOOKING RUANGAN
+              </p>
+              <p className="text-base md:text-lg text-center">
+                PT PLN NUSANTARA POWER
+              </p>
+              <p className="text-base md:text-lg text-center">
+                UP KALTIM TELUK
+              </p>
               {isMobile && (
                 <button
                   className="mobile-masuk-btn"
@@ -39,7 +56,6 @@ export default function LoginPage() {
               )}
             </div>
           </div>
-
           {/* Login Form Card (hidden initially) */}
           <div className="login-form-card">
             <div className="login-form-wrapper">

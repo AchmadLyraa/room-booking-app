@@ -5,15 +5,40 @@ import { adapter } from "@/prisma/adapter-pg.ts";
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  // Clear existing data
-  await prisma.bookingSnack.deleteMany();
-  await prisma.bookingFood.deleteMany();
-  await prisma.booking.deleteMany();
-  await prisma.snack.deleteMany();
-  await prisma.food.deleteMany();
-  await prisma.room.deleteMany();
-  await prisma.user.deleteMany();
-  await prisma.systemConfig.deleteMany();
+  console.log("🧹 Starting cleanup...");
+
+  try {
+    // Hapus dari child tables dulu (yang punya foreign keys)
+    await prisma.bookingSnack.deleteMany();
+    console.log("✅ BookingSnack cleared");
+
+    await prisma.bookingFood.deleteMany();
+    console.log("✅ BookingFood cleared");
+
+    await prisma.booking.deleteMany();
+    console.log("✅ Booking cleared");
+
+    // Baru hapus parent tables
+    await prisma.snack.deleteMany();
+    console.log("✅ Snack cleared");
+
+    await prisma.food.deleteMany();
+    console.log("✅ Food cleared");
+
+    await prisma.room.deleteMany();
+    console.log("✅ Room cleared");
+
+    await prisma.user.deleteMany();
+    console.log("✅ User cleared");
+
+    await prisma.systemConfig.deleteMany();
+    console.log("✅ SystemConfig cleared");
+
+    console.log("🎉 All data cleared!\n");
+  } catch (error) {
+    console.error("❌ Error during cleanup:", error);
+    throw error;
+  }
 
   // Create admin user
   const admin = await prisma.user.create({
@@ -47,7 +72,7 @@ async function main() {
   // Create rooms
   const room1 = await prisma.room.create({
     data: {
-      name: "Ruang Meeting A",
+      name: "Ruang Meeting Smart Office",
       description: "Ruang meeting dengan kapasitas besar",
       capacity: 50,
     },
@@ -55,7 +80,31 @@ async function main() {
 
   const room2 = await prisma.room.create({
     data: {
-      name: "Ruang Meeting B",
+      name: "Ruang Meeting Refactory",
+      description: "Ruang meeting medium size",
+      capacity: 30,
+    },
+  });
+
+  const room3 = await prisma.room.create({
+    data: {
+      name: "Ruang Meeting Perpustakaan",
+      description: "Ruang meeting medium size",
+      capacity: 30,
+    },
+  });
+
+  const room4 = await prisma.room.create({
+    data: {
+      name: "Hall Meeting Refactory",
+      description: "Ruang meeting medium size",
+      capacity: 30,
+    },
+  });
+
+  const room5 = await prisma.room.create({
+    data: {
+      name: "Ruang Meeting CCR",
       description: "Ruang meeting medium size",
       capacity: 30,
     },
@@ -84,16 +133,19 @@ async function main() {
     data: { autoApprove: false },
   });
 
-  console.log("Seed completed:", {
+  console.log("✅ Seed completed:", {
     admin: admin.email,
-    pic: pic1.email,
+    pic1: pic1.email,
+    pic2: pic2.email,
     rooms: [room1.name, room2.name],
+    foods: [food1.name, food2.name],
+    snacks: [snack1.name, snack2.name],
   });
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error("❌ Fatal error:", e);
     process.exit(1);
   })
   .finally(async () => {
