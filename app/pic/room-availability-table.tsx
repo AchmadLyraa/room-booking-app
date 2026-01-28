@@ -10,15 +10,31 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { getRoomAvailability } from "@/app/actions/pic-actions";
-import type { BookingSession } from "@prisma/client";
+import type { BookingSession } from "@/prisma/generated/client";
+
+// Helper function di luar component
+function getTodayString() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+// Helper untuk parse string date ke Date object tanpa timezone offset
+function parseLocalDate(dateString: string): Date {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+// Helper untuk convert Date ke string YYYY-MM-DD tanpa timezone offset
+function formatLocalDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 export function RoomAvailabilityTable() {
   const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState<Date>(() => {
-    const today = new Date();
-    // today.setHours(0, 0, 0, 0);
-    return today;
-  });
+  // SET LANGSUNG di useState, JANGAN di useEffect
+  const [selectedDate, setSelectedDate] = useState<string>(getTodayString());
   const [availability, setAvailability] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -28,8 +44,7 @@ export function RoomAvailabilityTable() {
     async function loadAvailability() {
       setLoading(true);
       try {
-        const dateString = selectedDate.toLocaleDateString("en-CA"); // en-CA gives YYYY-MM-DD format
-        const data = await getRoomAvailability(dateString);
+        const data = await getRoomAvailability(selectedDate);
         setAvailability(data);
       } finally {
         setLoading(false);
@@ -46,16 +61,9 @@ export function RoomAvailabilityTable() {
   ) => {
     if (status !== "TERSEDIA") return;
 
-    const dateString = selectedDate!.toLocaleDateString("en-CA");
     router.push(
-      `/pic/booking?date=${dateString}&roomId=${roomId}&session=${session}`,
+      `/pic/booking?date=${selectedDate}&roomId=${roomId}&session=${session}`,
     );
-  };
-
-  const getSessionLabel = (session: BookingSession) => {
-    if (session === "SESSION_1") return "SESI1\n08:00-12:00";
-    if (session === "SESSION_2") return "SESI2\n13:00-16:00";
-    return "FULL\n08:00-16:00";
   };
 
   const getStatusStyle = (status: string) => {
@@ -74,31 +82,27 @@ export function RoomAvailabilityTable() {
         <h2 className="text-2xl font-bold">DAFTAR RESERVASI RUANGAN</h2>
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline">
-              📅{" "}
-              {selectedDate
-                ? selectedDate.toLocaleDateString("id-ID")
-                : "Pilih Tanggal"}
-            </Button>
+            <Button variant="outline">📅 {selectedDate}</Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              selected={selectedDate}
-              onSelect={setSelectedDate}
-              disabled={(date) =>
-                date < new Date(new Date().setHours(0, 0, 0, 0))
-              }
+              selected={parseLocalDate(selectedDate)}
+              onSelect={(date) => {
+                if (!date) return;
+                setSelectedDate(formatLocalDate(date));
+              }}
+              disabled={(date) => {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                return date < today;
+              }}
             />
           </PopoverContent>
         </Popover>
       </div>
 
-      {!selectedDate ? (
-        <p className="text-gray-500 text-center py-8">
-          Silakan pilih tanggal untuk melihat ketersediaan ruangan
-        </p>
-      ) : loading ? (
+      {loading ? (
         <p className="text-gray-500 text-center py-8">Loading...</p>
       ) : (
         <div className="overflow-x-auto">

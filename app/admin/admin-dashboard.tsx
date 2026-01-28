@@ -245,9 +245,7 @@ export default function AdminDashboardClient({
                 <tr key={booking.id} className="hover:bg-gray-50">
                   <td className="border p-2">{booking.letterNumber}</td>
                   <td className="border p-2">{booking.room?.name}</td>
-                  <td className="border p-2">
-                    {new Date(booking.bookingDate).toLocaleDateString()}
-                  </td>
+                  <td className="border p-2">{booking.bookingDateFormatted}</td>
                   <td className="border p-2">{booking.session}</td>
                   <td className="border p-2">{booking.user?.name}</td>
                   <td className="border p-2">

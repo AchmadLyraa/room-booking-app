@@ -226,7 +226,12 @@ export async function getAllBookings(
     take: pageSize,
   });
 
-  return successResult(bookings);
+  return successResult(
+    bookings.map((b) => ({
+      ...b,
+      bookingDateFormatted: b.bookingDate.toISOString().slice(0, 10),
+    })),
+  );
 }
 
 // FOOD & SNACK MANAGEMENT

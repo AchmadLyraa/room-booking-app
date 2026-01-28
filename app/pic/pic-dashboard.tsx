@@ -12,6 +12,15 @@ function parseJsonArray(jsonString: string | null): string[] {
   }
 }
 
+// Helper function untuk format date yang aman dari hydration error
+function formatDateSafe(dateString: string | Date): string {
+  const date = new Date(dateString);
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  return `${day}/${month}/${year}`; // atau format lain yang kamu mau
+}
+
 export default function PICDashboardClient({ bookings }: { bookings: any[] }) {
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
 
@@ -66,7 +75,7 @@ export default function PICDashboardClient({ bookings }: { bookings: any[] }) {
                     <div>
                       <p className="text-sm text-gray-600">Date</p>
                       <p className="font-semibold">
-                        {new Date(booking.bookingDate).toLocaleDateString()}
+                        {formatDateSafe(booking.bookingDate)}
                       </p>
                     </div>
                     <div>
@@ -135,7 +144,7 @@ export default function PICDashboardClient({ bookings }: { bookings: any[] }) {
                 <div>
                   <p className="text-sm text-gray-600">Date</p>
                   <p className="font-semibold">
-                    {new Date(selectedBooking.bookingDate).toLocaleDateString()}
+                    {formatDateSafe(selectedBooking.bookingDate)}
                   </p>
                 </div>
                 <div>
