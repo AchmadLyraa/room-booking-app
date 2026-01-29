@@ -31,7 +31,7 @@ export default function LoginPage() {
             </div>
 
             <div className="profile-logo">
-              <img src="./PLNSPACE_logo.png" alt="logo pln" />
+              <img src="./login-logo-UPKTSPACE.png" alt="logo pln" />
             </div>
             <div className="profile-content">
               <h1 className="text-3xl md:text-4xl font-bold uppercase mb-4 text-center">
