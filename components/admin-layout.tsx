@@ -89,7 +89,7 @@ export function Sidebar({ currentView, menuItems }: SidebarProps) {
     <aside className="w-64 min-h-screen bg-white border-r-3 border-black flex flex-col">
       <div className="p-4 border-b-3 border-black">
         <Link href="/admin" className="flex items-center gap-2">
-          <img src="/PLNSPACE_logo2.png" alt="PLNSPACE Logo" className="object-contain" />
+          <img src="/logo-UPKTSPACE2.png" alt="PLNSPACE Logo" className="object-contain" />
         </Link>
       </div>
 
