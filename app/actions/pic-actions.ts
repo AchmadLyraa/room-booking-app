@@ -125,18 +125,24 @@ export async function createBooking(data: {
     };
   }
 
+  const witaNow = getWIBTime(now);
+  const currentHourWITA = witaNow.hours;
+
   if (isToday) {
-    if (data.session === "SESSION_1" && currentHour >= 8) {
+    if (data.session === "SESSION_1" && currentHourWITA >= 12) {
+      // ← Cek jam 12 WITA (akhir sesi)
       return errorResult(
         "SESSION_1 (08:00–12:00) has already started or passed.",
       );
     }
-    if (data.session === "SESSION_2" && currentHour >= 13) {
+    if (data.session === "SESSION_2" && currentHourWITA >= 16) {
+      // ← Cek jam 16 WITA (akhir sesi)
       return errorResult(
         "SESSION_2 (13:00–16:00) has already started or passed.",
       );
     }
-    if (data.session === "FULLDAY" && currentHour >= 8) {
+    if (data.session === "FULLDAY" && currentHourWITA >= 8) {
+      // ← Cek jam 8 WITA (awal sesi)
       return errorResult(
         "FULLDAY (08:00–16:00) has already started or passed.",
       );
@@ -153,19 +159,6 @@ export async function createBooking(data: {
 
   const foodNames = JSON.stringify(selectedFoods.map((f) => f.name));
   const snackNames = JSON.stringify(selectedSnacks.map((s) => s.name));
-
-  // Cegah letter number yang sudah ada
-  // const existingLetterNumber = await prisma.booking.findUnique({
-  //   where: { letterNumber: data.letterNumber },
-  // });
-
-  // if (existingLetterNumber) {
-  //   return {
-  //     success: false,
-  //     error:
-  //       "Letter number already exists. Please use a different letter number.",
-  //   };
-  // }
 
   const existingBooking = await prisma.booking.findFirst({
     where: {
@@ -411,12 +404,11 @@ export async function getRoomAvailability(bookingDateString: string) {
         FULLDAY:
           hasS1 || hasS2
             ? "DISABLED"
-            : getSessionStatus(
-                hasFD,
-                isToday,
-                currentHourWIB,
-                sessionTimes.FULLDAY,
-              ),
+            : isToday && currentHourWIB >= sessionTimes.FULLDAY.start
+              ? "DISABLED"
+              : hasFD
+                ? "TERPAKAI"
+                : "TERSEDIA",
       },
     };
   });
