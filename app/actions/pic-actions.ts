@@ -155,17 +155,17 @@ export async function createBooking(data: {
   const snackNames = JSON.stringify(selectedSnacks.map((s) => s.name));
 
   // Cegah letter number yang sudah ada
-  const existingLetterNumber = await prisma.booking.findUnique({
-    where: { letterNumber: data.letterNumber },
-  });
+  // const existingLetterNumber = await prisma.booking.findUnique({
+  //   where: { letterNumber: data.letterNumber },
+  // });
 
-  if (existingLetterNumber) {
-    return {
-      success: false,
-      error:
-        "Letter number already exists. Please use a different letter number.",
-    };
-  }
+  // if (existingLetterNumber) {
+  //   return {
+  //     success: false,
+  //     error:
+  //       "Letter number already exists. Please use a different letter number.",
+  //   };
+  // }
 
   const existingBooking = await prisma.booking.findFirst({
     where: {

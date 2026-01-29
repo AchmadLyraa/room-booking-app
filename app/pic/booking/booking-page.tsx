@@ -47,7 +47,8 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
         const data = await getAvailableRooms(formData.bookingDate);
         setRooms(data);
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
         showError(errorMessage, "Failed to load rooms");
         setRooms([]);
       } finally {
@@ -109,7 +110,8 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
       );
       router.push("/pic");
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
       showError(errorMessage, "Failed to create booking");
     } finally {
       setLoading(false);
@@ -123,9 +125,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
   };
 
   const sessionMap: Record<string, string> = {
-    "SESSION_1": "1 (08:00 - 12:00)",
-    "SESSION_2": "2 (13:00 - 16:00)",
-    "FULLDAY": "Full Day (08:00 - 16:00)",
+    SESSION_1: "1 (08:00 - 12:00)",
+    SESSION_2: "2 (13:00 - 16:00)",
+    FULLDAY: "Full Day (08:00 - 16:00)",
   };
 
   const getSelectedRoom = () => {
@@ -140,11 +142,17 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
           {/* Room Info - Responsive */}
           {formData.roomId && getSelectedRoom() && (
             <div className="pb-4 border-b-3 border-black">
-              <h2 className="font-bold text-lg uppercase mb-4">{getSelectedRoom().name}</h2>
+              <h2 className="font-bold text-lg uppercase mb-4">
+                {getSelectedRoom().name}
+              </h2>
               <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-black/60 uppercase">KAPASITAS</span>
-                  <span className="font-bold text-xl">{getSelectedRoom().capacity}</span>
+                  <span className="text-xs text-black/60 uppercase">
+                    KAPASITAS
+                  </span>
+                  <span className="font-bold text-xl">
+                    {getSelectedRoom().capacity}
+                  </span>
                   <Users className="w-5 h-5" />
                 </div>
               </div>
@@ -158,7 +166,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             {/* Responsive form fields - stack on mobile, row on desktop */}
             <div className="flex flex-col md:flex-row gap-4 items-end">
               <div className="space-y-2 w-full md:w-[220px]">
-                <label className="text-xs font-bold uppercase block">NO SURAT*</label>
+                <label className="text-xs font-bold uppercase block">
+                  NO SURAT*
+                </label>
                 <input
                   placeholder="Masukkan no surat"
                   value={formData.letterNumber}
@@ -169,7 +179,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
                 />
               </div>
               <div className="space-y-2 w-full md:w-[180px]">
-                <label className="text-xs font-bold uppercase block">TGL BOOKING*</label>
+                <label className="text-xs font-bold uppercase block">
+                  TGL BOOKING*
+                </label>
                 <input
                   type="date"
                   value={formData.bookingDate}
@@ -177,17 +189,21 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
                     setFormData({ ...formData, bookingDate: e.target.value })
                   }
                   className={`w-full h-12 px-4 border-3 border-black bg-white font-mono outline-none transition-all focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] ${
-                    initialDate !== ""
-                      ? "bg-[#f5f5f5] cursor-not-allowed"
-                      : ""
+                    initialDate !== "" ? "bg-[#f5f5f5] cursor-not-allowed" : ""
                   }`}
                   disabled={initialDate !== ""}
                 />
               </div>
               <div className="space-y-2 w-full md:w-[220px]">
-                <label className="text-xs font-bold uppercase block">SESI*</label>
+                <label className="text-xs font-bold uppercase block">
+                  SESI*
+                </label>
                 <input
-                  value={formData.session ? sessionMap[formData.session] || formData.session : ""}
+                  value={
+                    formData.session
+                      ? sessionMap[formData.session] || formData.session
+                      : ""
+                  }
                   disabled
                   className="w-full h-12 px-4 border-3 border-black bg-[#f5f5f5] font-mono cursor-not-allowed"
                 />
@@ -195,7 +211,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase block">AGENDA*</label>
+              <label className="text-xs font-bold uppercase block">
+                AGENDA*
+              </label>
               <input
                 placeholder="Masukkan agenda"
                 value={formData.agenda}
@@ -207,7 +225,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase block">DESKRIPSI*</label>
+              <label className="text-xs font-bold uppercase block">
+                DESKRIPSI*
+              </label>
               <textarea
                 placeholder="Masukkan deskripsi"
                 value={formData.description}
@@ -219,7 +239,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase block">JENIS RAPAT*</label>
+              <label className="text-xs font-bold uppercase block">
+                JENIS RAPAT*
+              </label>
               <select
                 onChange={(e) =>
                   setFormData({
@@ -232,13 +254,17 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
               >
                 <option value="">Pilih jenis rapat</option>
                 <option value="INTERNAL">Internal</option>
-                <option value="INTERNAL_LINTAS_BIDANG">Internal Lintas Bidang</option>
+                <option value="INTERNAL_LINTAS_BIDANG">
+                  Internal Lintas Bidang
+                </option>
                 <option value="EKSTERNAL">Eksternal</option>
               </select>
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase block">CATATAN TAMBAHAN</label>
+              <label className="text-xs font-bold uppercase block">
+                CATATAN TAMBAHAN
+              </label>
               <textarea
                 placeholder="Catatan tambahan (opsional)"
                 value={formData.note}
@@ -252,7 +278,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
             {/* Responsive food/snack selection - stack on mobile */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase block">PILIH MENU MAKANAN</label>
+                <label className="text-xs font-bold uppercase block">
+                  PILIH MENU MAKANAN
+                </label>
                 <select
                   onChange={(e) => {
                     const foodId = e.target.value;
@@ -274,7 +302,9 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
                 </select>
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase block">PILIH MENU SNACK</label>
+                <label className="text-xs font-bold uppercase block">
+                  PILIH MENU SNACK
+                </label>
                 <select
                   onChange={(e) => {
                     const snackId = e.target.value;
@@ -303,51 +333,89 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
       {/* Booking Summary - Responsive */}
       <div className="bg-white border-3 border-black brutal-shadow-lg sticky top-6 md:w-96 md:ml-6">
         <div className="p-6 space-y-4">
-          <h3 className="font-bold text-center text-lg uppercase border-b-3 border-black pb-4">RINGKASAN RESERVASI</h3>
+          <h3 className="font-bold text-center text-lg uppercase border-b-3 border-black pb-4">
+            RINGKASAN RESERVASI
+          </h3>
 
           <div className="space-y-3 text-sm">
             <div className="grid grid-cols-2 gap-4 pb-2 border-b-2 border-black">
               <div>
-                <p className="text-xs font-bold uppercase text-black/60">TGL BOOKING</p>
+                <p className="text-xs font-bold uppercase text-black/60">
+                  TGL BOOKING
+                </p>
                 <p className="font-bold">{formData.bookingDate || "-"}</p>
               </div>
               <div>
-                <p className="text-xs font-bold uppercase text-black/60">SESI</p>
-                <p className="font-bold">{formData.session ? sessionMap[formData.session] || formData.session : "-"}</p>
+                <p className="text-xs font-bold uppercase text-black/60">
+                  SESI
+                </p>
+                <p className="font-bold">
+                  {formData.session
+                    ? sessionMap[formData.session] || formData.session
+                    : "-"}
+                </p>
               </div>
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase text-black/60">NO SURAT</p>
+              <p className="text-xs font-bold uppercase text-black/60">
+                NO SURAT
+              </p>
               <p className="font-bold">{formData.letterNumber || "-"}</p>
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase text-black/60">AGENDA</p>
+              <p className="text-xs font-bold uppercase text-black/60">
+                AGENDA
+              </p>
               <p className="font-bold">{formData.agenda || "-"}</p>
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase text-black/60">DESKRIPSI</p>
+              <p className="text-xs font-bold uppercase text-black/60">
+                DESKRIPSI
+              </p>
               <p className="font-bold">{formData.description || "-"}</p>
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase text-black/60">JENIS RAPAT</p>
-              <p className="font-bold uppercase">{formData.meetingType || "-"}</p>
+              <p className="text-xs font-bold uppercase text-black/60">
+                JENIS RAPAT
+              </p>
+              <p className="font-bold uppercase">
+                {formData.meetingType || "-"}
+              </p>
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase text-black/60">CATATAN</p>
+              <p className="text-xs font-bold uppercase text-black/60">
+                CATATAN
+              </p>
               <p className="font-bold">{formData.note || "-"}</p>
             </div>
 
             <div className="pt-2 border-t-2 border-black">
-              <p className="text-xs font-bold uppercase text-black/60">MENU MAKANAN & SNACK</p>
+              <p className="text-xs font-bold uppercase text-black/60">
+                MENU MAKANAN & SNACK
+              </p>
               <div className="flex gap-2 mt-1">
-                <span className="font-bold">{formData.foodIds.length > 0 ? foods.filter(f => formData.foodIds.includes(f.id)).map(f => f.name).join(", ") : "-"}</span>
+                <span className="font-bold">
+                  {formData.foodIds.length > 0
+                    ? foods
+                        .filter((f) => formData.foodIds.includes(f.id))
+                        .map((f) => f.name)
+                        .join(", ")
+                    : "-"}
+                </span>
                 <span className="text-black/60">|</span>
-                <span className="font-bold">{formData.snackIds.length > 0 ? snacks.filter(s => formData.snackIds.includes(s.id)).map(s => s.name).join(", ") : "-"}</span>
+                <span className="font-bold">
+                  {formData.snackIds.length > 0
+                    ? snacks
+                        .filter((s) => formData.snackIds.includes(s.id))
+                        .map((s) => s.name)
+                        .join(", ")
+                    : "-"}
+                </span>
               </div>
             </div>
           </div>
@@ -355,7 +423,12 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
           <div className="space-y-2 pt-4 border-t-3 border-black">
             <button
               onClick={handleSubmit}
-              disabled={!formData.letterNumber || !formData.bookingDate || !formData.agenda || loading}
+              disabled={
+                !formData.letterNumber ||
+                !formData.bookingDate ||
+                !formData.agenda ||
+                loading
+              }
               className="w-full h-12 bg-[#22c55e] text-white font-bold uppercase border-3 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-x-0 disabled:hover:translate-y-0"
             >
               {loading ? "MEMBUAT BOOKING..." : "BOOKING SEKARANG"}
@@ -390,7 +463,9 @@ export default function CreateBookingClient({
         >
           KEMBALI
         </Link>
-        <h1 className="text-2xl font-bold text-black uppercase flex-1 text-center">BOOKING RUANGAN</h1>
+        <h1 className="text-2xl font-bold text-black uppercase flex-1 text-center">
+          BOOKING RUANGAN
+        </h1>
         <div className="w-24" />
       </div>
 

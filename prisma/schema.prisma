@@ -100,7 +100,7 @@ model Snack {
 
 model Booking {
   id              String          @id @default(cuid())
-  letterNumber    String          @unique
+  letterNumber    String
   bookingDate     DateTime
   session         BookingSession
   status          BookingStatus   @default(PENDING)
