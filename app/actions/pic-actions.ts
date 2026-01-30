@@ -308,26 +308,25 @@ export async function getFoodsAndSnacks() {
 // GET ROOM AVAILABILITY FOR A SPECIFIC DATE
 // Fungsi untuk convert UTC ke WIB (GMT+7)
 function getWIBTime(date: Date) {
-  // Tambah 7 jam untuk WIB
-  const wibTime = new Date(date.getTime() + 8 * 60 * 60 * 1000);
+  const witaTime = new Date(date.getTime() + 8 * 60 * 60 * 1000);
   return {
-    hours: wibTime.getUTCHours(),
-    date: wibTime,
+    hours: witaTime.getUTCHours(),
+    date: witaTime,
   };
 }
 
 function getSessionStatus(
   isBooked: boolean,
   isToday: boolean,
-  currentHourWIB: number,
+  currentHourWITA: number,
   sessionTime: { start: number; end: number },
 ) {
   if (isBooked) {
-    return "TERPAKAI"; // ← GANTI INI DARI "RESERVED"
+    return "TERPAKAI";
   }
 
-  // Kalau hari ini, cek apakah sesi sudah lewat
-  if (isToday && currentHourWIB >= sessionTime.end) {
+  // Cek apakah sesi sudah SELESAI (lewat jam end)
+  if (isToday && currentHourWITA >= sessionTime.end) {
     return "DISABLED";
   }
 
@@ -341,16 +340,13 @@ export async function getRoomAvailability(bookingDateString: string) {
   const dateUTC = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
   const nextDayUTC = new Date(dateUTC.getTime() + 24 * 60 * 60 * 1000);
 
-  // Ambil waktu sekarang dalam WIB
   const now = new Date();
-  const wibNow = getWIBTime(now);
+  const witaNow = getWIBTime(now);
 
-  // Bandingkan tanggal dalam WIB
-  const todayWIB = new Date(now.getTime() + 8 * 60 * 60 * 1000);
-  const todayWIBString = todayWIB.toISOString().slice(0, 10);
-  const isToday = bookingDateString === todayWIBString;
-
-  const currentHourWIB = wibNow.hours;
+  const todayWITA = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+  const todayWITAString = todayWITA.toISOString().slice(0, 10);
+  const isToday = bookingDateString === todayWITAString;
+  const currentHourWITA = witaNow.hours;
 
   const rooms = await prisma.room.findMany({
     include: {
@@ -381,34 +377,36 @@ export async function getRoomAvailability(bookingDateString: string) {
     const hasFD = booked.includes("FULLDAY");
 
     return {
-      id: room.id,
-      name: room.name,
-      capacity: room.capacity,
+      id: room.id, // ← TAMBAH INI ANJING!
+      name: room.name, // ← TAMBAH INI!
+      capacity: room.capacity, // ← TAMBAH INI!
       sessionAvailability: {
         SESSION_1: hasFD
           ? "TERPAKAI"
           : getSessionStatus(
               hasS1,
               isToday,
-              currentHourWIB,
+              currentHourWITA,
               sessionTimes.SESSION_1,
             ),
+
         SESSION_2: hasFD
           ? "TERPAKAI"
           : getSessionStatus(
               hasS2,
               isToday,
-              currentHourWIB,
+              currentHourWITA,
               sessionTimes.SESSION_2,
             ),
+
         FULLDAY:
           hasS1 || hasS2
-            ? "DISABLED" // ← Ada booking di S1 atau S2, FULLDAY gak bisa
+            ? "DISABLED" // Ada booking di S1/S2
             : hasFD
-              ? "TERPAKAI" // ← FULLDAY udah di-booking
-              : isToday && currentHourWIB >= sessionTimes.SESSION_2.end // ← Cek jam >= 16:00 (akhir S2)
-                ? "DISABLED" // ← Kalo udah jam 16:00 lebih, FULLDAY gak mungkin
-                : "TERSEDIA", // ← Sisanya TERSEDIA (walau jam udah jalan, selama S1 & S2 kosong)
+              ? "TERPAKAI" // FULLDAY ada booking
+              : isToday && currentHourWITA >= sessionTimes.SESSION_1.end // ← Cek jam >= 12 (akhir SESI 1)
+                ? "DISABLED" // SESI 1 udah lewat, FULLDAY gak mungkin!
+                : "TERSEDIA",
       },
     };
   });
