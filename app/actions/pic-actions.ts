@@ -403,12 +403,12 @@ export async function getRoomAvailability(bookingDateString: string) {
             ),
         FULLDAY:
           hasS1 || hasS2
-            ? "DISABLED"
-            : isToday && currentHourWIB >= sessionTimes.FULLDAY.start
-              ? "DISABLED"
-              : hasFD
-                ? "TERPAKAI"
-                : "TERSEDIA",
+            ? "DISABLED" // ← Ada booking di S1 atau S2, FULLDAY gak bisa
+            : hasFD
+              ? "TERPAKAI" // ← FULLDAY udah di-booking
+              : isToday && currentHourWIB >= sessionTimes.SESSION_2.end // ← Cek jam >= 16:00 (akhir S2)
+                ? "DISABLED" // ← Kalo udah jam 16:00 lebih, FULLDAY gak mungkin
+                : "TERSEDIA", // ← Sisanya TERSEDIA (walau jam udah jalan, selama S1 & S2 kosong)
       },
     };
   });
