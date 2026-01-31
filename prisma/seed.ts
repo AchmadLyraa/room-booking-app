@@ -88,7 +88,7 @@ async function main() {
 
   const room3 = await prisma.room.create({
     data: {
-      name: "Ruang Meeting Perpustakaan",
+      name: "Hall Meeting Refactory",
       description: "Ruang meeting medium size",
       capacity: 30,
     },
@@ -96,7 +96,7 @@ async function main() {
 
   const room4 = await prisma.room.create({
     data: {
-      name: "Hall Meeting Refactory",
+      name: "Ruang Meeting CCR",
       description: "Ruang meeting medium size",
       capacity: 30,
     },
@@ -104,7 +104,7 @@ async function main() {
 
   const room5 = await prisma.room.create({
     data: {
-      name: "Ruang Meeting CCR",
+      name: "Ruang Meeting Perpustakaan",
       description: "Ruang meeting medium size",
       capacity: 30,
     },

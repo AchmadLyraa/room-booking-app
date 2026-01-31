@@ -361,7 +361,7 @@ export async function getRoomAvailability(bookingDateString: string) {
         select: { session: true },
       },
     },
-    orderBy: { name: "asc" },
+    orderBy: { createdAt: "asc" },
   });
 
   const sessionTimes = {
@@ -377,9 +377,9 @@ export async function getRoomAvailability(bookingDateString: string) {
     const hasFD = booked.includes("FULLDAY");
 
     return {
-      id: room.id, // ← TAMBAH INI ANJING!
-      name: room.name, // ← TAMBAH INI!
-      capacity: room.capacity, // ← TAMBAH INI!
+      id: room.id,
+      name: room.name,
+      capacity: room.capacity,
       sessionAvailability: {
         SESSION_1: hasFD
           ? "TERPAKAI"
