@@ -12,7 +12,7 @@ export default async function BookingPage() {
     redirect("/");
   }
 
-  const { foods, snacks } = await getFoodsAndSnacks();
+  const { foods } = await getFoodsAndSnacks();
 
-  return <CreateBookingClient foods={foods} snacks={snacks} />;
+  return <CreateBookingClient foods={foods} name={session.user.name} />;
 }

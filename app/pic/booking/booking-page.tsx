@@ -10,7 +10,7 @@ import { useToastNotifications } from "@/hooks/use-toast-notifications";
 import { Grid2X2, Users } from "lucide-react";
 import Link from "next/link";
 
-function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
+function BookingForm({ foods, name }: { foods: any[]; name: string }) {
   const router = useRouter();
   const { showError, showSuccess } = useToastNotifications();
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,6 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
     note: "",
     documentUrl: "",
     foodIds: [] as string[],
-    snackIds: [] as string[],
   });
 
   // load rooms based on date
@@ -118,6 +117,13 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
     }
   };
 
+  const removeFood = (foodId: string) => {
+    setFormData({
+      ...formData,
+      foodIds: formData.foodIds.filter((id) => id !== foodId),
+    });
+  };
+
   const getAvailableSessions = () => {
     const room = rooms.find((r) => r.id === formData.roomId);
     if (!room) return [];
@@ -132,6 +138,42 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
 
   const getSelectedRoom = () => {
     return rooms.find((r) => r.id === formData.roomId);
+  };
+
+  useEffect(() => {
+    if (formData.meetingType === "INTERNAL") {
+      setFormData((prev) => ({
+        ...prev,
+        foodIds: [],
+      }));
+    }
+  }, [formData.meetingType]);
+
+  const buildGoogleFormUrl = () => {
+    if (!formData.bookingDate) return "#";
+
+    const [year, month, day] = formData.bookingDate.split("-");
+
+    const selectedFoods = foods
+      .filter((f) => formData.foodIds.includes(f.id))
+      .map((f) => f.name)
+      .slice(0, 4); // ⛔ MAKS 4, YANG LEBIH DIBUANG
+
+    const params = new URLSearchParams({
+      "entry.1092170183": name,
+      "entry.288592386": `${formData.agenda} - ${formData.description}`,
+      "entry.1492350912_year": year,
+      "entry.1492350912_month": month,
+      "entry.1492350912_day": day,
+
+      // MAKANAN
+      "entry.1091738289": selectedFoods[0] ?? "",
+      "entry.2130031280": selectedFoods[1] ?? "",
+      "entry.849751698": selectedFoods[2] ?? "",
+      "entry.1305936456": selectedFoods[3] ?? "",
+    });
+
+    return `https://docs.google.com/forms/d/e/1FAIpQLScP3nR11XzswzoXmxuHVi5Ep385ed0rzcrqT6SmCgZ5_PzT0g/viewform?${params.toString()}`;
   };
 
   return (
@@ -275,57 +317,86 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
               />
             </div>
 
-            {/* Responsive food/snack selection - stack on mobile */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase block">
-                  PILIH MENU MAKANAN
-                </label>
-                <select
-                  onChange={(e) => {
-                    const foodId = e.target.value;
-                    if (foodId) {
+            {/* Responsive food selection - stack on mobile */}
+            {formData.meetingType && formData.meetingType !== "INTERNAL" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold  block">
+                    <p>PILIH MENU MAKANAN MAKSIMAL 4</p>
+                    <p>Hanya tersedia di jenis rapat selain Internal</p>
+                  </label>
+
+                  <select
+                    disabled={formData.foodIds.length >= 4}
+                    value=""
+                    onChange={(e) => {
+                      const foodId = e.target.value;
+                      if (!foodId) return;
+                      if (formData.foodIds.includes(foodId)) return;
+
                       setFormData({
                         ...formData,
                         foodIds: [...formData.foodIds, foodId],
                       });
-                    }
-                  }}
-                  className="w-full h-12 px-4 border-3 border-black bg-[#22c55e] text-white font-mono font-bold outline-none cursor-pointer"
-                >
-                  <option value="">Pilih makanan</option>
-                  {foods.map((food: any) => (
-                    <option key={food.id} value={food.id}>
-                      {food.name}
-                    </option>
-                  ))}
-                </select>
+                    }}
+                    className="w-full h-12 px-4 border-3 border-black bg-[#22c55e] text-white font-mono font-bold outline-none cursor-pointer"
+                  >
+                    <option value="">Pilih makanan</option>
+
+                    {foods.map((food: any) => (
+                      <option
+                        key={food.id}
+                        value={food.id}
+                        disabled={formData.foodIds.includes(food.id)}
+                      >
+                        {food.name}
+                      </option>
+                    ))}
+                  </select>
+
+                  {formData.foodIds.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {foods
+                        .filter((f) => formData.foodIds.includes(f.id))
+                        .map((food) => (
+                          <div
+                            key={food.id}
+                            className="flex items-center gap-2 px-3 py-1 bg-black text-white border-2 border-black font-mono text-sm"
+                          >
+                            <span>{food.name}</span>
+                            <button
+                              type="button"
+                              onClick={() => removeFood(food.id)}
+                              className="bg-red-500 text-white w-5 h-5 flex items-center justify-center font-bold"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase block">
-                  PILIH MENU SNACK
-                </label>
-                <select
-                  onChange={(e) => {
-                    const snackId = e.target.value;
-                    if (snackId) {
-                      setFormData({
-                        ...formData,
-                        snackIds: [...formData.snackIds, snackId],
-                      });
-                    }
-                  }}
-                  className="w-full h-12 px-4 border-3 border-black bg-[#22c55e] text-white font-mono font-bold outline-none cursor-pointer"
+            )}
+
+            {formData.meetingType && formData.meetingType !== "INTERNAL" && (
+              <>
+                {" "}
+                <p className="text-s font-bold text-center block text-red-400">
+                  SILAHKAN ISI LENGKAP FORM DIATAS SEBELUM MENGISI GOOGLE FORM,
+                  SETELAH MENGISI DAN SUBMIT GOOGLE FORM, KLIK "BOOKING
+                  SEKARANG"
+                </p>
+                <a
+                  href={buildGoogleFormUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full h-12 flex items-center justify-center bg-[#22c55e] text-white font-bold uppercase border-3 border-black"
                 >
-                  <option value="">Pilih snack</option>
-                  {snacks.map((snack: any) => (
-                    <option key={snack.id} value={snack.id}>
-                      {snack.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+                  ISI GOOGLE FORM
+                </a>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -396,7 +467,7 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
 
             <div className="pt-2 border-t-2 border-black">
               <p className="text-xs font-bold uppercase text-black/60">
-                MENU MAKANAN & SNACK
+                MENU MAKANAN
               </p>
               <div className="flex gap-2 mt-1">
                 <span className="font-bold">
@@ -404,15 +475,6 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
                     ? foods
                         .filter((f) => formData.foodIds.includes(f.id))
                         .map((f) => f.name)
-                        .join(", ")
-                    : "-"}
-                </span>
-                <span className="text-black/60">|</span>
-                <span className="font-bold">
-                  {formData.snackIds.length > 0
-                    ? snacks
-                        .filter((s) => formData.snackIds.includes(s.id))
-                        .map((s) => s.name)
                         .join(", ")
                     : "-"}
                 </span>
@@ -448,10 +510,10 @@ function BookingForm({ foods, snacks }: { foods: any[]; snacks: any[] }) {
 
 export default function CreateBookingClient({
   foods,
-  snacks,
+  name,
 }: {
   foods: any[];
-  snacks: any[];
+  name: string;
 }) {
   return (
     <div className="min-h-screen bg-white p-6">
@@ -470,7 +532,7 @@ export default function CreateBookingClient({
       </div>
 
       <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
-        <BookingForm foods={foods} snacks={snacks} />
+        <BookingForm foods={foods} name={name} />
       </Suspense>
     </div>
   );

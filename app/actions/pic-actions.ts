@@ -89,7 +89,6 @@ export async function createBooking(data: {
   note?: string;
   documentUrl?: string;
   foodIds: string[];
-  snackIds: string[];
 }) {
   const user = await requireRole([Role.PIC]);
 
@@ -153,12 +152,8 @@ export async function createBooking(data: {
   const selectedFoods = await prisma.food.findMany({
     where: { id: { in: data.foodIds } },
   });
-  const selectedSnacks = await prisma.snack.findMany({
-    where: { id: { in: data.snackIds } },
-  });
 
   const foodNames = JSON.stringify(selectedFoods.map((f) => f.name));
-  const snackNames = JSON.stringify(selectedSnacks.map((s) => s.name));
 
   const existingBooking = await prisma.booking.findFirst({
     where: {
@@ -245,18 +240,13 @@ export async function createBooking(data: {
       note: data.note,
       documentUrl: data.documentUrl,
       foodNames,
-      snackNames,
       bookingFoods: {
         create: data.foodIds.map((foodId) => ({ foodId })),
-      },
-      bookingSnacks: {
-        create: data.snackIds.map((snackId) => ({ snackId })),
       },
     },
     include: {
       room: true,
       bookingFoods: { include: { food: true } },
-      bookingSnacks: { include: { snack: true } },
     },
   });
 
@@ -270,7 +260,6 @@ export async function createBooking(data: {
       include: {
         room: true,
         bookingFoods: { include: { food: true } },
-        bookingSnacks: { include: { snack: true } },
       },
     });
     return {

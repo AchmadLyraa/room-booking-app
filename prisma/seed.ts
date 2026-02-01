@@ -111,21 +111,24 @@ async function main() {
   });
 
   // Create food items
-  const food1 = await prisma.food.create({
-    data: { name: "Nasi Kuning" },
-  });
+  const foodNames = [
+    "Makan Pagi",
+    "Makan Siang",
+    "Makan Sore",
+    "Makan Malam",
+    "Snack Malam (Khusus On Call Malam)",
+    "Snack Piring",
+    "Kotak Snack",
+    "Air Mineral Botol Kecil",
+    "Kopi kapal api",
+    "Teh",
+    "Gula",
+    "Minuman manis",
+    "Kopi (Khusus On Call Malam)",
+  ];
 
-  const food2 = await prisma.food.create({
-    data: { name: "Mie Goreng" },
-  });
-
-  // Create snacks
-  const snack1 = await prisma.snack.create({
-    data: { name: "Kopi" },
-  });
-
-  const snack2 = await prisma.snack.create({
-    data: { name: "Teh Manis" },
+  await prisma.food.createMany({
+    data: foodNames.map((name) => ({ name })),
   });
 
   // Create system config
@@ -138,8 +141,7 @@ async function main() {
     pic1: pic1.email,
     pic2: pic2.email,
     rooms: [room1.name, room2.name],
-    foods: [food1.name, food2.name],
-    snacks: [snack1.name, snack2.name],
+    foods: foodNames,
   });
 }
 
