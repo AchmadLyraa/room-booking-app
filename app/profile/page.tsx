@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { User, Mail, Calendar, Clock, ArrowLeft } from "lucide-react";
 import { auth } from "@/auth";
 import Link from "next/link";
+import ChangePasswordForm from "./change-password";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -38,7 +39,9 @@ export default async function ProfilePage() {
         >
           KEMBALI
         </Link>
-        <h1 className="text-2xl font-bold text-black uppercase flex-1 text-center">PROFIL PENGGUNA</h1>
+        <h1 className="text-2xl font-bold text-black uppercase flex-1 text-center">
+          PROFIL PENGGUNA
+        </h1>
         <div className="w-24" />
       </div>
 
@@ -48,7 +51,10 @@ export default async function ProfilePage() {
           <Card className="md:col-span-1">
             <CardHeader className="flex flex-col items-center gap-4">
               <Avatar className="w-24 h-24">
-                <AvatarImage src="/placeholder-user.jpg" alt={user.name || "User"} />
+                <AvatarImage
+                  src="/placeholder-user.jpg"
+                  alt={user.name || "User"}
+                />
                 <AvatarFallback>{user.name?.charAt(0) || "U"}</AvatarFallback>
               </Avatar>
               <div className="text-center">
@@ -65,7 +71,9 @@ export default async function ProfilePage() {
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="w-4 h-4 text-muted-foreground" />
-                <span>Joined: {new Date(user.createdAt).toLocaleDateString()}</span>
+                <span>
+                  Joined: {new Date(user.createdAt).toLocaleDateString()}
+                </span>
               </div>
             </CardContent>
           </Card>
@@ -93,8 +101,12 @@ export default async function ProfilePage() {
                       <span>{user.role}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Member since</span>
-                      <span>{new Date(user.createdAt).toLocaleDateString()}</span>
+                      <span className="text-muted-foreground">
+                        Member since
+                      </span>
+                      <span>
+                        {new Date(user.createdAt).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -102,16 +114,27 @@ export default async function ProfilePage() {
                   <h3 className="font-semibold mb-2">Booking Statistics</h3>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Total Bookings</span>
+                      <span className="text-muted-foreground">
+                        Total Bookings
+                      </span>
                       <span>{user.bookings.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Active Bookings</span>
-                      <span>{user.bookings.filter(b => new Date(b.bookingDate) >= new Date()).length}</span>
+                      <span className="text-muted-foreground">
+                        Active Bookings
+                      </span>
+                      <span>
+                        {
+                          user.bookings.filter(
+                            (b) => new Date(b.bookingDate) >= new Date(),
+                          ).length
+                        }
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
+              <ChangePasswordForm />
             </CardContent>
           </Card>
         </div>
