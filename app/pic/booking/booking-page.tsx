@@ -10,7 +10,15 @@ import { useToastNotifications } from "@/hooks/use-toast-notifications";
 import { Grid2X2, Users } from "lucide-react";
 import Link from "next/link";
 
-function BookingForm({ foods, name }: { foods: any[]; name: string }) {
+function BookingForm({
+  foods,
+  name,
+  nid,
+}: {
+  foods: any[];
+  name: string;
+  nid: string;
+}) {
   const router = useRouter();
   const { showError, showSuccess } = useToastNotifications();
   const [loading, setLoading] = useState(false);
@@ -117,6 +125,8 @@ function BookingForm({ foods, name }: { foods: any[]; name: string }) {
     }
   };
 
+  const nidFormat = nid.split("@")[0];
+
   const removeFood = (foodId: string) => {
     setFormData({
       ...formData,
@@ -161,6 +171,7 @@ function BookingForm({ foods, name }: { foods: any[]; name: string }) {
 
     const params = new URLSearchParams({
       "entry.1092170183": name,
+      "entry.2109756274": nidFormat,
       "entry.288592386": `${formData.agenda} - ${formData.description}`,
       "entry.1492350912_year": year,
       "entry.1492350912_month": month,
@@ -511,9 +522,11 @@ function BookingForm({ foods, name }: { foods: any[]; name: string }) {
 export default function CreateBookingClient({
   foods,
   name,
+  nid,
 }: {
   foods: any[];
   name: string;
+  nid: string;
 }) {
   return (
     <div className="min-h-screen bg-white p-6">
@@ -532,7 +545,7 @@ export default function CreateBookingClient({
       </div>
 
       <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
-        <BookingForm foods={foods} name={name} />
+        <BookingForm foods={foods} name={name} nid={nid} />
       </Suspense>
     </div>
   );

@@ -17,7 +17,6 @@ export default function ChangePasswordForm() {
     initialState,
   );
 
-  // ✅ Controlled inputs biar gak ilang pas error
   const [currentPassword, setCurrentPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");

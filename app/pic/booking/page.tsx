@@ -14,5 +14,11 @@ export default async function BookingPage() {
 
   const { foods } = await getFoodsAndSnacks();
 
-  return <CreateBookingClient foods={foods} name={session.user.name} />;
+  return (
+    <CreateBookingClient
+      foods={foods}
+      name={session.user.name}
+      nid={session.user.email}
+    />
+  );
 }

@@ -8,6 +8,7 @@ import {
   Home,
   DoorOpen,
   UtensilsCrossed,
+  Lock,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -93,6 +94,7 @@ export function Sidebar({ currentView, menuItems }: SidebarProps) {
     { href: "/admin", label: "BERANDA", icon: Home },
     { href: "/admin/rooms", label: "RUANGAN", icon: DoorOpen },
     { href: "/admin/foods-snacks", label: "MAKANAN", icon: UtensilsCrossed },
+    { href: "/admin/password", label: "RESET PASSWORD", icon: Lock },
   ];
 
   const items = menuItems || defaultMenuItems;
