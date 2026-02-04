@@ -117,8 +117,8 @@ export function LoginForm() {
         <div className="divider">Coba Akun Demo</div>
         <div className="mt-0 p-2 bg-green-50 text-sm">
           <p>Admin: admin@booking.com / admin123</p>
-          <p>PIC: pic1@booking.com / pic123</p>
-          <p>PIC: pic2@booking.com / pic123</p>
+          <p>PIC: mudzofars@gmail.com / pic123</p>
+          <p>PIC: Doniputra19793@gmail.com / pic123</p>
         </div>
       </div>
     </div>

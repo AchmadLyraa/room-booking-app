@@ -14,10 +14,12 @@ function BookingForm({
   foods,
   name,
   nid,
+  bidang,
 }: {
   foods: any[];
   name: string;
   nid: string;
+  bidang: string;
 }) {
   const router = useRouter();
   const { showError, showSuccess } = useToastNotifications();
@@ -103,6 +105,7 @@ function BookingForm({
         return;
       }
 
+      // ✅ SAVE KE DATABASE
       const result = await createBooking(formData);
 
       if (!result.success) {
@@ -115,6 +118,18 @@ function BookingForm({
         "Booking created successfully! Awaiting admin approval.",
         "Success",
       );
+
+      // LOGIKA BARU: CEK MEETING TYPE
+      if (
+        formData.meetingType === "INTERNAL_LINTAS_BIDANG" ||
+        formData.meetingType === "EKSTERNAL"
+      ) {
+        // Buka Google Form di tab baru
+        const googleFormUrl = buildGoogleFormUrl();
+        window.open(googleFormUrl, "_blank");
+      }
+
+      // REDIRECT KE DASHBOARD (semua jenis meeting)
       router.push("/pic");
     } catch (error) {
       const errorMessage =
@@ -124,8 +139,6 @@ function BookingForm({
       setLoading(false);
     }
   };
-
-  const nidFormat = nid.split("@")[0];
 
   const removeFood = (foodId: string) => {
     setFormData({
@@ -171,7 +184,8 @@ function BookingForm({
 
     const params = new URLSearchParams({
       "entry.1092170183": name,
-      "entry.2109756274": nidFormat,
+      "entry.2109756274": nid,
+      "entry.1943234164": bidang,
       "entry.288592386": `${formData.agenda} - ${formData.description}`,
       "entry.1492350912_year": year,
       "entry.1492350912_month": month,
@@ -389,25 +403,6 @@ function BookingForm({
                 </div>
               </div>
             )}
-
-            {formData.meetingType && formData.meetingType !== "INTERNAL" && (
-              <>
-                {" "}
-                <p className="text-s font-bold text-center block text-red-400">
-                  SILAHKAN ISI LENGKAP FORM DIATAS SEBELUM MENGISI GOOGLE FORM,
-                  SETELAH MENGISI DAN SUBMIT GOOGLE FORM, KLIK "BOOKING
-                  SEKARANG"
-                </p>
-                <a
-                  href={buildGoogleFormUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full h-12 flex items-center justify-center bg-[#22c55e] text-white font-bold uppercase border-3 border-black"
-                >
-                  ISI GOOGLE FORM
-                </a>
-              </>
-            )}
           </div>
         </div>
       </div>
@@ -523,10 +518,12 @@ export default function CreateBookingClient({
   foods,
   name,
   nid,
+  bidang,
 }: {
   foods: any[];
   name: string;
   nid: string;
+  bidang: string;
 }) {
   return (
     <div className="min-h-screen bg-white p-6">
@@ -545,7 +542,7 @@ export default function CreateBookingClient({
       </div>
 
       <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
-        <BookingForm foods={foods} name={name} nid={nid} />
+        <BookingForm foods={foods} name={name} nid={nid} bidang={bidang} />
       </Suspense>
     </div>
   );

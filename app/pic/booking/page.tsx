@@ -18,7 +18,8 @@ export default async function BookingPage() {
     <CreateBookingClient
       foods={foods}
       name={session.user.name}
-      nid={session.user.email}
+      nid={session.user.nid}
+      bidang={session.user.bidang}
     />
   );
 }

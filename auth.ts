@@ -12,7 +12,18 @@ declare module "next-auth" {
     user: {
       id: string;
       role: string;
+      nid: string;
+      bidang: string;
     } & DefaultSession["user"];
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    role: string;
+    nid: string;
+    bidang: string;
   }
 }
 
@@ -47,6 +58,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: user.email,
           name: user.name,
           role: user.role,
+          nid: user.nid,
+          bidang: user.bidang,
           image: null,
         };
       },
@@ -57,6 +70,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) {
         token.id = user.id;
         token.role = (user as any).role || "PIC";
+        token.nid = (user as any).nid || "";
+        token.bidang = (user as any).bidang || "";
       }
       return token;
     },
@@ -64,6 +79,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
+        session.user.nid = token.nid as string;
+        session.user.bidang = token.bidang as string;
       }
       return session;
     },
