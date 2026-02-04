@@ -347,8 +347,11 @@ function BookingForm({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold  block">
-                    <p>PILIH MENU MAKANAN MAKSIMAL 4</p>
-                    <p>Hanya tersedia di jenis rapat selain Internal</p>
+                    <p>PILIH JENIS KONSUMSI MAKSIMAL 4</p>
+                    <p>
+                      Hanya tersedia pada selain jenis rapat Internal Bidang
+                      UPKT
+                    </p>
                   </label>
 
                   <select
