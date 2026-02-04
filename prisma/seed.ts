@@ -1,6 +1,7 @@
 import { PrismaClient, Role } from "./generated/client";
 import bcrypt from "bcryptjs";
 import { adapter } from "@/prisma/adapter-pg.ts";
+import { getUsersData } from "./data/users";
 
 const prisma = new PrismaClient({ adapter });
 
@@ -40,41 +41,19 @@ async function main() {
     throw error;
   }
 
-  // Create admin user
-  const admin = await prisma.user.create({
-    data: {
-      name: "Admin",
-      email: "admin@booking.com",
-      password: await bcrypt.hash("admin123", 10),
-      role: Role.ADMIN,
-    },
+  // CREATE USERS
+  const usersData = await getUsersData();
+  const createdUsers = await prisma.user.createManyAndReturn({
+    data: usersData,
   });
-
-  // Create PIC users
-  const pic1 = await prisma.user.create({
-    data: {
-      name: "PIC 1",
-      email: "pic1@booking.com",
-      password: await bcrypt.hash("pic123", 10),
-      role: Role.PIC,
-    },
-  });
-
-  const pic2 = await prisma.user.create({
-    data: {
-      name: "PIC 2",
-      email: "pic2@booking.com",
-      password: await bcrypt.hash("pic123", 10),
-      role: Role.PIC,
-    },
-  });
+  console.log(`✅ Created ${createdUsers.length} users`);
 
   // Create rooms
   const room1 = await prisma.room.create({
     data: {
       name: "Ruang Meeting Smart Office",
       description: "Ruang meeting dengan kapasitas besar",
-      capacity: 50,
+      capacity: 35,
     },
   });
 
@@ -82,7 +61,7 @@ async function main() {
     data: {
       name: "Ruang Meeting Refactory",
       description: "Ruang meeting medium size",
-      capacity: 30,
+      capacity: 35,
     },
   });
 
@@ -90,7 +69,7 @@ async function main() {
     data: {
       name: "Hall Meeting Refactory",
       description: "Ruang meeting medium size",
-      capacity: 30,
+      capacity: 100,
     },
   });
 
@@ -98,7 +77,7 @@ async function main() {
     data: {
       name: "Ruang Meeting CCR",
       description: "Ruang meeting medium size",
-      capacity: 30,
+      capacity: 20,
     },
   });
 
@@ -106,7 +85,7 @@ async function main() {
     data: {
       name: "Ruang Meeting Perpustakaan",
       description: "Ruang meeting medium size",
-      capacity: 30,
+      capacity: 10,
     },
   });
 
@@ -134,14 +113,6 @@ async function main() {
   // Create system config
   await prisma.systemConfig.create({
     data: { autoApprove: false },
-  });
-
-  console.log("✅ Seed completed:", {
-    admin: admin.email,
-    pic1: pic1.email,
-    pic2: pic2.email,
-    rooms: [room1.name, room2.name],
-    foods: foodNames,
   });
 }
 

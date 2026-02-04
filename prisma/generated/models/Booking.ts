@@ -694,10 +694,6 @@ export type EnumBookingStatusFieldUpdateOperationsInput = {
   set?: $Enums.BookingStatus
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type EnumMeetingTypeFieldUpdateOperationsInput = {
   set?: $Enums.MeetingType
 }

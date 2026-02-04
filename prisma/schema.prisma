@@ -45,6 +45,8 @@ model User {
   email     String   @unique
   password  String   // For basic auth (hashed with bcrypt)
   role      Role     @default(PIC)
+  nid       String
+  bidang    String?
 
   bookings  Booking[]
 

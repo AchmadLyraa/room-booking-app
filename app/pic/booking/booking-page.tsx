@@ -306,11 +306,11 @@ function BookingForm({
                 className="w-full h-12 px-4 border-3 border-black bg-white font-mono outline-none cursor-pointer"
               >
                 <option value="">Pilih jenis rapat</option>
-                <option value="INTERNAL">Internal</option>
+                <option value="INTERNAL">Internal Bidang UPKT</option>
                 <option value="INTERNAL_LINTAS_BIDANG">
-                  Internal Lintas Bidang
+                  Internal Lintas Bidang UPKT
                 </option>
-                <option value="EKSTERNAL">Eksternal</option>
+                <option value="EKSTERNAL">Eksternal (Tamu Luar UPKT)</option>
               </select>
             </div>
 

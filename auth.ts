@@ -73,6 +73,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   session: {
     strategy: "jwt",
+    maxAge: 8 * 60 * 60, // 8 jam kerja
+    updateAge: 60 * 60, // Update token tiap 1 jam
   },
   secret: process.env.NEXTAUTH_SECRET,
   trustHost: true, // Trust custom domains in production
