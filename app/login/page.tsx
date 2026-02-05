@@ -1,12 +1,14 @@
 "use client";
 import { LoginForm } from "./login-form";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
 export default function LoginPage() {
   const isMobile = useIsMobile();
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [hasInput, setHasInput] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4 login-page-container">
       {/* Mobile-only: Direct login form display */}
@@ -18,7 +20,19 @@ export default function LoginPage() {
         </div>
       ) : (
         // Desktop: Keep the original card-based layout
-        <div className="login-card-container" data-show-login={showLoginForm}>
+        <div
+          ref={containerRef}
+          className="login-card-container"
+          data-show-login={showLoginForm}
+          data-has-input={hasInput}
+          onFocusCapture={() => setHasInput(true)}
+          onBlurCapture={() =>
+            setTimeout(() => {
+              if (!containerRef.current?.contains(document.activeElement))
+                setHasInput(false);
+            }, 0)
+          }
+        >
           {/* Profile Card (visible initially) */}
           <div className="profile-card">
             {/* Logo Danantara - Di dalam profile card */}
