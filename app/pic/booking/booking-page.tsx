@@ -165,12 +165,32 @@ function BookingForm({
 
   useEffect(() => {
     if (formData.meetingType === "INTERNAL") {
+      // Kalo INTERNAL, hapus semua makanan
       setFormData((prev) => ({
         ...prev,
         foodIds: [],
       }));
+    } else if (formData.meetingType === "INTERNAL_LINTAS_BIDANG") {
+      // Kalo LINTAS BIDANG, filter cuma Snack Piring
+      const snackPiringId = foods.find((f) => f.name === "Snack Piring")?.id;
+
+      setFormData((prev) => ({
+        ...prev,
+        foodIds: prev.foodIds
+          .filter((id) => {
+            const food = foods.find((f) => f.id === id);
+            return food?.name === "Snack Piring";
+          })
+          .slice(0, 1), // ← Maks 1 item (Snack Piring aja)
+      }));
+    } else if (formData.meetingType === "EKSTERNAL") {
+      // Kalo EKSTERNAL, maks 4 item
+      setFormData((prev) => ({
+        ...prev,
+        foodIds: prev.foodIds.slice(0, 4),
+      }));
     }
-  }, [formData.meetingType]);
+  }, [formData.meetingType, foods]);
 
   const buildGoogleFormUrl = () => {
     if (!formData.bookingDate) return "#";
@@ -322,7 +342,7 @@ function BookingForm({
                 <option value="">Pilih jenis rapat</option>
                 <option value="INTERNAL">Internal Bidang UPKT</option>
                 <option value="INTERNAL_LINTAS_BIDANG">
-                  Internal Lintas Bidang UPKT
+                  Internal Lintas Bidang UPKT (nonrutin)
                 </option>
                 <option value="EKSTERNAL">Eksternal (Tamu Luar UPKT)</option>
               </select>
@@ -333,7 +353,7 @@ function BookingForm({
                 CATATAN TAMBAHAN
               </label>
               <textarea
-                placeholder="Catatan tambahan (opsional)"
+                placeholder="Contoh: nomor PRK, pembebanan konsumsi"
                 value={formData.note}
                 onChange={(e) =>
                   setFormData({ ...formData, note: e.target.value })
@@ -346,16 +366,22 @@ function BookingForm({
             {formData.meetingType && formData.meetingType !== "INTERNAL" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold  block">
-                    <p>PILIH JENIS KONSUMSI MAKSIMAL 4</p>
-                    <p>
-                      Hanya tersedia pada selain jenis rapat Internal Bidang
-                      UPKT
-                    </p>
+                  <label className="text-xs font-bold block text-nowrap">
+                    {formData.meetingType === "INTERNAL_LINTAS_BIDANG" ? (
+                      <p>
+                        UNTUK RAPAT INTERNAL LINTAS BIDANG HANYA SNACK PIRING
+                      </p>
+                    ) : (
+                      <p>UNTUK RAPAT EKSTERNAL DAPAT MEMILIH MAKSIMAL 4</p>
+                    )}
                   </label>
 
                   <select
-                    disabled={formData.foodIds.length >= 4}
+                    disabled={
+                      formData.meetingType === "EKSTERNAL"
+                        ? formData.foodIds.length >= 4
+                        : formData.foodIds.length >= 1 // ← Lintas bidang max 1
+                    }
                     value=""
                     onChange={(e) => {
                       const foodId = e.target.value;
@@ -367,19 +393,28 @@ function BookingForm({
                         foodIds: [...formData.foodIds, foodId],
                       });
                     }}
-                    className="w-full h-12 px-4 border-3 border-black bg-[#22c55e] text-white font-mono font-bold outline-none cursor-pointer"
+                    className="w-full h-12 px-4 border-3 border-black bg-[#22c55e] text-white font-mono font-bold outline-none cursor-pointer disabled:opacity-50"
                   >
                     <option value="">Pilih makanan</option>
 
-                    {foods.map((food: any) => (
-                      <option
-                        key={food.id}
-                        value={food.id}
-                        disabled={formData.foodIds.includes(food.id)}
-                      >
-                        {food.name}
-                      </option>
-                    ))}
+                    {foods
+                      .filter((food) => {
+                        // LOGIKA FILTER: Kalo INTERNAL_LINTAS_BIDANG, cuma show "Snack Piring"
+                        if (formData.meetingType === "INTERNAL_LINTAS_BIDANG") {
+                          return food.name === "Snack Piring";
+                        }
+                        // Kalo EKSTERNAL, show semua
+                        return true;
+                      })
+                      .map((food: any) => (
+                        <option
+                          key={food.id}
+                          value={food.id}
+                          disabled={formData.foodIds.includes(food.id)}
+                        >
+                          {food.name}
+                        </option>
+                      ))}
                   </select>
 
                   {formData.foodIds.length > 0 && (
