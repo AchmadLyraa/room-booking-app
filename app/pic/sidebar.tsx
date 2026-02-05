@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { Home, DoorOpen, UtensilsCrossed, CalendarCheck } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useDispatch } from "react-redux"
+import { showLoading, hideLoading } from "react-redux-loading-bar"
 
 interface SidebarProps {
   role: "admin" | "user"
@@ -24,20 +26,26 @@ const userMenuItems = [
 export function Sidebar({ role, currentView }: SidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const dispatch = useDispatch();
   const menuItems = role === "admin" ? adminMenuItems : userMenuItems
 
-  const handleUserMenuClick = (index: number) => {
-    if (index === 0) { // BERANDA
-      router.push("/pic")
-    } else if (index === 1) { // BOOKING AKTIF
-      router.push("/pic/bookings")
+  const handleUserMenuClick = async (index: number) => {
+    dispatch(showLoading());
+    try {
+      if (index === 0) {
+        await router.push("/pic");
+      } else if (index === 1) {
+        await router.push("/pic/bookings");
+      }
+    } finally {
+      dispatch(hideLoading());
     }
   }
 
   return (
     <aside className="w-64 min-h-screen bg-white border-r-3 border-black flex flex-col">
       <div className="p-4 border-b-3 border-black">
-        <Link href={role === "admin" ? "/admin" : "/pic"} className="flex items-center gap-2">
+        <Link href={role === "admin" ? "/admin" : "/pic"} className="flex items-center gap-2" onClick={() => dispatch(showLoading())}>
           <img src="/logo-UPKTSPACE2.png" alt="PLNSPACE Logo" className="object-contain" />
         </Link>
       </div>
@@ -80,6 +88,7 @@ export function Sidebar({ role, currentView }: SidebarProps) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => dispatch(showLoading())}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 border-2 border-black transition-all font-bold uppercase text-sm",
                 isActive

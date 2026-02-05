@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import { useToastNotifications } from "@/hooks/use-toast-notifications";
 import { Sidebar, Header } from "@/components/admin-layout";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -35,24 +37,31 @@ export default function FoodsSnacksManagementClient({
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    type: "makanan",
   });
   const [editingItem, setEditingItem] = useState<any>(null);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [shakeAnimation, setShakeAnimation] = useState(false);
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
 
   // Refresh data when edit mode changes
   useEffect(() => {
     const refreshData = async () => {
-      const foodsResult = await getAllFoods();
+      dispatch(showLoading());
+      try {
+        const foodsResult = await getAllFoods();
 
-      const combinedItems = [];
-      if (foodsResult.success && foodsResult.data) {
-        combinedItems.push(
-          ...foodsResult.data.map((item) => ({ ...item, type: "makanan" })),
-        );
+        const combinedItems = [];
+        if (foodsResult.success && foodsResult.data) {
+          combinedItems.push(
+            ...foodsResult.data.map((item) => ({ ...item, type: "makanan" })),
+          );
+        }
+        setItemList(combinedItems);
+      } finally {
+        dispatch(hideLoading());
       }
-      setItemList(combinedItems);
     };
 
     if (!editMode) {
@@ -63,6 +72,7 @@ export default function FoodsSnacksManagementClient({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    dispatch(showLoading());
 
     try {
       // Create new item
@@ -74,7 +84,7 @@ export default function FoodsSnacksManagementClient({
       }
 
       // Add the new item to the combined list with its type
-      setItemList((prev) => [{ ...result.data, type: formData.type }, ...prev]);
+      setItemList((prev) => [{ ...result.data, type: "makanan" }, ...prev]);
       showSuccess(`${"Makanan"} berhasil dibuat`);
 
       // Reset form and close dialog
@@ -83,6 +93,7 @@ export default function FoodsSnacksManagementClient({
     } catch (error) {
       showError("Gagal menyimpan item");
     } finally {
+      dispatch(hideLoading());
       setLoading(false);
     }
   };
@@ -91,6 +102,7 @@ export default function FoodsSnacksManagementClient({
     if (!confirm(`Apakah Anda yakin ingin menghapus makanan ini?`)) return;
 
     setLoading(true);
+    dispatch(showLoading());
     try {
       const result = await deleteFood(itemId);
 
@@ -105,6 +117,7 @@ export default function FoodsSnacksManagementClient({
     } catch (error) {
       showError("Gagal menghapus item");
     } finally {
+      dispatch(hideLoading());
       setLoading(false);
     }
   };
@@ -123,6 +136,7 @@ export default function FoodsSnacksManagementClient({
       return;
 
     setLoading(true);
+    dispatch(showLoading());
     let successCount = 0;
     let failedItems = [];
 
@@ -164,6 +178,7 @@ export default function FoodsSnacksManagementClient({
       );
       setSelectedItems([]);
     } finally {
+      dispatch(hideLoading());
       setLoading(false);
     }
   };

@@ -10,7 +10,9 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { logoutUser } from "@/app/actions/logout-action";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { signOut } from "next-auth/react";
 
 interface HeaderProps {
   showSearch?: boolean;
@@ -19,6 +21,7 @@ interface HeaderProps {
 
 export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <header className="sticky top-0 z-20 h-16 border-b-3 border-black bg-white flex items-center justify-between px-4 md:px-6">
@@ -50,6 +53,7 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
             <DropdownMenuItem asChild>
               <Link
                 href="/profile"
+                onClick={() => dispatch(showLoading())}
                 className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm"
               >
                 <User className="w-4 h-4" />
@@ -58,15 +62,21 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-black h-[2px]" />
             <DropdownMenuItem asChild>
-              <form action={logoutUser}>
-                <button
-                  type="submit"
-                  className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm w-full text-left"
-                >
-                  <LogOut className="w-4 h-4" />
-                  KELUAR
-                </button>
-              </form>
+              <button
+                onClick={async (e) => {
+                  e.preventDefault();
+                  dispatch(showLoading());
+                  try {
+                    await signOut({ callbackUrl: "/login" });
+                  } finally {
+                    dispatch(hideLoading());
+                  }
+                }}
+                className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm w-full text-left"
+              >
+                <LogOut className="w-4 h-4" />
+                KELUAR
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

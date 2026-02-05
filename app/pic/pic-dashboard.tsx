@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { logoutUser } from "@/app/actions/logout-action";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { signOut } from "next-auth/react";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { RoomAvailabilityTable } from "./room-availability-table";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import BookingsClient from "./bookings/bookings-client";
 
 function parseJsonArray(jsonString: string | null): string[] {
   if (!jsonString) return [];
@@ -38,9 +41,15 @@ export default function PICDashboardClient({
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    await logoutUser();
+    dispatch(showLoading());
+    try {
+      await signOut({ callbackUrl: "/login" });
+    } finally {
+      dispatch(hideLoading());
+    }
   };
 
   const statusConfig = {
@@ -76,7 +85,7 @@ export default function PICDashboardClient({
 
           <div className="p-4 md:p-8">
             {view === "bookings" ? (
-              <BookingList bookings={bookings} />
+              <BookingsClient bookings={bookings} />
             ) : (
               <RoomAvailabilityTable />
             )}
