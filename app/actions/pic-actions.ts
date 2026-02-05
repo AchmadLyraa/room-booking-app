@@ -140,7 +140,7 @@ export async function createBooking(data: {
         "SESSION_2 (13:00–16:00) has already started or passed.",
       );
     }
-    if (data.session === "FULLDAY" && currentHourWITA >= 8) {
+    if (data.session === "FULLDAY" && currentHourWITA >= 12) {
       // ← Cek jam 8 WITA (awal sesi)
       return errorResult(
         "FULLDAY (08:00–16:00) has already started or passed.",
