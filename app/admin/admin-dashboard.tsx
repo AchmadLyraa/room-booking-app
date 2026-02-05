@@ -21,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import CountUp from '@/components/CountUp'
 
 function parseJsonArray(jsonString: string | null): string[] {
   if (!jsonString) return [];
@@ -229,7 +230,7 @@ export default function AdminDashboardClient({
           </div>
 
           {/* Stats Cards */}
-          <div className="mb-8">
+          <div className="mb-8" >
             <div className="flex gap-4 overflow-x-auto pb-2">
               {/* STATUS CARDS */}
               <div className="flex w-full gap-4 min-w-[700px]">
@@ -239,7 +240,15 @@ export default function AdminDashboardClient({
                     <h2 className="text-sm font-bold uppercase text-black/60">
                       TOTAL BOOKING
                     </h2>
-                    <p className="text-3xl font-bold">{bookingList.length}</p>
+                    <p className="text-3xl font-bold">
+                      <CountUp 
+                        to={bookingList.length} 
+                        duration={0.5} 
+                        className="text-3xl font-bold"
+                        onStart={() => {0}}
+                        onEnd={() => {}}
+                      />
+                    </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
                     <BookOpen className="w-8 h-8 text-[#22c55e]" />
@@ -252,7 +261,13 @@ export default function AdminDashboardClient({
                       MENUNGGU
                     </h2>
                     <p className="text-3xl font-bold">
-                      {bookingList.filter((b) => b.status === "PENDING").length}
+                      <CountUp 
+                        to={bookingList.filter((b) => b.status === "PENDING").length} 
+                        duration={0.5} 
+                        className="text-3xl font-bold"
+                        onStart={() => {0}}
+                        onEnd={() => {}}
+                      />
                     </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
@@ -266,10 +281,13 @@ export default function AdminDashboardClient({
                       DISETUJUI
                     </h2>
                     <p className="text-3xl font-bold">
-                      {
-                        bookingList.filter((b) => b.status === "APPROVED")
-                          .length
-                      }
+                      <CountUp 
+                        to={bookingList.filter((b) => b.status === "APPROVED").length} 
+                        duration={0.5} 
+                        className="text-3xl font-bold"
+                        onStart={() => {0}}
+                        onEnd={() => {}}
+                      />
                     </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
@@ -283,10 +301,13 @@ export default function AdminDashboardClient({
                       DITOLAK
                     </h2>
                     <p className="text-3xl font-bold">
-                      {
-                        bookingList.filter((b) => b.status === "REJECTED")
-                          .length
-                      }
+                      <CountUp 
+                        to={bookingList.filter((b) => b.status === "REJECTED").length} 
+                        duration={0.5} 
+                        className="text-3xl font-bold"
+                        onStart={() => {0}}
+                        onEnd={() => {}}
+                      />
                     </p>
                   </div>
                   <span className="ml-4 flex-shrink-0">
@@ -308,12 +329,12 @@ export default function AdminDashboardClient({
                 value={filter}
                 onChange={handleFilterChange}
                 placeholder="Cari booking..."
-                className="w-full px-4 py-2 border-2 border-black brutal-shadow focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
+                className="w-full px-4 py-2 border-2 border-black  focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
               />
               <button
                 onClick={handleToggleAutoApprove}
                 disabled={togglingAutoApprove}
-                className={`w-full md:w-auto flex flex-col justify-center items-center font-bold uppercase text-center border-3 border-black brutal-shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed
+                className={`w-full md:w-auto flex flex-col justify-center items-center font-bold uppercase text-center border-2 border-black  transition-all disabled:opacity-50 disabled:cursor-not-allowed
                   hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px]
                   ${autoApproveEnabled ? "bg-[#22c55e] text-white" : "bg-white text-black"}
                   h-[44px] px-4 py-2
