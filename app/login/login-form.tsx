@@ -56,14 +56,14 @@ export function LoginForm() {
   return (
     <div className="login-form-wrapper">
       <div className="login-form-container relative">
-        {/* ✅ ERROR MESSAGE - ABSOLUTE POSITIONING BIAR GAK NGEGESER */}
+        {/* ERROR MESSAGE - ABSOLUTE POSITIONING BIAR GAK NGEGESER */}
         {error && (
           <div className="absolute -top-16 left-0 right-0 p-3 bg-[#FF5E5B] text-white border-2 border-black brutal-shadow animate-in slide-in-from-top duration-200">
             <p className="font-bold text-sm text-center">{error}</p>
           </div>
         )}
 
-        <h1 className="login-heading">MASUK</h1>
+        <h1 className="login-heading">SILAHKAN MASUK</h1>
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="login-field">
@@ -113,13 +113,6 @@ export function LoginForm() {
             {loading ? "MEMPROSES..." : "MASUK"}
           </button>
         </form>
-
-        <div className="divider">Coba Akun Demo</div>
-        <div className="mt-0 p-2 bg-green-50 text-sm">
-          <p>Admin: admin@booking.com / admin123</p>
-          <p>PIC: mudzofars@gmail.com / pic123</p>
-          <p>PIC: Doniputra19793@gmail.com / pic123</p>
-        </div>
       </div>
     </div>
   );

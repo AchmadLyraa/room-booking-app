@@ -342,7 +342,7 @@ function BookingForm({
                 <option value="">Pilih jenis rapat</option>
                 <option value="INTERNAL">Internal Bidang UPKT</option>
                 <option value="INTERNAL_LINTAS_BIDANG">
-                  Internal Lintas Bidang UPKT (nonrutin)
+                  Internal Lintas Bidang UPKT (non rutin)
                 </option>
                 <option value="EKSTERNAL">Eksternal (Tamu Luar UPKT)</option>
               </select>
@@ -353,7 +353,7 @@ function BookingForm({
                 CATATAN TAMBAHAN
               </label>
               <textarea
-                placeholder="Contoh: nomor PRK, pembebanan konsumsi"
+                placeholder="Contoh: nomor PRK untuk pembebanan konsumsi, dan lain lain"
                 value={formData.note}
                 onChange={(e) =>
                   setFormData({ ...formData, note: e.target.value })
