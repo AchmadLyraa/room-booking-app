@@ -25,7 +25,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     // PIC USERS
     {
       name: "HABIB MUHAJIR",
-      email: "habib.muhajir99@gmail.com",
+      email: "habib.muhajir@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8006131JA",
@@ -33,7 +33,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "WAHYOE ROBBYANUR",
-      email: "Wahyoerobbyanur@gmail.com",
+      email: "wahyoe.robbyanur@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216020TB",
@@ -41,7 +41,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ANGGA SENJA PRASETYA",
-      email: "Anggasenja30@gmail.com",
+      email: "9116070TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116070TB",
@@ -121,7 +121,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "BHEKTY CRISVIANDI",
-      email: "B.crisviandi@gmail.com",
+      email: "bhekty.crisviandi@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116099PC",
@@ -129,7 +129,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ANDI AYU WILDANA",
-      email: "Ayuwildana@gmail.com",
+      email: "9317002TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317002TB",
@@ -137,7 +137,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "KOKOH WAHYU ADILLAH",
-      email: "kokoh.adillah@gmail.com",
+      email: "9014056RB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9014056RB",
@@ -177,7 +177,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DHIDHIK KRIDHO LAKSONO",
-      email: "Dhi2k10@gmail.com",
+      email: "dhidhik.krido@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8308095JA",
@@ -185,7 +185,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DIDIK AGUS SETIAWAN",
-      email: "setiawandidikagus@gmail.com",
+      email: "didik.agus@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916236ZJY",
@@ -193,7 +193,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "LUMBAN GAOL CRISTOFEL",
-      email: "lumbancris@gmail.com",
+      email: "9316036TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316036TB",
@@ -201,7 +201,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RAMSES HASUDUNGAN SIMATUPANG",
-      email: "Ramcs.okm@gmail.com",
+      email: "9016067TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016067TB",
@@ -209,7 +209,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ADITYA KUMARA TUNGGA",
-      email: "Adityakumara76@gmail.com",
+      email: "9616046TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616046TB",
@@ -225,7 +225,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ANDI ISTRADA",
-      email: "andi_istrada@yahoo.com",
+      email: "andi.istrada@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8305037JA",
@@ -233,7 +233,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ADI HERLAMBANG",
-      email: "Adihrlmbng@gmail.com",
+      email: "9116014TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116014TB",
@@ -241,7 +241,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ARDIKA RIO NINDRA",
-      email: "Dikario.b4k3uniba13@gmail.com",
+      email: "9216051TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216051TB",
@@ -249,7 +249,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NANDA FINALIS",
-      email: "Nandafinalis@gmail.com",
+      email: "9016022TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016022TB",
@@ -257,7 +257,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RAHMANSYAH",
-      email: "rahman.ujkt@gmail.com",
+      email: "9216010TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216010TB",
@@ -265,7 +265,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SIGIT HARIYAWAN",
-      email: "Sigithariyawan@gmail.com",
+      email: "9616048TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616048TB",
@@ -273,7 +273,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "KSATRIAWAN DWIGUNA",
-      email: "Ksatriawan22@gmail.com",
+      email: "9316044TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316044TB",
@@ -281,7 +281,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD RIZAL PERDANA",
-      email: "Rperdana400@gmail.com",
+      email: "9216119TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216119TB",
@@ -289,7 +289,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "LUKI DWI ARGO SAPUTRO",
-      email: "Saputroluki24@gmail.com",
+      email: "9116065TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116065TB",
@@ -297,7 +297,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "UNTUNG PRI HANDOKO",
-      email: "Uphhandoko@gmail.com",
+      email: "9516146TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516146TB",
@@ -305,7 +305,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "KRISNADI SETIAWAN",
-      email: "krisnadisetyawan212@gmail.com",
+      email: "9317009TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317009TB",
@@ -313,7 +313,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ARDIANTO",
-      email: "Bintang.ar28@gmail.com",
+      email: "9416106TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416106TB",
@@ -321,7 +321,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FACHRI APRILIYAN MUTIYASNUR",
-      email: "Fachri.apriliyan@gmail.com",
+      email: "9716141TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716141TB",
@@ -329,7 +329,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AMRAN ALI",
-      email: "amranali100891@gmail.com",
+      email: "9116028TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116028TB",
@@ -337,7 +337,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NOORDIHAMSYAH MAULANAH",
-      email: "M_maul@rocketmail.com",
+      email: "8917010TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8917010TB",
@@ -417,7 +417,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD IRFAN",
-      email: "muh.irfan23@gmail.com",
+      email: "muh.irfan@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8614135ZJY",
@@ -425,7 +425,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "APIAN DONO",
-      email: "Apiandono@gmail.com",
+      email: "9016035TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016035TB",
@@ -433,7 +433,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RANGGA DISTIANTARA",
-      email: "Radistiantara@gmail.com & dewantororanda@gmail.com",
+      email: "9316019TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316019TB",
@@ -441,7 +441,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NOEGRAH TRI JULIANSYAH",
-      email: "Noe.julian04@gmail.com",
+      email: "8916062TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916062TB",
@@ -449,7 +449,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FIRMAN MAULANA HARAHAP",
-      email: "Firmanmaulanaharahap@gmail.com",
+      email: "9116094TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116094TB",
@@ -457,7 +457,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HADYAN",
-      email: "Hadyanheixa@gmail.com",
+      email: "9116029TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116029TB",
@@ -465,7 +465,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "STYAWAN",
-      email: "styawan.090791@gmail.com",
+      email: "9116074TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116074TB",
@@ -473,7 +473,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RIBUT INDRAYANA",
-      email: "Ribut862@gmail.com",
+      email: "9017011TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9017011TB",
@@ -481,7 +481,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD ANDY",
-      email: "Muhammadandy1994@gmail.com",
+      email: "9416149TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416149TB",
@@ -489,7 +489,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HARI SUPRIANTO",
-      email: "harysuprianto.hs@gmail.com",
+      email: "9416118TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416118TB",
@@ -497,7 +497,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FERDIAN EKA PRASETYA",
-      email: "Deianprasetya@gmail.com",
+      email: "9516134TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516134TB",
@@ -505,7 +505,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ACHMAD BASOFI",
-      email: "Basofislayer2146@gmail.com",
+      email: "9417016TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9417016TB",
@@ -513,7 +513,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NUR ROCHMAT",
-      email: "Nurrochm4t@gmail.com",
+      email: "9013006BR@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9013006BR",
@@ -521,7 +521,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ACHMAD BUCHORI",
-      email: "Achm4d.8uchori@gmail.com",
+      email: "9716103TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716103TB",
@@ -529,7 +529,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "JUNAID HIDAYAT",
-      email: "Juneid1991@gmail.com",
+      email: "9116057TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116057TB",
@@ -601,7 +601,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "TARYONO",
-      email: "Suandytison@gmail.comcom",
+      email: "taryono@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8505090JA",
@@ -609,7 +609,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FADLI",
-      email: "El09612047@gmail.com",
+      email: "9016086TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016086TB",
@@ -617,7 +617,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD YUNUS",
-      email: "muhammadyunus092@gmail.com",
+      email: "9216027TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216027TB",
@@ -625,7 +625,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HARDIANSYAH",
-      email: "Ancabahar28@gmail.com",
+      email: "9116116TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116116TB",
@@ -633,7 +633,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ACHMAD FACHRIZAL",
-      email: "Achmadfachrizal05@gmail.com",
+      email: "9016041TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016041TB",
@@ -641,7 +641,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ADITYO DARMAJI",
-      email: "Adityo.darmaji@gmail.com",
+      email: "9116063TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116063TB",
@@ -649,7 +649,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HANDOKO",
-      email: "Handokocomex@gmail.com",
+      email: "9416052TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416052TB",
@@ -657,7 +657,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "I WAYAN PURWANA",
-      email: "Wayanpurwana46@gmail.com",
+      email: "9316087TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316087TB",
@@ -665,7 +665,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SLAMET RIYADI",
-      email: "Sslamet465@gmail.com",
+      email: "8916045TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916045TB",
@@ -673,7 +673,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "JUMARDI",
-      email: "jumardi.adi69@gmail.com",
+      email: "9516056TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516056TB",
@@ -681,7 +681,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DWI ZUNIARTO",
-      email: "Dwizuniartoo@gmail.com",
+      email: "9116058TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116058TB",
@@ -689,7 +689,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RIKI EHDHA SUBAWEH",
-      email: "Rikiehda@gmail.com",
+      email: "9317013TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317013TB",
@@ -697,7 +697,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SURYA ARMANDA",
-      email: "Suryaarmanda39@gmail.com",
+      email: "9416100TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416100TB",
@@ -705,7 +705,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "BAGUS WIBOWO",
-      email: "Baguswibowo272@yahoo.com",
+      email: "9116015TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116015TB",
@@ -713,7 +713,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RACHMAD SANDY",
-      email: "Rachmad2992@gmail.com",
+      email: "9317012TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317012TB",
@@ -721,7 +721,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "WISNU HABIB",
-      email: "Wisnuhabib605@gmail.com",
+      email: "9516122TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516122TB",
@@ -793,7 +793,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD FAUZAN",
-      email: "Muhammadfauzan092@gmail.com",
+      email: "m.fauzan@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216030TB",
@@ -801,7 +801,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "GERSON YOSEP BA'KA'",
-      email: "Gersonbaka@gmail.com",
+      email: "9116077TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116077TB",
@@ -809,7 +809,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "JUMADIL RAHMAN",
-      email: "Jumadilrahman32@gmail.com",
+      email: "9216021TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216021TB",
@@ -817,7 +817,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SEPTIANOER PERMADI WIBOWO",
-      email: "Septianoer.permadi@gmail.com",
+      email: "9316082TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316082TB",
@@ -825,7 +825,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHTAR DANI",
-      email: "Muhtardani@gmail.com",
+      email: "9416071TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416071TB",
@@ -833,7 +833,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SUGONDO PRAYOGO",
-      email: "Sugondo06@gmail.com",
+      email: "9216064TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216064TB",
@@ -841,7 +841,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MOCHAMMAD ISHAK",
-      email: "ishakzhafran@gmail.com",
+      email: "9416079TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416079TB",
@@ -849,7 +849,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AHMAD IKBAL",
-      email: "Ahmadikbal93@gmail.com",
+      email: "9316009TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316009TB",
@@ -857,7 +857,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DANU RACHMADDAN",
-      email: "D.rachmaddan@gmail.com",
+      email: "9316032TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316032TB",
@@ -865,7 +865,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HILMAN AKBAR AL HAZMI",
-      email: "Hilmanalhazmi6@gmail.com",
+      email: "9316081TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316081TB",
@@ -873,7 +873,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ANSHORI",
-      email: "Anshoripjbs@gmail.com",
+      email: "9616130TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616130TB",
@@ -881,7 +881,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FIRMAN SANTYA RUDI",
-      email: "Firman.sr23@gmail.com",
+      email: "9417014TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9417014TB",
@@ -889,7 +889,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AUFA RAFDIKA",
-      email: "Aufa.rafdika@gmail.com",
+      email: "8916099TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916099TB",
@@ -897,7 +897,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AGUNG MAULANA",
-      email: "maulanaagung1005@gmail.com",
+      email: "9716121TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716121TB",
@@ -985,7 +985,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NURAFIATULLAH",
-      email: "afik178@gmail.com",
+      email: "nurafiatuullah@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9215255ZJY",
@@ -993,7 +993,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AGUNG PRIA AMBARA",
-      email: "Agungambara44@gmail.com",
+      email: "9316053TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316053TB",
@@ -1001,7 +1001,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HERRY IRAWAN",
-      email: "Herryirawan1988@gmail.com",
+      email: "8916039TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916039TB",
@@ -1025,7 +1025,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUDZOFAR SOFYAN",
-      email: "mudzofars@gmail.com",
+      email: "mudzofar.sofyan@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216180ZJY",
@@ -1033,7 +1033,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ANDHIKA",
-      email: "Dhikayoo@gmail.com",
+      email: "9316108TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316108TB",
@@ -1041,7 +1041,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MIFTAKHUL HUDA",
-      email: "Mifta.huda07@gmail.com",
+      email: "9216038TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216038TB",
@@ -1049,7 +1049,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "REZA IBNU MULIA",
-      email: "rezaibnu@ymail.com & laborujkt@gmail.com",
+      email: "9316023TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316023TB",
@@ -1105,7 +1105,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MISDIYANTO",
-      email: "misdipjb@gmail.com",
+      email: "misdiyanto@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8410073JA",
@@ -1113,7 +1113,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NASRI MATHAR",
-      email: "nazrimathar@gmail.com",
+      email: "nasri.mathar@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8811100JA",
@@ -1121,7 +1121,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "BANGKIT INDRA PRATAMA",
-      email: "Bangkitindrap@gmail.com",
+      email: "9116017TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116017TB",
@@ -1129,7 +1129,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FAJRIN ZAINUDDIN",
-      email: "Fajrinzain10@gmail.com",
+      email: "9016075TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016075TB",
@@ -1137,7 +1137,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD ARGHU",
-      email: "Muh.arghu@gmail.com",
+      email: "9416150TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416150TB",
@@ -1145,7 +1145,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SURIANTO",
-      email: "surianto.sk@gmail.com",
+      email: "9317007TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317007TB",
@@ -1153,7 +1153,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RUDY SETYANA RAHARJO",
-      email: "rudyruudrush@gmail.com",
+      email: "8916078TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916078TB",
@@ -1177,7 +1177,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "TONY SUHARTONO",
-      email: "tonykediri87@gmail.com",
+      email: "tony.suharto@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8711040JA",
@@ -1185,7 +1185,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MAYKY ARISDA SUMANTO",
-      email: "max8715008td@gmail.com",
+      email: "8715008TD@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8715008TD",
@@ -1193,7 +1193,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD ADITYAWARMAN",
-      email: "Adiwarman05@gmail.com",
+      email: "9116044PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116044PL",
@@ -1201,7 +1201,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FAHMI HERMAWAN",
-      email: "Fahmihermawan8@gmail.com",
+      email: "9116137TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116137TB",
@@ -1217,7 +1217,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "EVAN SATRIA",
-      email: "nave.satria@gmail.com",
+      email: "evan.satria@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216226ZJY",
@@ -1225,7 +1225,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "HERI SISWANTO",
-      email: "herisiswanto8@gmail.com",
+      email: "9116095TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116095TB",
@@ -1233,7 +1233,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "INDRA SAPUTRA SIAHAAN",
-      email: "Indrakrezen2@gmail.com",
+      email: "9416089TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416089TB",
@@ -1241,7 +1241,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "TRI SUPRIADI",
-      email: "Iamtriee@gmail.com",
+      email: "9217008TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9217008TB",
@@ -1249,7 +1249,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "EDI TIARDI",
-      email: "Editiardi25@gmail.com",
+      email: "9316151TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316151TB",
@@ -1257,7 +1257,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "JUHAMSYARIE",
-      email: "Juhamsyarie@gmail.com",
+      email: "9416144TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416144TB",
@@ -1265,7 +1265,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "KHAIRUL ARIFIN PANGGE",
-      email: "Khairularifin927@gmail.com",
+      email: "9716135TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716135TB",
@@ -1273,7 +1273,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MARIANSYAH",
-      email: "Mariansyahreal14@gmail.com",
+      email: "9516145TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516145TB",
@@ -1281,7 +1281,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMAD ICHSANUDIN",
-      email: "Ihsandhafa@gmail.com",
+      email: "9316109TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316109TB",
@@ -1289,7 +1289,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD JAYA MAYYASA",
-      email: "M.jayamayyasa96@gmail.com",
+      email: "9616140TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616140TB",
@@ -1417,7 +1417,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "KHUSNUL KHOLIK",
-      email: "kholik.khusnul@gmail.com",
+      email: "9016097TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016097TB",
@@ -1425,7 +1425,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "TAUFIK AFRIANDY NAPITUPULU",
-      email: "taufik.an670@gmail.com",
+      email: "9016098TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016098TB",
@@ -1433,7 +1433,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "EDY NURDIANSYAH",
-      email: "Edy.knox@gmail.com",
+      email: "9516136TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516136TB",
@@ -1441,7 +1441,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "IKHSAN PRAYOGI",
-      email: "Ikhsanprayoogi@gmail.com",
+      email: "9416148TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416148TB",
@@ -1449,7 +1449,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "KAMAL HASAN",
-      email: "Kamahasanojt8@gmail.com",
+      email: "9616142TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616142TB",
@@ -1457,7 +1457,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "REZA AZHARI",
-      email: "Azharireza88@gmail.com",
+      email: "8817074PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8817074PL",
@@ -1465,7 +1465,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "JULI PAJAR WALOYO",
-      email: "jullypjr@gmail.com",
+      email: "8913001BR@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913001BR",
@@ -1609,7 +1609,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FAQIH ALFARUQ",
-      email: "faqihxalfaruq@gmail.com",
+      email: "faqih.alfaruq@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9217031ZJY",
@@ -1617,7 +1617,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD MUSTAFA",
-      email: "mustafamuhammad866@gmail.com",
+      email: "9316073TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316073TB",
@@ -1625,7 +1625,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "PERRY BURA",
-      email: "Perrybura17@gmail.com",
+      email: "8916037TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916037TB",
@@ -1633,7 +1633,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "REZA PRATAMA",
-      email: "Reza.pratama27@gmail.com",
+      email: "9416084TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416084TB",
@@ -1641,7 +1641,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "YOGI PRATAMA",
-      email: "Yogipratama164@gmail.com",
+      email: "9316011TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316011TB",
@@ -1649,7 +1649,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "OXSA ANUGRAH",
-      email: "Anugrahoxsa@gmail.com",
+      email: "9716128TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716128TB",
@@ -1657,7 +1657,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD HASBI",
-      email: "Hasbi1717@yahoo.com",
+      email: "9216043TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216043TB",
@@ -1665,7 +1665,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "CHANDRA DWI SAPUTRA",
-      email: "Candramickey@gmail.com",
+      email: "9516125TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516125TB",
@@ -1745,7 +1745,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RIMMER",
-      email: "Rimmer.kaltim@gmail.com",
+      email: "rimmer@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8917005TB",
@@ -1753,7 +1753,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DANANG PRASETYA",
-      email: "Danangdasilva@gmail.com",
+      email: "9416080TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416080TB",
@@ -1761,7 +1761,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RISZKI WAHYU ADINATA",
-      email: "Riszkiw@gmail.com",
+      email: "9416083TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416083TB",
@@ -1769,7 +1769,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ANGGA ARRYANDA PUTRA HIDAYAT",
-      email: "Anggaryandha176@gmail.com",
+      email: "9516123TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516123TB",
@@ -1777,7 +1777,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "BAYU PRASETYO",
-      email: "Bayu.prasetyo441@gmail.com",
+      email: "9716133TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716133TB",
@@ -1785,7 +1785,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "JAKA WENDIS EKA SAPUTRA",
-      email: "Jakawendis.es@gmail.com",
+      email: "9516059TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516059TB",
@@ -1793,7 +1793,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "NAUFAL RIZKI SYAPUTRA",
-      email: "Opexgood@gmail.com",
+      email: "9716127TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716127TB",
@@ -1801,7 +1801,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ZUQNI SEPTIAN",
-      email: "Zukni.septian@gmail.com",
+      email: "9316153TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316153TB",
@@ -1873,7 +1873,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "WAWAN HENDRI KUSMANTO",
-      email: "awan.jirolu@gmail.com",
+      email: "wawan.hendri@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913016ZJY",
@@ -1881,7 +1881,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "IKWAL IDUL FIKRI",
-      email: "Ikwal.fikri@pjbs.com",
+      email: "9116024tb@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116024TB",
@@ -1889,7 +1889,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "WISNU DWI YANTO",
-      email: "Wisnudwiy66@gmail.com & wisnuastrisena@gmail.com",
+      email: "9616104TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616104TB",
@@ -1897,7 +1897,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "YULIO DESTA FEBRIONA HIDAYATI",
-      email: "yuliodesta321@gmail.com",
+      email: "9516105TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516105TB",
@@ -1905,7 +1905,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AHMAD CHOERUL SAHRI",
-      email: "Ahmadchoerul89@gmail.com",
+      email: "8913032BR@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913032BR",
@@ -1913,7 +1913,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SURYA PERDANA",
-      email: "suryaperdana425@gmail.com",
+      email: "9416042TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416042TB",
@@ -1937,7 +1937,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD ARIF AZHAR",
-      email: "azr_tm02@yahoo.com",
+      email: "muhammad.arif@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8409588Z",
@@ -1945,7 +1945,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "GUSTI PRYANDARU",
-      email: "gustipryandaru@gmail.com",
+      email: "gusti.pryandaru@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9115298ZJY",
@@ -1953,7 +1953,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RICARDO",
-      email: "Ricardokbmk@gmail.com",
+      email: "9216034TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216034TB",
@@ -1961,7 +1961,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RISKO RAHMAN NOOR",
-      email: "riskorahman93@gmail.com",
+      email: "9316012TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316012TB",
@@ -1985,7 +1985,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "GEDE BAYU ANUGRAH JANARDANA",
-      email: "anugrah.janardana@gmail.com",
+      email: "gede.bayu@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9315204ZJY",
@@ -1993,7 +1993,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ARBIAN TRIHARTONO",
-      email: "Arbian.trihartono@gmail.com",
+      email: "arbian.tri@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016018TB",
@@ -2001,7 +2001,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AGUSTIAN RAHMAT",
-      email: "Agutirrah@gmail.com",
+      email: "9116049TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116049TB",
@@ -2009,7 +2009,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AGUNG WIJAYANTO",
-      email: "agungwwijayanto@outlook.com / Xagungwijayantox@gmail.com",
+      email: "9217073PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9217073PL",
@@ -2017,7 +2017,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "FRANKY NOPRYANTO",
-      email: "Frankienoprianto@gmail.com",
+      email: "8916007TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916007TB",
@@ -2025,7 +2025,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DAVID HERMAWAN",
-      email: "davidhermawan122@gmail.com",
+      email: "9316025TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316025TB",
@@ -2033,7 +2033,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD AN NUUR ISLAM",
-      email: "annoer.respect365@gmail.com",
+      email: "9316016TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316016TB",
@@ -2041,7 +2041,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DWI PUJIANTO",
-      email: "Dwi.pujianto27@gmail.com",
+      email: "9216124TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216124TB",
@@ -2057,7 +2057,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "AGISTA RIZKY PRAMANA",
-      email: "agistarizky@gmail.com",
+      email: "agista.rizky@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9115227ZJY",
@@ -2065,7 +2065,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD ANZAR",
-      email: "Anzargavigun@gmail.com",
+      email: "9316131TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316131TB",
@@ -2073,7 +2073,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "TEGUH DWI SUSANTO",
-      email: "teguhsusanto420@gmail.com",
+      email: "9116013TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116013TB",
@@ -2081,7 +2081,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "SANDI WIDYANTO",
-      email: "Sandiwidyanto@gmail.com",
+      email: "8816076TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8816076TB",
@@ -2097,7 +2097,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ARISTO TITIS ADILO",
-      email: "adilo.aristo@gmail.com",
+      email: "aristo.titis@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913045ZJY",
@@ -2129,7 +2129,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "BAMBANG BAGJA",
-      email: "bambangbagja@gmail.com",
+      email: "bambang.bagja@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9117193ZJY",
@@ -2137,7 +2137,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "ERMA YUNITA",
-      email: "Tata.sitata92@gmail.com",
+      email: "9116114TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116114TB",
@@ -2145,7 +2145,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "MUHAMMAD ARSYAD",
-      email: "Arsyadmsp@gmail.com",
+      email: "9216111TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216111TB",
@@ -2161,7 +2161,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "YUDA WARDANA",
-      email: "yudatanex@gmail.com",
+      email: "9516072PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516072PL",
@@ -2169,7 +2169,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RIZA MEIRISAH",
-      email: "Rizameirisah@gmail.com",
+      email: "9416102TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416102TB",
@@ -2193,7 +2193,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "DZIKRI IRHAMI MUHARROM",
-      email: "dzikri.irhami@gmail.com",
+      email: "dzikri@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9014041ZJY",
@@ -2201,7 +2201,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "WISDOMI WASIH S PURBA",
-      email: "Wisdomiwsp@gmail.com",
+      email: "8715005TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8715005TB",
@@ -2209,7 +2209,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "IKE LUVITA AYUNANI",
-      email: "Ikeluvita91@gmail.com",
+      email: "9117043PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9117043PL",
@@ -2249,7 +2249,7 @@ export async function getUsersData(): Promise<SeedUser[]> {
     },
     {
       name: "RAHMAT NURROYYAN",
-      email: "r.nurroyyan@gmail.com",
+      email: "9317002RP@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317002RP",
