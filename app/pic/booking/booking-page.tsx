@@ -120,10 +120,7 @@ function BookingForm({
       );
 
       // LOGIKA BARU: CEK MEETING TYPE
-      if (
-        formData.meetingType === "INTERNAL_LINTAS_BIDANG" ||
-        formData.meetingType === "EKSTERNAL"
-      ) {
+      if (formData.meetingType === "EKSTERNAL") {
         // Buka Google Form di tab baru
         const googleFormUrl = buildGoogleFormUrl();
         window.open(googleFormUrl, "_blank");

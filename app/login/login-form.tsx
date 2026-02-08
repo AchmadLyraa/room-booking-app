@@ -107,6 +107,9 @@ export function LoginForm() {
                 )}
               </button>
             </div>
+            <p className="mt-2 text-xs text-red-400">
+              Password default: <span className="font-bold">pic123</span>
+            </p>
           </div>
 
           <button type="submit" disabled={loading} className="login-submit-btn">

@@ -347,7 +347,14 @@ export async function getRoomAvailability(bookingDateString: string) {
           },
           status: "APPROVED",
         },
-        select: { session: true },
+        select: {
+          session: true,
+          user: {
+            select: {
+              name: true,
+            },
+          },
+        },
       },
     },
     orderBy: { createdAt: "asc" },
@@ -364,6 +371,11 @@ export async function getRoomAvailability(bookingDateString: string) {
     const hasS1 = booked.includes("SESSION_1");
     const hasS2 = booked.includes("SESSION_2");
     const hasFD = booked.includes("FULLDAY");
+
+    const getBookedBy = (session: string) => {
+      const booking = room.bookings.find((b) => b.session === session);
+      return booking?.user?.name || null;
+    };
 
     return {
       id: room.id,
@@ -396,6 +408,11 @@ export async function getRoomAvailability(bookingDateString: string) {
               : isToday && currentHourWITA >= sessionTimes.SESSION_1.end // ← Cek jam >= 12 (akhir SESI 1)
                 ? "DISABLED" // SESI 1 udah lewat, FULLDAY gak mungkin!
                 : "TERSEDIA",
+      },
+      bookedBy: {
+        SESSION_1: hasFD ? getBookedBy("FULLDAY") : getBookedBy("SESSION_1"),
+        SESSION_2: hasFD ? getBookedBy("FULLDAY") : getBookedBy("SESSION_2"),
+        FULLDAY: getBookedBy("FULLDAY"),
       },
     };
   });

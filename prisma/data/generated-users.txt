@@ -1,7 +1,7 @@
     // AUTO-GENERATED FROM EXCEL - DO NOT EDIT MANUALLY
     {
       name: "HABIB MUHAJIR",
-      email: "habib.muhajir99@gmail.com",
+      email: "habib.muhajir@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8006131JA",
@@ -9,7 +9,7 @@
     },
     {
       name: "WAHYOE ROBBYANUR",
-      email: "Wahyoerobbyanur@gmail.com",
+      email: "wahyoe.robbyanur@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216020TB",
@@ -17,7 +17,7 @@
     },
     {
       name: "ANGGA SENJA PRASETYA",
-      email: "Anggasenja30@gmail.com",
+      email: "9116070TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116070TB",
@@ -97,7 +97,7 @@
     },
     {
       name: "BHEKTY CRISVIANDI",
-      email: "B.crisviandi@gmail.com",
+      email: "bhekty.crisviandi@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116099PC",
@@ -105,7 +105,7 @@
     },
     {
       name: "ANDI AYU WILDANA",
-      email: "Ayuwildana@gmail.com",
+      email: "9317002TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317002TB",
@@ -113,7 +113,7 @@
     },
     {
       name: "KOKOH WAHYU ADILLAH",
-      email: "kokoh.adillah@gmail.com",
+      email: "9014056RB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9014056RB",
@@ -153,7 +153,7 @@
     },
     {
       name: "DHIDHIK KRIDHO LAKSONO",
-      email: "Dhi2k10@gmail.com",
+      email: "dhidhik.krido@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8308095JA",
@@ -161,7 +161,7 @@
     },
     {
       name: "DIDIK AGUS SETIAWAN",
-      email: "setiawandidikagus@gmail.com",
+      email: "didik.agus@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916236ZJY",
@@ -169,7 +169,7 @@
     },
     {
       name: "LUMBAN GAOL CRISTOFEL",
-      email: "lumbancris@gmail.com",
+      email: "9316036TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316036TB",
@@ -177,7 +177,7 @@
     },
     {
       name: "RAMSES HASUDUNGAN SIMATUPANG",
-      email: "Ramcs.okm@gmail.com",
+      email: "9016067TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016067TB",
@@ -185,7 +185,7 @@
     },
     {
       name: "ADITYA KUMARA TUNGGA",
-      email: "Adityakumara76@gmail.com",
+      email: "9616046TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616046TB",
@@ -201,7 +201,7 @@
     },
     {
       name: "ANDI ISTRADA",
-      email: "andi_istrada@yahoo.com",
+      email: "andi.istrada@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8305037JA",
@@ -209,7 +209,7 @@
     },
     {
       name: "ADI HERLAMBANG",
-      email: "Adihrlmbng@gmail.com",
+      email: "9116014TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116014TB",
@@ -217,7 +217,7 @@
     },
     {
       name: "ARDIKA RIO NINDRA",
-      email: "Dikario.b4k3uniba13@gmail.com",
+      email: "9216051TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216051TB",
@@ -225,7 +225,7 @@
     },
     {
       name: "NANDA FINALIS",
-      email: "Nandafinalis@gmail.com",
+      email: "9016022TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016022TB",
@@ -233,7 +233,7 @@
     },
     {
       name: "RAHMANSYAH",
-      email: "rahman.ujkt@gmail.com",
+      email: "9216010TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216010TB",
@@ -241,7 +241,7 @@
     },
     {
       name: "SIGIT HARIYAWAN",
-      email: "Sigithariyawan@gmail.com",
+      email: "9616048TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616048TB",
@@ -249,7 +249,7 @@
     },
     {
       name: "KSATRIAWAN DWIGUNA",
-      email: "Ksatriawan22@gmail.com",
+      email: "9316044TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316044TB",
@@ -257,7 +257,7 @@
     },
     {
       name: "MUHAMMAD RIZAL PERDANA",
-      email: "Rperdana400@gmail.com",
+      email: "9216119TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216119TB",
@@ -265,7 +265,7 @@
     },
     {
       name: "LUKI DWI ARGO SAPUTRO",
-      email: "Saputroluki24@gmail.com",
+      email: "9116065TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116065TB",
@@ -273,7 +273,7 @@
     },
     {
       name: "UNTUNG PRI HANDOKO",
-      email: "Uphhandoko@gmail.com",
+      email: "9516146TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516146TB",
@@ -281,7 +281,7 @@
     },
     {
       name: "KRISNADI SETIAWAN",
-      email: "krisnadisetyawan212@gmail.com",
+      email: "9317009TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317009TB",
@@ -289,7 +289,7 @@
     },
     {
       name: "ARDIANTO",
-      email: "Bintang.ar28@gmail.com",
+      email: "9416106TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416106TB",
@@ -297,7 +297,7 @@
     },
     {
       name: "FACHRI APRILIYAN MUTIYASNUR",
-      email: "Fachri.apriliyan@gmail.com",
+      email: "9716141TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716141TB",
@@ -305,7 +305,7 @@
     },
     {
       name: "AMRAN ALI",
-      email: "amranali100891@gmail.com",
+      email: "9116028TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116028TB",
@@ -313,7 +313,7 @@
     },
     {
       name: "NOORDIHAMSYAH MAULANAH",
-      email: "M_maul@rocketmail.com",
+      email: "8917010TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8917010TB",
@@ -393,7 +393,7 @@
     },
     {
       name: "MUHAMMAD IRFAN",
-      email: "muh.irfan23@gmail.com",
+      email: "muh.irfan@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8614135ZJY",
@@ -401,7 +401,7 @@
     },
     {
       name: "APIAN DONO",
-      email: "Apiandono@gmail.com",
+      email: "9016035TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016035TB",
@@ -409,7 +409,7 @@
     },
     {
       name: "RANGGA DISTIANTARA",
-      email: "Radistiantara@gmail.com & dewantororanda@gmail.com",
+      email: "9316019TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316019TB",
@@ -417,7 +417,7 @@
     },
     {
       name: "NOEGRAH TRI JULIANSYAH",
-      email: "Noe.julian04@gmail.com",
+      email: "8916062TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916062TB",
@@ -425,7 +425,7 @@
     },
     {
       name: "FIRMAN MAULANA HARAHAP",
-      email: "Firmanmaulanaharahap@gmail.com",
+      email: "9116094TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116094TB",
@@ -433,7 +433,7 @@
     },
     {
       name: "HADYAN",
-      email: "Hadyanheixa@gmail.com",
+      email: "9116029TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116029TB",
@@ -441,7 +441,7 @@
     },
     {
       name: "STYAWAN",
-      email: "styawan.090791@gmail.com",
+      email: "9116074TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116074TB",
@@ -449,7 +449,7 @@
     },
     {
       name: "RIBUT INDRAYANA",
-      email: "Ribut862@gmail.com",
+      email: "9017011TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9017011TB",
@@ -457,7 +457,7 @@
     },
     {
       name: "MUHAMMAD ANDY",
-      email: "Muhammadandy1994@gmail.com",
+      email: "9416149TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416149TB",
@@ -465,7 +465,7 @@
     },
     {
       name: "HARI SUPRIANTO",
-      email: "harysuprianto.hs@gmail.com",
+      email: "9416118TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416118TB",
@@ -473,7 +473,7 @@
     },
     {
       name: "FERDIAN EKA PRASETYA",
-      email: "Deianprasetya@gmail.com",
+      email: "9516134TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516134TB",
@@ -481,7 +481,7 @@
     },
     {
       name: "ACHMAD BASOFI",
-      email: "Basofislayer2146@gmail.com",
+      email: "9417016TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9417016TB",
@@ -489,7 +489,7 @@
     },
     {
       name: "NUR ROCHMAT",
-      email: "Nurrochm4t@gmail.com",
+      email: "9013006BR@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9013006BR",
@@ -497,7 +497,7 @@
     },
     {
       name: "ACHMAD BUCHORI",
-      email: "Achm4d.8uchori@gmail.com",
+      email: "9716103TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716103TB",
@@ -505,7 +505,7 @@
     },
     {
       name: "JUNAID HIDAYAT",
-      email: "Juneid1991@gmail.com",
+      email: "9116057TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116057TB",
@@ -577,7 +577,7 @@
     },
     {
       name: "TARYONO",
-      email: "Suandytison@gmail.comcom",
+      email: "taryono@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8505090JA",
@@ -585,7 +585,7 @@
     },
     {
       name: "FADLI",
-      email: "El09612047@gmail.com",
+      email: "9016086TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016086TB",
@@ -593,7 +593,7 @@
     },
     {
       name: "MUHAMMAD YUNUS",
-      email: "muhammadyunus092@gmail.com",
+      email: "9216027TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216027TB",
@@ -601,7 +601,7 @@
     },
     {
       name: "HARDIANSYAH",
-      email: "Ancabahar28@gmail.com",
+      email: "9116116TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116116TB",
@@ -609,7 +609,7 @@
     },
     {
       name: "ACHMAD FACHRIZAL",
-      email: "Achmadfachrizal05@gmail.com",
+      email: "9016041TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016041TB",
@@ -617,7 +617,7 @@
     },
     {
       name: "ADITYO DARMAJI",
-      email: "Adityo.darmaji@gmail.com",
+      email: "9116063TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116063TB",
@@ -625,7 +625,7 @@
     },
     {
       name: "HANDOKO",
-      email: "Handokocomex@gmail.com",
+      email: "9416052TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416052TB",
@@ -633,7 +633,7 @@
     },
     {
       name: "I WAYAN PURWANA",
-      email: "Wayanpurwana46@gmail.com",
+      email: "9316087TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316087TB",
@@ -641,7 +641,7 @@
     },
     {
       name: "SLAMET RIYADI",
-      email: "Sslamet465@gmail.com",
+      email: "8916045TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916045TB",
@@ -649,7 +649,7 @@
     },
     {
       name: "JUMARDI",
-      email: "jumardi.adi69@gmail.com",
+      email: "9516056TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516056TB",
@@ -657,7 +657,7 @@
     },
     {
       name: "DWI ZUNIARTO",
-      email: "Dwizuniartoo@gmail.com",
+      email: "9116058TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116058TB",
@@ -665,7 +665,7 @@
     },
     {
       name: "RIKI EHDHA SUBAWEH",
-      email: "Rikiehda@gmail.com",
+      email: "9317013TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317013TB",
@@ -673,7 +673,7 @@
     },
     {
       name: "SURYA ARMANDA",
-      email: "Suryaarmanda39@gmail.com",
+      email: "9416100TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416100TB",
@@ -681,7 +681,7 @@
     },
     {
       name: "BAGUS WIBOWO",
-      email: "Baguswibowo272@yahoo.com",
+      email: "9116015TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116015TB",
@@ -689,7 +689,7 @@
     },
     {
       name: "RACHMAD SANDY",
-      email: "Rachmad2992@gmail.com",
+      email: "9317012TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317012TB",
@@ -697,7 +697,7 @@
     },
     {
       name: "WISNU HABIB",
-      email: "Wisnuhabib605@gmail.com",
+      email: "9516122TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516122TB",
@@ -769,7 +769,7 @@
     },
     {
       name: "MUHAMMAD FAUZAN",
-      email: "Muhammadfauzan092@gmail.com",
+      email: "m.fauzan@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216030TB",
@@ -777,7 +777,7 @@
     },
     {
       name: "GERSON YOSEP BA'KA'",
-      email: "Gersonbaka@gmail.com",
+      email: "9116077TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116077TB",
@@ -785,7 +785,7 @@
     },
     {
       name: "JUMADIL RAHMAN",
-      email: "Jumadilrahman32@gmail.com",
+      email: "9216021TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216021TB",
@@ -793,7 +793,7 @@
     },
     {
       name: "SEPTIANOER PERMADI WIBOWO",
-      email: "Septianoer.permadi@gmail.com",
+      email: "9316082TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316082TB",
@@ -801,7 +801,7 @@
     },
     {
       name: "MUHTAR DANI",
-      email: "Muhtardani@gmail.com",
+      email: "9416071TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416071TB",
@@ -809,7 +809,7 @@
     },
     {
       name: "SUGONDO PRAYOGO",
-      email: "Sugondo06@gmail.com",
+      email: "9216064TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216064TB",
@@ -817,7 +817,7 @@
     },
     {
       name: "MOCHAMMAD ISHAK",
-      email: "ishakzhafran@gmail.com",
+      email: "9416079TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416079TB",
@@ -825,7 +825,7 @@
     },
     {
       name: "AHMAD IKBAL",
-      email: "Ahmadikbal93@gmail.com",
+      email: "9316009TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316009TB",
@@ -833,7 +833,7 @@
     },
     {
       name: "DANU RACHMADDAN",
-      email: "D.rachmaddan@gmail.com",
+      email: "9316032TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316032TB",
@@ -841,7 +841,7 @@
     },
     {
       name: "HILMAN AKBAR AL HAZMI",
-      email: "Hilmanalhazmi6@gmail.com",
+      email: "9316081TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316081TB",
@@ -849,7 +849,7 @@
     },
     {
       name: "ANSHORI",
-      email: "Anshoripjbs@gmail.com",
+      email: "9616130TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616130TB",
@@ -857,7 +857,7 @@
     },
     {
       name: "FIRMAN SANTYA RUDI",
-      email: "Firman.sr23@gmail.com",
+      email: "9417014TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9417014TB",
@@ -865,7 +865,7 @@
     },
     {
       name: "AUFA RAFDIKA",
-      email: "Aufa.rafdika@gmail.com",
+      email: "8916099TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916099TB",
@@ -873,7 +873,7 @@
     },
     {
       name: "AGUNG MAULANA",
-      email: "maulanaagung1005@gmail.com",
+      email: "9716121TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716121TB",
@@ -961,7 +961,7 @@
     },
     {
       name: "NURAFIATULLAH",
-      email: "afik178@gmail.com",
+      email: "nurafiatuullah@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9215255ZJY",
@@ -969,7 +969,7 @@
     },
     {
       name: "AGUNG PRIA AMBARA",
-      email: "Agungambara44@gmail.com",
+      email: "9316053TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316053TB",
@@ -977,7 +977,7 @@
     },
     {
       name: "HERRY IRAWAN",
-      email: "Herryirawan1988@gmail.com",
+      email: "8916039TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916039TB",
@@ -1001,7 +1001,7 @@
     },
     {
       name: "MUDZOFAR SOFYAN",
-      email: "mudzofars@gmail.com",
+      email: "mudzofar.sofyan@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216180ZJY",
@@ -1009,7 +1009,7 @@
     },
     {
       name: "ANDHIKA",
-      email: "Dhikayoo@gmail.com",
+      email: "9316108TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316108TB",
@@ -1017,7 +1017,7 @@
     },
     {
       name: "MIFTAKHUL HUDA",
-      email: "Mifta.huda07@gmail.com",
+      email: "9216038TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216038TB",
@@ -1025,7 +1025,7 @@
     },
     {
       name: "REZA IBNU MULIA",
-      email: "rezaibnu@ymail.com & laborujkt@gmail.com",
+      email: "9316023TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316023TB",
@@ -1081,7 +1081,7 @@
     },
     {
       name: "MISDIYANTO",
-      email: "misdipjb@gmail.com",
+      email: "misdiyanto@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8410073JA",
@@ -1089,7 +1089,7 @@
     },
     {
       name: "NASRI MATHAR",
-      email: "nazrimathar@gmail.com",
+      email: "nasri.mathar@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8811100JA",
@@ -1097,7 +1097,7 @@
     },
     {
       name: "BANGKIT INDRA PRATAMA",
-      email: "Bangkitindrap@gmail.com",
+      email: "9116017TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116017TB",
@@ -1105,7 +1105,7 @@
     },
     {
       name: "FAJRIN ZAINUDDIN",
-      email: "Fajrinzain10@gmail.com",
+      email: "9016075TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016075TB",
@@ -1113,7 +1113,7 @@
     },
     {
       name: "MUHAMMAD ARGHU",
-      email: "Muh.arghu@gmail.com",
+      email: "9416150TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416150TB",
@@ -1121,7 +1121,7 @@
     },
     {
       name: "SURIANTO",
-      email: "surianto.sk@gmail.com",
+      email: "9317007TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317007TB",
@@ -1129,7 +1129,7 @@
     },
     {
       name: "RUDY SETYANA RAHARJO",
-      email: "rudyruudrush@gmail.com",
+      email: "8916078TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916078TB",
@@ -1153,7 +1153,7 @@
     },
     {
       name: "TONY SUHARTONO",
-      email: "tonykediri87@gmail.com",
+      email: "tony.suharto@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8711040JA",
@@ -1161,7 +1161,7 @@
     },
     {
       name: "MAYKY ARISDA SUMANTO",
-      email: "max8715008td@gmail.com",
+      email: "8715008TD@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8715008TD",
@@ -1169,7 +1169,7 @@
     },
     {
       name: "MUHAMMAD ADITYAWARMAN",
-      email: "Adiwarman05@gmail.com",
+      email: "9116044PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116044PL",
@@ -1177,7 +1177,7 @@
     },
     {
       name: "FAHMI HERMAWAN",
-      email: "Fahmihermawan8@gmail.com",
+      email: "9116137TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116137TB",
@@ -1193,7 +1193,7 @@
     },
     {
       name: "EVAN SATRIA",
-      email: "nave.satria@gmail.com",
+      email: "evan.satria@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216226ZJY",
@@ -1201,7 +1201,7 @@
     },
     {
       name: "HERI SISWANTO",
-      email: "herisiswanto8@gmail.com",
+      email: "9116095TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116095TB",
@@ -1209,7 +1209,7 @@
     },
     {
       name: "INDRA SAPUTRA SIAHAAN",
-      email: "Indrakrezen2@gmail.com",
+      email: "9416089TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416089TB",
@@ -1217,7 +1217,7 @@
     },
     {
       name: "TRI SUPRIADI",
-      email: "Iamtriee@gmail.com",
+      email: "9217008TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9217008TB",
@@ -1225,7 +1225,7 @@
     },
     {
       name: "EDI TIARDI",
-      email: "Editiardi25@gmail.com",
+      email: "9316151TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316151TB",
@@ -1233,7 +1233,7 @@
     },
     {
       name: "JUHAMSYARIE",
-      email: "Juhamsyarie@gmail.com",
+      email: "9416144TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416144TB",
@@ -1241,7 +1241,7 @@
     },
     {
       name: "KHAIRUL ARIFIN PANGGE",
-      email: "Khairularifin927@gmail.com",
+      email: "9716135TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716135TB",
@@ -1249,7 +1249,7 @@
     },
     {
       name: "MARIANSYAH",
-      email: "Mariansyahreal14@gmail.com",
+      email: "9516145TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516145TB",
@@ -1257,7 +1257,7 @@
     },
     {
       name: "MUHAMAD ICHSANUDIN",
-      email: "Ihsandhafa@gmail.com",
+      email: "9316109TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316109TB",
@@ -1265,7 +1265,7 @@
     },
     {
       name: "MUHAMMAD JAYA MAYYASA",
-      email: "M.jayamayyasa96@gmail.com",
+      email: "9616140TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616140TB",
@@ -1393,7 +1393,7 @@
     },
     {
       name: "KHUSNUL KHOLIK",
-      email: "kholik.khusnul@gmail.com",
+      email: "9016097TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016097TB",
@@ -1401,7 +1401,7 @@
     },
     {
       name: "TAUFIK AFRIANDY NAPITUPULU",
-      email: "taufik.an670@gmail.com",
+      email: "9016098TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016098TB",
@@ -1409,7 +1409,7 @@
     },
     {
       name: "EDY NURDIANSYAH",
-      email: "Edy.knox@gmail.com",
+      email: "9516136TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516136TB",
@@ -1417,7 +1417,7 @@
     },
     {
       name: "IKHSAN PRAYOGI",
-      email: "Ikhsanprayoogi@gmail.com",
+      email: "9416148TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416148TB",
@@ -1425,7 +1425,7 @@
     },
     {
       name: "KAMAL HASAN",
-      email: "Kamahasanojt8@gmail.com",
+      email: "9616142TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616142TB",
@@ -1433,7 +1433,7 @@
     },
     {
       name: "REZA AZHARI",
-      email: "Azharireza88@gmail.com",
+      email: "8817074PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8817074PL",
@@ -1441,7 +1441,7 @@
     },
     {
       name: "JULI PAJAR WALOYO",
-      email: "jullypjr@gmail.com",
+      email: "8913001BR@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913001BR",
@@ -1585,7 +1585,7 @@
     },
     {
       name: "FAQIH ALFARUQ",
-      email: "faqihxalfaruq@gmail.com",
+      email: "faqih.alfaruq@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9217031ZJY",
@@ -1593,7 +1593,7 @@
     },
     {
       name: "MUHAMMAD MUSTAFA",
-      email: "mustafamuhammad866@gmail.com",
+      email: "9316073TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316073TB",
@@ -1601,7 +1601,7 @@
     },
     {
       name: "PERRY BURA",
-      email: "Perrybura17@gmail.com",
+      email: "8916037TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916037TB",
@@ -1609,7 +1609,7 @@
     },
     {
       name: "REZA PRATAMA",
-      email: "Reza.pratama27@gmail.com",
+      email: "9416084TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416084TB",
@@ -1617,7 +1617,7 @@
     },
     {
       name: "YOGI PRATAMA",
-      email: "Yogipratama164@gmail.com",
+      email: "9316011TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316011TB",
@@ -1625,7 +1625,7 @@
     },
     {
       name: "OXSA ANUGRAH",
-      email: "Anugrahoxsa@gmail.com",
+      email: "9716128TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716128TB",
@@ -1633,7 +1633,7 @@
     },
     {
       name: "MUHAMMAD HASBI",
-      email: "Hasbi1717@yahoo.com",
+      email: "9216043TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216043TB",
@@ -1641,7 +1641,7 @@
     },
     {
       name: "CHANDRA DWI SAPUTRA",
-      email: "Candramickey@gmail.com",
+      email: "9516125TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516125TB",
@@ -1721,7 +1721,7 @@
     },
     {
       name: "RIMMER",
-      email: "Rimmer.kaltim@gmail.com",
+      email: "rimmer@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8917005TB",
@@ -1729,7 +1729,7 @@
     },
     {
       name: "DANANG PRASETYA",
-      email: "Danangdasilva@gmail.com",
+      email: "9416080TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416080TB",
@@ -1737,7 +1737,7 @@
     },
     {
       name: "RISZKI WAHYU ADINATA",
-      email: "Riszkiw@gmail.com",
+      email: "9416083TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416083TB",
@@ -1745,7 +1745,7 @@
     },
     {
       name: "ANGGA ARRYANDA PUTRA HIDAYAT",
-      email: "Anggaryandha176@gmail.com",
+      email: "9516123TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516123TB",
@@ -1753,7 +1753,7 @@
     },
     {
       name: "BAYU PRASETYO",
-      email: "Bayu.prasetyo441@gmail.com",
+      email: "9716133TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716133TB",
@@ -1761,7 +1761,7 @@
     },
     {
       name: "JAKA WENDIS EKA SAPUTRA",
-      email: "Jakawendis.es@gmail.com",
+      email: "9516059TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516059TB",
@@ -1769,7 +1769,7 @@
     },
     {
       name: "NAUFAL RIZKI SYAPUTRA",
-      email: "Opexgood@gmail.com",
+      email: "9716127TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9716127TB",
@@ -1777,7 +1777,7 @@
     },
     {
       name: "ZUQNI SEPTIAN",
-      email: "Zukni.septian@gmail.com",
+      email: "9316153TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316153TB",
@@ -1849,7 +1849,7 @@
     },
     {
       name: "WAWAN HENDRI KUSMANTO",
-      email: "awan.jirolu@gmail.com",
+      email: "wawan.hendri@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913016ZJY",
@@ -1857,7 +1857,7 @@
     },
     {
       name: "IKWAL IDUL FIKRI",
-      email: "Ikwal.fikri@pjbs.com",
+      email: "9116024tb@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116024TB",
@@ -1865,7 +1865,7 @@
     },
     {
       name: "WISNU DWI YANTO",
-      email: "Wisnudwiy66@gmail.com & wisnuastrisena@gmail.com",
+      email: "9616104TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9616104TB",
@@ -1873,7 +1873,7 @@
     },
     {
       name: "YULIO DESTA FEBRIONA HIDAYATI",
-      email: "yuliodesta321@gmail.com",
+      email: "9516105TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516105TB",
@@ -1881,7 +1881,7 @@
     },
     {
       name: "AHMAD CHOERUL SAHRI",
-      email: "Ahmadchoerul89@gmail.com",
+      email: "8913032BR@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913032BR",
@@ -1889,7 +1889,7 @@
     },
     {
       name: "SURYA PERDANA",
-      email: "suryaperdana425@gmail.com",
+      email: "9416042TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416042TB",
@@ -1913,7 +1913,7 @@
     },
     {
       name: "MUHAMMAD ARIF AZHAR",
-      email: "azr_tm02@yahoo.com",
+      email: "muhammad.arif@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8409588Z",
@@ -1921,7 +1921,7 @@
     },
     {
       name: "GUSTI PRYANDARU",
-      email: "gustipryandaru@gmail.com",
+      email: "gusti.pryandaru@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9115298ZJY",
@@ -1929,7 +1929,7 @@
     },
     {
       name: "RICARDO",
-      email: "Ricardokbmk@gmail.com",
+      email: "9216034TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216034TB",
@@ -1937,7 +1937,7 @@
     },
     {
       name: "RISKO RAHMAN NOOR",
-      email: "riskorahman93@gmail.com",
+      email: "9316012TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316012TB",
@@ -1961,7 +1961,7 @@
     },
     {
       name: "GEDE BAYU ANUGRAH JANARDANA",
-      email: "anugrah.janardana@gmail.com",
+      email: "gede.bayu@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9315204ZJY",
@@ -1969,7 +1969,7 @@
     },
     {
       name: "ARBIAN TRIHARTONO",
-      email: "Arbian.trihartono@gmail.com",
+      email: "arbian.tri@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9016018TB",
@@ -1977,7 +1977,7 @@
     },
     {
       name: "AGUSTIAN RAHMAT",
-      email: "Agutirrah@gmail.com",
+      email: "9116049TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116049TB",
@@ -1985,7 +1985,7 @@
     },
     {
       name: "AGUNG WIJAYANTO",
-      email: "agungwwijayanto@outlook.com / Xagungwijayantox@gmail.com",
+      email: "9217073PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9217073PL",
@@ -1993,7 +1993,7 @@
     },
     {
       name: "FRANKY NOPRYANTO",
-      email: "Frankienoprianto@gmail.com",
+      email: "8916007TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8916007TB",
@@ -2001,7 +2001,7 @@
     },
     {
       name: "DAVID HERMAWAN",
-      email: "davidhermawan122@gmail.com",
+      email: "9316025TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316025TB",
@@ -2009,7 +2009,7 @@
     },
     {
       name: "MUHAMMAD AN NUUR ISLAM",
-      email: "annoer.respect365@gmail.com",
+      email: "9316016TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316016TB",
@@ -2017,7 +2017,7 @@
     },
     {
       name: "DWI PUJIANTO",
-      email: "Dwi.pujianto27@gmail.com",
+      email: "9216124TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216124TB",
@@ -2033,7 +2033,7 @@
     },
     {
       name: "AGISTA RIZKY PRAMANA",
-      email: "agistarizky@gmail.com",
+      email: "agista.rizky@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9115227ZJY",
@@ -2041,7 +2041,7 @@
     },
     {
       name: "MUHAMMAD ANZAR",
-      email: "Anzargavigun@gmail.com",
+      email: "9316131TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9316131TB",
@@ -2049,7 +2049,7 @@
     },
     {
       name: "TEGUH DWI SUSANTO",
-      email: "teguhsusanto420@gmail.com",
+      email: "9116013TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116013TB",
@@ -2057,7 +2057,7 @@
     },
     {
       name: "SANDI WIDYANTO",
-      email: "Sandiwidyanto@gmail.com",
+      email: "8816076TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8816076TB",
@@ -2073,7 +2073,7 @@
     },
     {
       name: "ARISTO TITIS ADILO",
-      email: "adilo.aristo@gmail.com",
+      email: "aristo.titis@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8913045ZJY",
@@ -2105,7 +2105,7 @@
     },
     {
       name: "BAMBANG BAGJA",
-      email: "bambangbagja@gmail.com",
+      email: "bambang.bagja@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9117193ZJY",
@@ -2113,7 +2113,7 @@
     },
     {
       name: "ERMA YUNITA",
-      email: "Tata.sitata92@gmail.com",
+      email: "9116114TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9116114TB",
@@ -2121,7 +2121,7 @@
     },
     {
       name: "MUHAMMAD ARSYAD",
-      email: "Arsyadmsp@gmail.com",
+      email: "9216111TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9216111TB",
@@ -2137,7 +2137,7 @@
     },
     {
       name: "YUDA WARDANA",
-      email: "yudatanex@gmail.com",
+      email: "9516072PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9516072PL",
@@ -2145,7 +2145,7 @@
     },
     {
       name: "RIZA MEIRISAH",
-      email: "Rizameirisah@gmail.com",
+      email: "9416102TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9416102TB",
@@ -2169,7 +2169,7 @@
     },
     {
       name: "DZIKRI IRHAMI MUHARROM",
-      email: "dzikri.irhami@gmail.com",
+      email: "dzikri@plnnusantarapower.co.id",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9014041ZJY",
@@ -2177,7 +2177,7 @@
     },
     {
       name: "WISDOMI WASIH S PURBA",
-      email: "Wisdomiwsp@gmail.com",
+      email: "8715005TB@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "8715005TB",
@@ -2185,7 +2185,7 @@
     },
     {
       name: "IKE LUVITA AYUNANI",
-      email: "Ikeluvita91@gmail.com",
+      email: "9117043PL@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9117043PL",
@@ -2225,7 +2225,7 @@
     },
     {
       name: "RAHMAT NURROYYAN",
-      email: "r.nurroyyan@gmail.com",
+      email: "9317002RP@pln-npservices.com",
       password: await bcrypt.hash("pic123", 10),
       role: Role.PIC,
       nid: "9317002RP",

@@ -19,6 +19,7 @@ function getStatusButton(
   selectedDate: Date,
   session1Status?: string,
   session2Status?: string,
+  bookedByName?: string | null,
 ) {
   const dateString = selectedDate.toLocaleDateString("en-CA");
 
@@ -27,7 +28,7 @@ function getStatusButton(
     if (status === "DISABLED") {
       return (
         <button
-          className="h-8 px-3 bg-[#FFF000] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed"
+          className="h-auto px-3 py-2 bg-[#FFF000] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed"
           disabled
         >
           DIBATASI
@@ -39,7 +40,7 @@ function getStatusButton(
         <Link
           href={`/pic/booking?date=${dateString}&roomId=${roomId}&session=${session}`}
         >
-          <button className="h-8 px-3 bg-[#22c55e] text-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
+          <button className="h-auto px-3 py-2 bg-[#22c55e] text-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
             TERSEDIA
           </button>
         </Link>
@@ -48,10 +49,13 @@ function getStatusButton(
     // Sisanya TERPAKAI
     return (
       <button
-        className="h-8 px-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black text-xs cursor-not-allowed"
+        className="h-auto px-3 py-2 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black text-xs cursor-not-allowed flex flex-col items-center gap-1"
         disabled
       >
-        TERPAKAI
+        <span>TERPAKAI</span>
+        {bookedByName && (
+          <span className="text-[10px] font-normal">({bookedByName})</span>
+        )}
       </button>
     );
   }
@@ -62,18 +66,17 @@ function getStatusButton(
       <Link
         href={`/pic/booking?date=${dateString}&roomId=${roomId}&session=${session}`}
       >
-        <button className="h-8 px-3 bg-[#22c55e] text-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
+        <button className="h-auto px-3 py-2 bg-[#22c55e] text-white font-bold uppercase border-2 border-black text-xs hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all">
           TERSEDIA
         </button>
       </Link>
     );
   }
 
-  // CEK DISABLED DULU SEBELUM RETURN TERPAKAI! ← FIX NYA DI SINI!
   if (status === "DISABLED") {
     return (
       <button
-        className="h-8 px-3 bg-[#FFF000] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed"
+        className="h-auto px-3 py-2 bg-[#FFF000] text-black font-bold uppercase border-2 border-black text-xs cursor-not-allowed"
         disabled
       >
         DIBATASI
@@ -81,13 +84,16 @@ function getStatusButton(
     );
   }
 
-  // Sisanya baru TERPAKAI
+  // Sisanya TERPAKAI
   return (
     <button
-      className="h-8 px-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black text-xs cursor-not-allowed"
+      className="h-auto px-3 py-2 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black text-xs cursor-not-allowed flex flex-col items-center gap-1"
       disabled
     >
-      TERPAKAI
+      <span>TERPAKAI</span>
+      {bookedByName && (
+        <span className="text-[10px] font-normal">({bookedByName})</span>
+      )}
     </button>
   );
 }
@@ -232,6 +238,7 @@ export function RoomAvailabilityTable() {
                       currentDate,
                       session1Status,
                       session2Status,
+                      room.bookedBy?.SESSION_1,
                     )}
                   </td>
                   <td className="px-4 py-4 text-center border-r-2 border-black">
@@ -242,6 +249,7 @@ export function RoomAvailabilityTable() {
                       currentDate,
                       session1Status,
                       session2Status,
+                      room.bookedBy?.SESSION_2,
                     )}
                   </td>
                   <td className="px-4 py-4 text-center">
@@ -252,6 +260,7 @@ export function RoomAvailabilityTable() {
                       currentDate,
                       session1Status,
                       session2Status,
+                      room.bookedBy?.FULLDAY,
                     )}
                   </td>
                 </tr>
@@ -305,6 +314,7 @@ export function RoomAvailabilityTable() {
                         currentDate,
                         session1Status,
                         session2Status,
+                        room.bookedBy?.SESSION_1,
                       )}
                     </div>
                   </div>
@@ -323,6 +333,7 @@ export function RoomAvailabilityTable() {
                         currentDate,
                         session1Status,
                         session2Status,
+                        room.bookedBy?.SESSION_2,
                       )}
                     </div>
                   </div>
@@ -343,6 +354,7 @@ export function RoomAvailabilityTable() {
                         currentDate,
                         session1Status,
                         session2Status,
+                        room.bookedBy?.FULLDAY,
                       )}
                     </div>
                   </div>
