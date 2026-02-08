@@ -14,7 +14,7 @@ export default function ReduxProvider({ children }: { children: React.ReactNode 
 
   return (
     <Provider store={store}>
-      {/* Loading bar positioned at the top */}
+      {/* Loading bar positioned at the top - above header */}
       <LoadingBar
         style={{
           backgroundColor: "#06b6d4",
@@ -23,7 +23,7 @@ export default function ReduxProvider({ children }: { children: React.ReactNode 
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 9999,
+          zIndex: 99999,
         }}
         updateTime={50}
         maxProgress={95}

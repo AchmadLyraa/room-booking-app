@@ -362,9 +362,9 @@ export default function RoomsManagementClient({ rooms: initialRooms }: RoomsMana
                             selectedRooms.includes(room.id) ? "bg-[#FF5E5B]" : "bg-white"
                           }`}
                         >
-    {selectedRooms.includes(room.id) && (
-      <span className="text-white font-bold text-sm">-</span>
-    )}
+                          {selectedRooms.includes(room.id) && (
+                           <span className="text-white font-bold text-sm">-</span>
+                           )}
                         </div>
                       </div>
                     )}
