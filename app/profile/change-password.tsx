@@ -41,8 +41,9 @@ export default function ChangePasswordForm() {
   }, [state, showError, showSuccess]);
 
   return (
-    <form action={formAction} className="space-y-4 mt-6 border p-4">
-      <h2 className="font-bold text-lg">Ganti Password</h2>
+    <form action={formAction} className="space-y-4 mt-6 border-3 padding-6">
+      <div className="flex flex-col gap-4 p-6">
+        <h2 className="font-bold text-lg">Ganti Password</h2>
 
       <input
         type="password"
@@ -50,7 +51,7 @@ export default function ChangePasswordForm() {
         placeholder="Password Lama"
         value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
-        className="w-full border px-3 py-2 disabled:opacity-50"
+        className="w-full bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black  hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         required
         disabled={isPending}
       />
@@ -61,7 +62,7 @@ export default function ChangePasswordForm() {
         placeholder="Password Baru"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
-        className="w-full border px-3 py-2 disabled:opacity-50"
+        className="w-full bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black  hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         required
         minLength={8}
         disabled={isPending}
@@ -73,18 +74,20 @@ export default function ChangePasswordForm() {
         placeholder="Ulangi Password Baru"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        className="w-full border px-3 py-2 disabled:opacity-50"
+        className="w-full bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         required
         disabled={isPending}
       />
 
       <button
         type="submit"
-        className="bg-black text-white px-4 py-2 font-bold disabled:opacity-50"
+        className="bg-black text-white px-6 py-3 font-bold uppercase border-3 border-black  hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         disabled={isPending}
       >
         {isPending ? "MENYIMPAN..." : "SIMPAN"}
       </button>
+      </div>
+      
     </form>
   );
 }

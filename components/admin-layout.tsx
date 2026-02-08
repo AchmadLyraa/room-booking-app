@@ -19,8 +19,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { logoutUser } from "@/app/actions/logout-action";
 import { cn } from "@/lib/utils";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { signOut } from "next-auth/react";
 
 interface HeaderProps {
   showSearch?: boolean;
@@ -29,6 +31,7 @@ interface HeaderProps {
 
 export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <header className="sticky top-0 z-20 h-16 border-b-3 border-black bg-white flex items-center justify-between px-4 md:px-6">
@@ -57,6 +60,7 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
             <DropdownMenuItem asChild>
               <Link
                 href="/profile"
+                onClick={() => dispatch(showLoading())}
                 className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm"
               >
                 <User className="w-4 h-4" />
@@ -65,15 +69,21 @@ export function Header({ showSearch = true, onMenuClick }: HeaderProps) {
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-black h-[2px]" />
             <DropdownMenuItem asChild>
-              <form action={logoutUser}>
-                <button
-                  type="submit"
-                  className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm w-full text-left"
-                >
-                  <LogOut className="w-4 h-4" />
-                  KELUAR
-                </button>
-              </form>
+              <button
+                onClick={async (e) => {
+                  e.preventDefault();
+                  dispatch(showLoading());
+                  try {
+                    await signOut({ callbackUrl: "/login" });
+                  } finally {
+                    dispatch(hideLoading());
+                  }
+                }}
+                className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm w-full text-left"
+              >
+                <LogOut className="w-4 h-4" />
+                KELUAR
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -99,10 +109,12 @@ export function Sidebar({ currentView, menuItems }: SidebarProps) {
 
   const items = menuItems || defaultMenuItems;
 
+  const dispatch = useDispatch();
+
   return (
     <aside className="w-64 min-h-screen bg-white border-r-3 border-black flex flex-col">
       <div className="p-4 border-b-3 border-black">
-        <Link href="/admin" className="flex items-center gap-2">
+        <Link href="/admin" className="flex items-center gap-2" onClick={() => dispatch(showLoading())}>
           <img
             src="/logo-UPKTSPACE2.png"
             alt="PLNSPACE Logo"
@@ -121,6 +133,7 @@ export function Sidebar({ currentView, menuItems }: SidebarProps) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => dispatch(showLoading())}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 border-2 border-black transition-all font-bold uppercase text-sm",
                 isActive

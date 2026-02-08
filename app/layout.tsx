@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 // import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import ReduxProvider from "@/components/redux-provider";
 
 const _jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
@@ -43,8 +44,10 @@ export default function RootLayout({
       </head>
       
       <body className={`font-sans antialiased`}>
-        {children}
-        <Toaster />
+        <ReduxProvider>
+          {children}
+          <Toaster />
+        </ReduxProvider>
         {/*<Analytics />*/}
       </body>
     </html>

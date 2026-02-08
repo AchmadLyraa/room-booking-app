@@ -3,6 +3,8 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { Eye, EyeOff } from "lucide-react";
 
 export function LoginForm() {
@@ -12,6 +14,8 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,34 +27,39 @@ export function LoginForm() {
     }
 
     setLoading(true);
+    dispatch(showLoading());
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      if (data.error === "USER_NOT_FOUND") {
-        setError("User tidak ditemukan");
-      } else if (data.error === "WRONG_PASSWORD") {
-        setError("Password salah");
-      } else {
-        setError("Login gagal");
+      if (!res.ok) {
+        if (data.error === "USER_NOT_FOUND") {
+          setError("User tidak ditemukan");
+        } else if (data.error === "WRONG_PASSWORD") {
+          setError("Password salah");
+        } else {
+          setError("Login gagal");
+        }
+        return;
       }
+
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      router.push("/");
+    } finally {
+      dispatch(hideLoading());
       setLoading(false);
-      return;
     }
-
-    await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-
-    router.push("/");
   };
 
   return (

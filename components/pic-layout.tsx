@@ -7,7 +7,9 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { logoutUser } from "@/app/actions/logout-action";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
+import { signOut } from "next-auth/react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PICLayoutProps {
@@ -22,6 +24,7 @@ export function PICLayout({ children, currentView, onMenuClick, sidebarOpen, set
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const menuItems = [
     { href: "/pic", label: "BERANDA", icon: Home },
@@ -149,11 +152,20 @@ export function PICLayout({ children, currentView, onMenuClick, sidebarOpen, set
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-black h-[2px]" />
                 <DropdownMenuItem asChild>
-                  <form action={logoutUser}>
-                    <button type="submit" className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm w-full text-left">
-                      <LogOut className="w-4 h-4" /> KELUAR
-                    </button>
-                  </form>
+                  <button
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      dispatch(showLoading());
+                      try {
+                        await signOut({ callbackUrl: "/login" });
+                      } finally {
+                        dispatch(hideLoading());
+                      }
+                    }}
+                    className="flex items-center gap-2 cursor-pointer font-bold uppercase text-sm w-full text-left"
+                  >
+                    <LogOut className="w-4 h-4" /> KELUAR
+                  </button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
