@@ -6,6 +6,7 @@ import { id } from "date-fns/locale";
 import {
   approveBooking,
   rejectBooking,
+  cancelBooking,
   updateAutoApprove,
   getSystemConfig,
 } from "@/app/actions/admin-actions";
@@ -42,6 +43,8 @@ export default function AdminDashboardClient({
   const [selectedBooking, setSelectedBooking] = useState<any>(null);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
   const [loading, setLoading] = useState(false);
   const [bookingList, setBookingList] = useState<any[]>(
     bookings?.success && bookings.data ? bookings.data : [],
@@ -187,6 +190,47 @@ export default function AdminDashboardClient({
     APPROVED: { label: "DISETUJUI", bg: "bg-[#22c55e]", text: "text-white" },
     PENDING: { label: "MENUNGGU", bg: "bg-[#FFF000]", text: "text-black" },
     REJECTED: { label: "DITOLAK", bg: "bg-[#FF5E5B]", text: "text-white" },
+  };
+
+  const handleCancelSubmit = async () => {
+    if (!selectedBooking) {
+      showError("Booking not found");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await cancelBooking(selectedBooking.id, cancelReason);
+
+      if (!result.success) {
+        showError(result.error);
+        return;
+      }
+
+      showSuccess("Booking berhasil dibatalkan");
+
+      if (
+        result.data &&
+        typeof result.data === "object" &&
+        "id" in result.data
+      ) {
+        const bookingData = result.data as { id: string };
+        setBookingList((prev) =>
+          prev.map((b) => (b.id === bookingData.id ? bookingData : b)),
+        );
+      }
+
+      setShowCancelModal(false);
+      setCancelReason("");
+      setSelectedBooking(null);
+    } catch (error) {
+      showError(
+        error instanceof Error ? error.message : String(error),
+        "Failed to cancel booking",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -421,6 +465,18 @@ export default function AdminDashboardClient({
                               </button>
                             </>
                           )}
+                          {booking.status === "APPROVED" && (
+                            <button
+                              onClick={() => {
+                                setSelectedBooking(booking);
+                                setShowCancelModal(true);
+                              }}
+                              disabled={loading}
+                              className="px-3 py-1 bg-[#FF5E5B] text-white border-2 border-black text-xs font-bold uppercase hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                            >
+                              BATAL
+                            </button>
+                          )}
                         </td>
                       </tr>
                     );
@@ -455,7 +511,7 @@ export default function AdminDashboardClient({
 
       {/* Detail Modal */}
       <Dialog
-        open={!!selectedBooking && !showRejectModal}
+        open={!!selectedBooking && !showRejectModal && !showCancelModal}
         onOpenChange={() => setSelectedBooking(null)}
       >
         <DialogContent className="max-w-2xl">
@@ -606,6 +662,68 @@ export default function AdminDashboardClient({
         }}
       >
         <DialogContent className="max-w-md">
+          {/* Cancel Confirmation Modal */}
+          <Dialog
+            open={showCancelModal && !!selectedBooking}
+            onOpenChange={() => {
+              setShowCancelModal(false);
+              setCancelReason("");
+            }}
+          >
+            <DialogContent className="max-w-md">
+              <div className="flex justify-between items-center mb-4">
+                <DialogTitle className="text-xl font-bold uppercase">
+                  BATALKAN BOOKING
+                </DialogTitle>
+              </div>
+              {selectedBooking && (
+                <>
+                  <div className="space-y-4 py-4">
+                    <div>
+                      <p className="font-bold uppercase text-black/60 mb-2">
+                        NOMOR SURAT
+                      </p>
+                      <p className="mb-4">{selectedBooking.letterNumber}</p>
+                    </div>
+
+                    <div className="bg-[#FFF000] border-2 border-black p-3">
+                      <p className="text-sm font-bold">
+                        ⚠️ Booking yang dibatalkan akan tersedia kembali untuk
+                        PIC lain
+                      </p>
+                    </div>
+
+                    <textarea
+                      value={cancelReason}
+                      onChange={(e) => setCancelReason(e.target.value)}
+                      placeholder="Masukkan alasan pembatalan..."
+                      className="w-full border-2 border-black p-3 h-24 mb-4 brutal-shadow focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
+                    />
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button
+                      onClick={handleCancelSubmit}
+                      disabled={loading || !cancelReason.trim()}
+                      className="flex-1 px-4 py-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                    >
+                      {loading ? "MEMPROSES..." : "BATALKAN"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowCancelModal(false);
+                        setCancelReason("");
+                      }}
+                      disabled={loading}
+                      className="flex-1 px-4 py-3 bg-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                    >
+                      BATAL
+                    </button>
+                  </div>
+                </>
+              )}
+            </DialogContent>
+          </Dialog>{" "}
           <div className="flex justify-between items-center mb-4">
             <DialogTitle className="text-xl font-bold uppercase">
               TOLAK BOOKING
@@ -641,6 +759,69 @@ export default function AdminDashboardClient({
                   onClick={() => {
                     setShowRejectModal(false);
                     setRejectReason("");
+                  }}
+                  disabled={loading}
+                  className="flex-1 px-4 py-3 bg-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                >
+                  BATAL
+                </button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Cancel Confirmation Modal */}
+      <Dialog
+        open={showCancelModal && !!selectedBooking}
+        onOpenChange={() => {
+          setShowCancelModal(false);
+          setCancelReason("");
+        }}
+      >
+        <DialogContent className="max-w-md">
+          <div className="flex justify-between items-center mb-4">
+            <DialogTitle className="text-xl font-bold uppercase">
+              BATALKAN BOOKING
+            </DialogTitle>
+          </div>
+          {selectedBooking && (
+            <>
+              <div className="space-y-4 py-4">
+                <div>
+                  <p className="font-bold uppercase text-black/60 mb-2">
+                    NOMOR SURAT
+                  </p>
+                  <p className="mb-4">{selectedBooking.letterNumber}</p>
+                </div>
+
+                <div className="bg-[#FFF000] border-2 border-black p-3">
+                  <p className="text-sm font-bold">
+                    ⚠️ Booking yang dibatalkan akan tersedia kembali untuk PIC
+                    lain
+                  </p>
+                </div>
+
+                <textarea
+                  value={cancelReason}
+                  onChange={(e) => setCancelReason(e.target.value)}
+                  placeholder="Masukkan alasan pembatalan..."
+                  className="w-full border-2 border-black p-3 h-24 mb-4 brutal-shadow focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  onClick={handleCancelSubmit}
+                  disabled={loading || !cancelReason.trim()}
+                  className="flex-1 px-4 py-3 bg-[#FF5E5B] text-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"
+                >
+                  {loading ? "MEMPROSES..." : "BATALKAN"}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowCancelModal(false);
+                    setCancelReason("");
                   }}
                   disabled={loading}
                   className="flex-1 px-4 py-3 bg-white font-bold uppercase border-2 border-black hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all disabled:opacity-50"

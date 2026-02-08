@@ -349,3 +349,47 @@ export async function getSystemConfig() {
 
   return successResult(config);
 }
+
+export async function cancelBooking(bookingId: string, cancelReason: string) {
+  try {
+    await requireRole([Role.ADMIN]);
+
+    if (!cancelReason?.trim()) {
+      return { success: false, error: "Alasan pembatalan wajib diisi" };
+    }
+
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      select: { status: true },
+    });
+
+    if (!booking) {
+      return { success: false, error: "Booking tidak ditemukan" };
+    }
+
+    if (booking.status !== "APPROVED") {
+      return {
+        success: false,
+        error: "Hanya booking yang disetujui yang bisa dibatalkan",
+      };
+    }
+
+    const updated = await prisma.booking.update({
+      where: { id: bookingId },
+      data: {
+        status: "REJECTED", // Pake REJECTED buat CANCELLED
+        rejectionReason: `[DIBATALKAN ADMIN] ${cancelReason}`,
+        updatedAt: new Date(),
+      },
+      include: {
+        user: { select: { name: true, email: true } },
+        room: { select: { name: true } },
+      },
+    });
+
+    return { success: true, data: updated };
+  } catch (error) {
+    console.error("[CANCEL_BOOKING_ERROR]", error);
+    return { success: false, error: "Gagal membatalkan booking" };
+  }
+}
