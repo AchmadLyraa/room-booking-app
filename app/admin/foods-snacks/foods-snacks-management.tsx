@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Package2 } from "lucide-react";
+import { Plus, Pencil, Package2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -24,6 +24,7 @@ import {
 
 type FoodsSnacksManagementProps = {
   foods: { success: boolean; data?: any[]; error?: string };
+  snacks: { success: boolean; data?: any[]; error?: string };
 };
 
 export default function FoodsSnacksManagementClient({
@@ -230,7 +231,7 @@ export default function FoodsSnacksManagementClient({
                     }
                     setEditMode(!editMode);
                   }}
-                  className={`px-6 py-3 font-bold uppercase border-3 border-black transition-all brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
+                  className={`px-6 py-3 font-bold uppercase border-3 border-black transition-all  hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] ${
                     editMode ? "bg-[#FFF000] text-black" : "bg-white text-black"
                   }`}
                 >
@@ -241,7 +242,7 @@ export default function FoodsSnacksManagementClient({
                   onOpenChange={setIsAddDialogOpen}
                 >
                   <DialogTrigger asChild>
-                    <button className="px-6 py-3 bg-[#22c55e] text-white font-bold uppercase border-3 border-black brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center gap-2">
+                    <button className="px-6 py-3 bg-[#22c55e] text-white font-bold uppercase border-3 border-black  hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center gap-2">
                       <Plus className="w-5 h-5" />
                       TAMBAH
                     </button>
@@ -321,7 +322,20 @@ export default function FoodsSnacksManagementClient({
                 >
                   <div className="p-6">
                     {editMode && (
-                      <div className="absolute top-2 right-2 z-10">
+                      <div className="absolute top-2 right-2 z-10 flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Handle edit action for the item
+                            setEditingItem(item);
+                            setFormData({ name: item.name, type: item.type });
+                            setIsAddDialogOpen(true);
+                          }}
+                          className="p-2 bg-white border-2 border-black text-black  hover:shadow-[4px_4px_0_0_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all"
+                          title="Edit menu"
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </button>
                         <div
                           onClick={(e) => {
                             e.stopPropagation();
@@ -347,7 +361,7 @@ export default function FoodsSnacksManagementClient({
                           {item.name}
                         </h3>
                       </div>
-                      <Package2 className="w-12 h-12 ml-4 flex-shrink-0" />
+                      <Package2 className={`w-12 h-12 ml-4 flex-shrink-0 ${editMode ? 'invisible' : ''}`} />
                     </div>
                   </div>
                 </div>
