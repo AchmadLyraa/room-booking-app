@@ -41,7 +41,7 @@ export default function ChangePasswordForm() {
   }, [state, showError, showSuccess]);
 
   return (
-    <form action={formAction} className="space-y-4 mt-6 border p-4">
+    <form action={formAction} className="space-y-4 mt-6 border p-4 border-3">
       <h2 className="font-bold text-lg">Ganti Password</h2>
 
       <input
@@ -50,7 +50,7 @@ export default function ChangePasswordForm() {
         placeholder="Password Lama"
         value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
-        className="w-full border px-3 py-2 disabled:opacity-50"
+        className="w-full border px-3 py-2 border-2  focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
         required
         disabled={isPending}
       />
@@ -61,7 +61,7 @@ export default function ChangePasswordForm() {
         placeholder="Password Baru"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
-        className="w-full border px-3 py-2 disabled:opacity-50"
+        className="w-full border px-3 py-2 border-2  focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
         required
         minLength={8}
         disabled={isPending}
@@ -73,14 +73,14 @@ export default function ChangePasswordForm() {
         placeholder="Ulangi Password Baru"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        className="w-full border px-3 py-2 disabled:opacity-50"
+        className="w-full border px-3 py-2 border-2  focus:outline-none focus:shadow-[4px_4px_0_0_#000] focus:translate-x-[-2px] focus:translate-y-[-2px] transition-all"
         required
         disabled={isPending}
       />
 
       <button
         type="submit"
-        className="bg-black text-white px-4 py-2 font-bold disabled:opacity-50"
+        className="bg-black text-white px-4 py-2 font-bold uppercase border-3 border-black hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         disabled={isPending}
       >
         {isPending ? "MENYIMPAN..." : "SIMPAN"}
