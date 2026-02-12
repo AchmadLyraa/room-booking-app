@@ -1,42 +1,92 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './lib/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
   theme: {
     extend: {
+      // Warna PLN dan tema 
       colors: {
-        // Neobrutalism Color Palette
+        pln: {
+          green: '#22c55e',
+          yellow: '#fff000',
+        },
         primary: {
-          50: '#000000',
-          100: '#000000',
+          50: '#22c55e',
+          100: '#22c55e',
+          foreground: '#ffffff',
         },
         secondary: {
-          50: '#FFFFFF',
-          100: '#FFFFFF',
+          50: '#f5f5f5',
+          100: '#f5f5f5',
+          foreground: '#000000',
         },
         accent: {
-          50: '#FF5E5B',
-          100: '#FF5E5B',
+          50: '#22c55e',
+          100: '#22c55e',
+          foreground: '#ffffff',
         },
+        destructive: {
+          50: '#ff5e5b',
+          100: '#ff5e5b',
+          foreground: '#ffffff',
+        },
+        muted: {
+          50: '#f5f5f5',
+          100: '#f5f5f5',
+          foreground: '#666666',
+        },
+        border: '#000000',
+        input: '#000000',
+        ring: '#000000',
+        background: '#ffffff',
+        foreground: '#000000',
+        card: '#ffffff',
+        popover: '#ffffff',
+        sidebar: '#ffffff',
+        'sidebar-foreground': '#000000',
+        'sidebar-primary': '#22c55e',
+        'sidebar-primary-foreground': '#ffffff',
+        'sidebar-accent': '#f5f5f5',
+        'sidebar-accent-foreground': '#000000',
+        'sidebar-border': '#000000',
+        'sidebar-ring': '#000000',
       },
+      
+      // Font khusus 
       fontFamily: {
-        mono: ['Courier New', 'monospace'],
+        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+        sans: ['JetBrains Mono', 'Courier New', 'monospace'],
       },
+      
+      // Shadow neobrutal
       boxShadow: {
-        'neobrutal': '8px 8px 0px #000000',
-        'neobrutal-sm': '4px 4px 0px #000000',
-        'neobrutal-lg': '12px 12px 0px #000000',
+        'neobrutal': '4px 4px 0px #000000',
+        'neobrutal-lg': '8px 8px 0px #000000',
+        'neobrutal-hover': '6px 6px 0px #000000',
       },
+      
+      // Border width custom 
       borderWidth: {
         '3': '3px',
         '4': '4px',
       },
+      
+      // Radius tajam (neobrutalism)
       borderRadius: {
-        'neobrutal': '12px',
+        'neobrutal': '0px',
+        'none': '0px',
+        'sm': '0px',
+        'md': '0px',
+        'lg': '0px',
+        'xl': '0px',
+      },
+      
+      // Chart colors 
+      chart: {
+        1: '#22c55e',
+        2: '#fff000',
+        3: '#ff5e5b',
+        4: '#3b82f6',
+        5: '#a855f7',
       },
     },
   },
@@ -45,4 +95,5 @@ const config: Config = {
     applyComplexClasses: true,
   },
 }
+
 export default config

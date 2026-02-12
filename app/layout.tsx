@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 // import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import TopLoader from "@/components/top-loader"
 
 const _jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
       </head>
       
       <body className={`font-sans antialiased`}>
+        <TopLoader />
         {children}
         <Toaster />
         {/*<Analytics />*/}
