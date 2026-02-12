@@ -566,7 +566,7 @@ export default function CreateBookingClient({
       <div className="flex items-center gap-4 mb-6 max-w-6xl mx-auto">
         <Link
           href="/pic"
-          className="bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
+          className="bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black  hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         >
           KEMBALI
         </Link>

@@ -35,7 +35,7 @@ export default async function ProfilePage() {
       <div className="flex items-center gap-4 mb-6 max-w-6xl mx-auto">
         <Link
           href={user.role === "PIC" ? "/pic" : "/"}
-          className="bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black brutal-shadow hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
+          className="bg-white text-black px-6 py-3 font-bold uppercase border-3 border-black hover:shadow-[6px_6px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
         >
           KEMBALI
         </Link>
@@ -48,7 +48,7 @@ export default async function ProfilePage() {
       <div className="container mx-auto py-8 px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Profile Card */}
-          <Card className="md:col-span-1">
+          <Card className="md:col-span-1 border-3 brutal-shadow">
             <CardHeader className="flex flex-col items-center gap-4">
               <Avatar className="w-24 h-24">
                 <AvatarImage
@@ -79,7 +79,7 @@ export default async function ProfilePage() {
           </Card>
 
           {/* User Info Card */}
-          <Card className="md:col-span-2">
+          <Card className="md:col-span-2 border-3 brutal-shadow">
             <CardHeader>
               <CardTitle>User Information</CardTitle>
             </CardHeader>
